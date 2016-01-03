@@ -1,1 +1,1 @@
-my dotfiles, a mixture of invention and theft
+Some of dotfiles... a mixture of theft and obsessive tweaking

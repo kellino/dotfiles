@@ -45,26 +45,21 @@ Plug 'vim-pandoc/vim-pandoc', {'for' : 'markdown'}
 Plug 'vim-pandoc/vim-pandoc-syntax', {'for' : 'markdown'}
 
 
-"" UML
-Plug 'aklt/plantuml-syntax'
-
-
 "" Coding
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
 Plug 'scrooloose/syntastic', { 'for' : ['java', 'lisp', 'lex', 'lua', 'tex', 'latex', 'xml', 'html', 'css', 'yacc', 'zsh', 'clojure', 'python', 'javascript'] }
 Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'java', 'javascript', 'tex', 'latex'] }
-Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell'] }
-Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'clojure', 'lisp', 'haskell'] }
+Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell', 'javascript'] }
+Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'clojure', 'lisp', 'haskell'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle'}
-Plug 'idanarye/vim-vebugger', { 'for' : 'java' }
 Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk', 'sed']}
 Plug 'Chiel92/vim-autoformat'
 
 
 "" YouCompleteMe, Snippets & Tags
-Plug 'xolox/vim-misc', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua']}
-Plug 'xolox/vim-easytags', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua']}
+Plug 'xolox/vim-misc', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua', 'javascript']}
+Plug 'xolox/vim-easytags', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua', 'javascript']}
 
 Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
 Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.sh --clang-completer --system-libclang --system-boost'}
@@ -97,12 +92,15 @@ Plug 'tpope/vim-classpath', { 'for' : ['clojure'] }
 Plug 'neovimhaskell/haskell-vim', { 'for' : 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
-Plug 'Twinside/vim-haskellConceal', { 'for' : 'haskell' }
+Plug 'Twinside/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
+Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 
+Plug 'vim-scripts/Miranda-syntax-highlighting', { 'for' : 'miranda' }
 
-"" Java & Android
+
+"" Java
 Plug 'artur-shaik/vim-javacomplete2', { 'for' : 'java' }
 Plug 'tfnico/vim-gradle', { 'for' : 'gradle' }
 
@@ -117,8 +115,13 @@ Plug 'mattn/emmet-vim', { 'for' : ['html', 'css'] }
 Plug 'matthewsimo/angular-vim-snippets', { 'for' : 'javascript' }
 Plug 'burnettk/vim-angular', { 'for' : 'javascript' }
 
+
 "" LaTeX
 Plug 'lervag/vimtex', { 'for' : 'tex'}
+
+
+"" Go
+Plug 'fatih/vim-go', { 'for' : 'go' }
 
 
 "" Shell & Scripting
@@ -326,6 +329,10 @@ function! SetSyntastic()
     let g:syntastic_check_on_open=1
     let g:syntastic_check_on_wq=0
 endfunction
+
+""javascript
+let g:used_javascript_libs = 'angularjs, jasmine'
+autocmd BufReadPre *.js let b:javascript_lib_use_angularjs = 1
 
 source ~/.config/nvim/config/ultisnips.vim
 source ~/.config/nvim/config/cscope.vim
