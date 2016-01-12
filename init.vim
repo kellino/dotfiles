@@ -1,8 +1,8 @@
 
-"       __   _( ) __   __  ________    ____   _____   _( ) ____   
-"       \ \ / / |/ _\_/_ \|  __/ __|  |  _ \ / _ \ \ / / ||  _ \     
-"        \ V /| | | | | | | | ( (__   | |_) / /_\ \ V /| || |_) )    
-"         \_/ |_|_| |_| |_|_|  \___|()|____/|_| |_|\_/ |_||____/     	   
+"   _   _ __   _( ) __   __  ________    ____   _____   _( ) ____   
+"  |  \| |\ \ / / |/ _\_/_ \|  __/ __|  |  _ \ / _ \ \ / / ||  _ \     
+"  | |\\ | \ V /| | | | | | | | ( (__   | |_) / /_\ \ V /| || |_) )    
+"  |_| \_|  \_/ |_|_| |_| |_|_|  \___|()|____/|_| |_|\_/ |_||____/     	   
 "
 
 set nocompatible
@@ -12,7 +12,7 @@ call plug#begin('~/.config/nvim/bundle/')
 Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'itchyny/lightline.vim'
 
-Plug 'Raimondi/delimitMate', { 'for' : ['c', 'cpp', 'java', 'vim', 'scheme',  'lisp', 'python', 'lua', 'clojure', 'haskell', 'javascript'] }
+Plug 'Raimondi/delimitMate', { 'for' : ['c', 'cpp', 'java', 'vim', 'scheme',  'lisp', 'python', 'lua', 'clojure', 'haskell', 'javascript', 'css'] }
 Plug 'tpope/vim-surround', { 'for' :  ['c', 'cpp', 'java', 'vim', 'scheme',  'lisp', 'python', 'lua', 'clojure', 'haskell', 'javascript'] }
 Plug 'haya14busa/incsearch.vim'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
@@ -53,13 +53,13 @@ Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'java', 'javascript', 'tex', '
 Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell', 'javascript'] }
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'clojure', 'lisp', 'haskell'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle'}
-Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk', 'sed']}
+Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk', 'sed'] }
 Plug 'Chiel92/vim-autoformat'
 
 
 "" YouCompleteMe, Snippets & Tags
-Plug 'xolox/vim-misc', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua', 'javascript']}
-Plug 'xolox/vim-easytags', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua', 'javascript']}
+Plug 'xolox/vim-misc', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua']}
+Plug 'xolox/vim-easytags', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua']}
 
 Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
 Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.sh --clang-completer --system-libclang --system-boost'}
@@ -72,9 +72,9 @@ augroup END
 
 
 "" C and C++
-Plug 'brookhong/cscope.vim', { 'for' : ['c', 'cpp']}
+Plug 'brookhong/cscope.vim', { 'for' : ['c', 'cpp'] }
 Plug 'vim-jp/vim-cpp', { 'for' : 'cpp'}
-Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'flex', 'lex', 'yacc']}
+Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'flex', 'lex', 'yacc'] }
 
 
 "" Lisps
@@ -97,8 +97,6 @@ Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 
-Plug 'vim-scripts/Miranda-syntax-highlighting', { 'for' : 'miranda' }
-
 
 "" Java
 Plug 'artur-shaik/vim-javacomplete2', { 'for' : 'java' }
@@ -114,10 +112,11 @@ Plug 'othree/javascript-libraries-syntax.vim', { 'for' : 'javascript' }
 Plug 'mattn/emmet-vim', { 'for' : ['html', 'css'] }
 Plug 'matthewsimo/angular-vim-snippets', { 'for' : 'javascript' }
 Plug 'burnettk/vim-angular', { 'for' : 'javascript' }
+Plug 'heavenshell/vim-jsdoc', { 'for' : 'javascript' }
 
 
 "" LaTeX
-Plug 'lervag/vimtex', { 'for' : 'tex'}
+Plug 'lervag/vimtex', { 'for' : 'tex' }
 
 
 "" Go
@@ -125,7 +124,7 @@ Plug 'fatih/vim-go', { 'for' : 'go' }
 
 
 "" Shell & Scripting
-Plug 'awk.vim', { 'for' : 'awk'}
+Plug 'awk.vim', { 'for' : 'awk' }
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : ['zsh', 'sh'] }
 
 
@@ -278,6 +277,9 @@ let g:easytags_dynamic_files=2
 
 "" limelight
 noremap <F10> :Limelight!!<CR>
+
+"" mips
+nnoremap mips :set syntax=mips<CR>
 
 "" delimitMate
 au FileType clojure let b:delimitMate_quotes = "\""

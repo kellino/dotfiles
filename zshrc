@@ -77,7 +77,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git archlinux adb colored-man lein history vi-mode zsh-syntax-highlighting)
+plugins=(git archlinux colored-man lein history vi-mode dirhistory zsh-syntax-highlighting)
 
 # User configuration
 
@@ -108,18 +108,24 @@ export ARCHFLAGS="-arch x86_64"
 
 # custom aliases
 alias down='shutdown -P now'
+# usb
 alias usb='sudo mount /dev/sdb1 /mnt'
 alias umusb='sudo umount /mnt'
+# monitor
+alias mon='xrandr --output HDMI1 --auto --left-of eDP1'
 alias ts='transset-df -a 0.88'
 alias ut='transset-df -a 1'
+# Tmux
 alias T='tmux'
+#todo
 alias td='todo.sh'
 alias tda='todo.sh add'
 alias tdl='todo.sh ls'
 alias tdd='todo.sh del'
-alias mon='xrandr --output HDMI1 --auto --left-of eDP1'
-alias crepl='lein repl'
+# aliases for java
 alias javacp='java -cp src/'
+alias jj="java -jar"
+alias crepl='lein repl'
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
