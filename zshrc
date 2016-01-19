@@ -1,13 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/usr/share/oh-my-zsh
 
-## termite settings
-# tab support in termite
-# /etc/profile.d/vte.sh
-# coloured output for ls
-#eval $(dircolors ~/.dircolors)
-
-
 # environmental exports
 export ANDROID_HOME=/opt/android-sdk
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
@@ -81,9 +74,8 @@ plugins=(git archlinux colored-man lein history vi-mode dirhistory zsh-syntax-hi
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/bin:/home/david/.cabal/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:/opt/jython/bin:"
+export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:/opt/jython/bin:"
 
-# export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -99,12 +91,6 @@ export ARCHFLAGS="-arch x86_64"
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# export PS1=$PS1'$( [ -n $TMUX ] && tmux setenv -g TMUX_PWD_$(tmux display -p "#D" | tr -d %) $PWD)'
 
 # custom aliases
 alias down='shutdown -P now'
@@ -126,6 +112,8 @@ alias tdd='todo.sh del'
 alias javacp='java -cp src/'
 alias jj="java -jar"
 alias crepl='lein repl'
+alias jclim="/usr/lib/eclipse/eclim -Dosgi.instance.area.default=@user.home/Programming/Java"
+alias pyclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Music"
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
