@@ -48,8 +48,8 @@ Plug 'vim-pandoc/vim-pandoc-syntax', {'for' : 'markdown'}
 "" Coding
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
-Plug 'scrooloose/syntastic', { 'for' : ['java', 'lisp', 'lex', 'lua', 'tex', 'latex', 'xml', 'html', 'css', 'yacc', 'zsh', 'clojure', 'python', 'javascript'] }
-Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'java', 'javascript', 'tex', 'latex'] }
+Plug 'scrooloose/syntastic', { 'for' : ['lisp', 'lex', 'lua', 'tex', 'latex', 'xml', 'html', 'css', 'yacc', 'zsh', 'clojure', 'python', 'javascript'] }
+Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'tex', 'latex'] }
 Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell', 'javascript'] }
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'clojure', 'lisp', 'haskell'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle'}
@@ -62,7 +62,7 @@ Plug 'xolox/vim-misc', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua']}
 Plug 'xolox/vim-easytags', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua']}
 
 Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
-Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.sh --clang-completer --system-libclang --system-boost'}
+Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --clang-completer --system-libclang --system-boost --gocode-completer --tern-completer'}
 
 augroup load_us_ycm
   autocmd!
@@ -83,9 +83,6 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for' : ['lisp', 'scheme', 
 "" Clojure specific
 Plug 'guns/vim-clojure-static', { 'for' : 'clojure' }
 Plug 'guns/vim-clojure-highlight', { 'for' : 'clojure' }
-Plug 'tpope/vim-salve', { 'for' : 'clojure' }
-Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
-Plug 'tpope/vim-classpath', { 'for' : ['clojure'] }
 
 
 "" Haskell
@@ -97,9 +94,11 @@ Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 
+""Plug 'vim-scripts/Miranda-syntax-highlighting'
+Plug '~/.config/nvim/bundle/miranda'
 
 "" Java
-Plug 'artur-shaik/vim-javacomplete2', { 'for' : 'java' }
+Plug 'starcraftman/vim-eclim'
 Plug 'tfnico/vim-gradle', { 'for' : 'gradle' }
 
 
@@ -114,6 +113,9 @@ Plug 'matthewsimo/angular-vim-snippets', { 'for' : 'javascript' }
 Plug 'burnettk/vim-angular', { 'for' : 'javascript' }
 Plug 'heavenshell/vim-jsdoc', { 'for' : 'javascript' }
 
+
+"" Python
+Plug 'klen/python-mode'
 
 "" LaTeX
 Plug 'lervag/vimtex', { 'for' : 'tex' }
@@ -263,6 +265,9 @@ let g:EasyMotion_leader_key = '\#'
 
 "" Neomake
 autocmd! BufWritePost *.java Neomake
+autocmd! BufWritePost *.js Neomake
+autocmd! BufWritePost *.latex Neomake
+
 
 "" search with incsearch.vim
 nmap / <Plug>(incsearch-forward)
@@ -287,11 +292,11 @@ au FileType clojure let b:delimitMate_quotes = "\""
 "" Omnifunc completions
 set ofu=syntaxcomplete#Complete
 autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType miranda set omnifunc=mirandacomplete#CompleteMiranda
 
 "" html
 map <F11> :!html5check %<CR>
@@ -315,11 +320,7 @@ nmap ga <Plug>(UnicodeGA)
 "" Tagbar
 map <F8> :TagbarToggle<CR>
 
-"" JavaComplete2
-imap <F4>a <Plug>(JavaComplete-Imports-Add)
-imap <F4>r <Plug>(JavaComplete-Imports-RemoveUnused)
-nmap <F4>a <Plug>(JavaComplete-Imports-Add)
-nmap <F4>r <Plug>(JavaComplete-Imports-RemoveUnused)
+let g:EclimCompletionMethod='omnifunc'
 
 "" syntastic
 function! SetSyntastic()
@@ -330,7 +331,15 @@ function! SetSyntastic()
     let g:syntastic_auto_loc_list=1
     let g:syntastic_check_on_open=1
     let g:syntastic_check_on_wq=0
+    let g:syntastic_python_python_exec='/bin/python2.7'
 endfunction
+
+
+"" miranda
+au BufNewFile,BufRead *.m set filetype=miranda
+
+""
+let g:pymode_rope_loopup_project=0
 
 ""javascript
 let g:used_javascript_libs = 'angularjs, jasmine'
