@@ -13,7 +13,7 @@ Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'itchyny/lightline.vim'
 
 Plug 'Raimondi/delimitMate', { 'for' : ['c', 'cpp', 'java', 'vim', 'scheme',  'lisp', 'python', 'lua', 'clojure', 'haskell', 'javascript', 'css'] }
-Plug 'tpope/vim-surround', { 'for' :  ['c', 'cpp', 'java', 'vim', 'scheme',  'lisp', 'python', 'lua', 'clojure', 'haskell', 'javascript'] }
+"Plug 'tpope/vim-surround', { 'for' :  ['c', 'cpp', 'java', 'vim', 'scheme',  'lisp', 'python', 'lua', 'clojure', 'haskell', 'javascript'] }
 Plug 'haya14busa/incsearch.vim'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
 Plug 'mhinz/vim-startify'
@@ -31,30 +31,30 @@ Plug 'junegunn/fzf.vim'
 
 "" Unite
 Plug 'Shougo/unite.vim' | Plug 'Shougo/neomru.vim' 
-            \ | Plug 'thinca/vim-unite-history' | Plug 'Shougo/unite-outline'
-            \ | Plug 'ujihisa/unite-colorscheme' | Plug 'osyo-manga/unite-quickfix'
+            \ | Plug 'Shougo/unite-outline'
+            \ | Plug 'ujihisa/unite-colorscheme' 
 
 
 "" Text Editing
+Plug 'luochen1990/rainbow'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'chrisbra/unicode.vim'
-Plug 'ervandew/regex', {'for' : ['java', 'python']}
-Plug 'luochen1990/rainbow'
 Plug 'vim-pandoc/vim-pandoc', {'for' : 'markdown'}
 Plug 'vim-pandoc/vim-pandoc-syntax', {'for' : 'markdown'}
 
 
 "" Coding
+Plug 'ervandew/regex', {'for' : ['java', 'python']}
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
 Plug 'scrooloose/syntastic', { 'for' : ['lisp', 'lex', 'lua', 'tex', 'latex', 'xml', 'html', 'css', 'yacc', 'zsh', 'clojure', 'python', 'javascript'] }
-Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'tex', 'latex'] }
+Plug 'benekastah/neomake', { 'for' : ['java', 'c', 'cpp', 'javascript', 'tex', 'latex'] }
 Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell', 'javascript'] }
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'clojure', 'lisp', 'haskell'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle'}
 Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk', 'sed'] }
-Plug 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat', { 'for' : ['java', 'javascript', 'latex', 'tex'] }
 
 
 "" YouCompleteMe, Snippets & Tags
@@ -74,6 +74,7 @@ augroup END
 "" C and C++
 Plug 'brookhong/cscope.vim', { 'for' : ['c', 'cpp'] }
 Plug 'vim-jp/vim-cpp', { 'for' : 'cpp'}
+Plug 'critiqjo/lldb.nvim', { 'for' : ['c', 'cpp', 'h']}
 Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'flex', 'lex', 'yacc'] }
 
 
@@ -94,11 +95,12 @@ Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 
-""Plug 'vim-scripts/Miranda-syntax-highlighting'
+"" Miranda
 Plug '~/.config/nvim/bundle/miranda'
 
+
 "" Java
-Plug 'starcraftman/vim-eclim'
+Plug 'starcraftman/vim-eclim', { 'for' : 'java' }
 Plug 'tfnico/vim-gradle', { 'for' : 'gradle' }
 
 
@@ -111,14 +113,14 @@ Plug 'othree/javascript-libraries-syntax.vim', { 'for' : 'javascript' }
 Plug 'mattn/emmet-vim', { 'for' : ['html', 'css'] }
 Plug 'matthewsimo/angular-vim-snippets', { 'for' : 'javascript' }
 Plug 'burnettk/vim-angular', { 'for' : 'javascript' }
-Plug 'heavenshell/vim-jsdoc', { 'for' : 'javascript' }
 
 
 "" Python
-Plug 'klen/python-mode'
+Plug 'klen/python-mode', { 'for' : 'python' }
+
 
 "" LaTeX
-Plug 'lervag/vimtex', { 'for' : 'tex' }
+Plug 'lervag/vimtex', { 'for' : ['tex', 'latex'] }
 
 
 "" Go
@@ -290,13 +292,14 @@ nnoremap mips :set syntax=mips<CR>
 au FileType clojure let b:delimitMate_quotes = "\""
 
 "" Omnifunc completions
-set ofu=syntaxcomplete#Complete
+"set ofu=syntaxcomplete#Complete
 autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType miranda set omnifunc=mirandacomplete#CompleteMiranda
+autocmd FileType python set omnifunc=pythoncomplete#CompletePython
 
 "" html
 map <F11> :!html5check %<CR>
@@ -333,7 +336,6 @@ function! SetSyntastic()
     let g:syntastic_check_on_wq=0
     let g:syntastic_python_python_exec='/bin/python2.7'
 endfunction
-
 
 "" miranda
 au BufNewFile,BufRead *.m set filetype=miranda
