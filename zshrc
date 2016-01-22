@@ -112,7 +112,7 @@ alias tdd='todo.sh del'
 alias javacp='java -cp src/'
 alias jj="java -jar"
 alias crepl='lein repl'
-alias jclim="/usr/lib/eclipse/eclim -Dosgi.instance.area.default=@user.home/Programming/Java"
+alias jclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Java"
 alias pyclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Music"
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
