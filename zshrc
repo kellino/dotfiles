@@ -97,6 +97,7 @@ alias down='shutdown -P now'
 # usb
 alias usb='sudo mount /dev/sdb1 /mnt'
 alias umusb='sudo umount /mnt'
+alias modstat="stat --format '%a'"
 # monitor
 alias mon='xrandr --output HDMI1 --auto --left-of eDP1'
 alias ts='transset-df -a 0.88'
@@ -113,7 +114,9 @@ alias javacp='java -cp src/'
 alias jj="java -jar"
 alias crepl='lein repl'
 alias jclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Java"
-alias pyclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Music"
+alias pyclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Python"
+alias muclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Music"
+
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
