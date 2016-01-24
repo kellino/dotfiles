@@ -13,7 +13,6 @@ Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'itchyny/lightline.vim'
 
 Plug 'Raimondi/delimitMate', { 'for' : ['c', 'cpp', 'java', 'vim', 'scheme',  'lisp', 'python', 'lua', 'clojure', 'haskell', 'javascript', 'css'] }
-"Plug 'tpope/vim-surround', { 'for' :  ['c', 'cpp', 'java', 'vim', 'scheme',  'lisp', 'python', 'lua', 'clojure', 'haskell', 'javascript'] }
 Plug 'haya14busa/incsearch.vim'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
 Plug 'mhinz/vim-startify'
@@ -62,7 +61,7 @@ Plug 'xolox/vim-misc', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua']}
 Plug 'xolox/vim-easytags', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua']}
 
 Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
-Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --clang-completer --system-libclang --system-boost --gocode-completer --tern-completer'}
+Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --clang-completer --system-libclang --system-boost --tern-completer'}
 
 augroup load_us_ycm
   autocmd!
@@ -96,11 +95,11 @@ Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 
 "" Miranda
-Plug '~/.config/nvim/bundle/miranda'
+Plug '~/.config/nvim/bundle/miranda.nvim'
 
 
 "" Java
-Plug 'starcraftman/vim-eclim', { 'for' : 'java' }
+Plug 'starcraftman/vim-eclim', { 'for' : ['java', 'python'] }
 Plug 'tfnico/vim-gradle', { 'for' : 'gradle' }
 
 
@@ -116,15 +115,10 @@ Plug 'burnettk/vim-angular', { 'for' : 'javascript' }
 
 
 "" Python
-Plug 'klen/python-mode', { 'for' : 'python' }
-
+Plug 'hdima/python-syntax', { 'for' : 'python' }
 
 "" LaTeX
 Plug 'lervag/vimtex', { 'for' : ['tex', 'latex'] }
-
-
-"" Go
-Plug 'fatih/vim-go', { 'for' : 'go' }
 
 
 "" Shell & Scripting
@@ -299,7 +293,6 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType miranda set omnifunc=mirandacomplete#CompleteMiranda
-autocmd FileType python set omnifunc=pythoncomplete#CompletePython
 
 "" html
 map <F11> :!html5check %<CR>
@@ -340,8 +333,6 @@ endfunction
 "" miranda
 au BufNewFile,BufRead *.m set filetype=miranda
 
-""
-let g:pymode_rope_loopup_project=0
 
 ""javascript
 let g:used_javascript_libs = 'angularjs, jasmine'
