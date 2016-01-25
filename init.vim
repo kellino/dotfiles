@@ -47,8 +47,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax', {'for' : 'markdown'}
 Plug 'ervandew/regex', {'for' : ['java', 'python']}
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
-Plug 'scrooloose/syntastic', { 'for' : ['lisp', 'lex', 'lua', 'tex', 'latex', 'xml', 'html', 'css', 'yacc', 'zsh', 'clojure', 'python', 'javascript'] }
-Plug 'benekastah/neomake', { 'for' : ['java', 'c', 'cpp', 'javascript', 'tex', 'latex'] }
+Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'tex', 'latex', 'haskell'] }
 Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell', 'javascript'] }
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'clojure', 'lisp', 'haskell'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle'}
@@ -318,17 +317,6 @@ map <F8> :TagbarToggle<CR>
 
 let g:EclimCompletionMethod='omnifunc'
 
-"" syntastic
-function! SetSyntastic()
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
-    let g:syntastic_always_populate_loc_list=1
-    let g:syntastic_auto_loc_list=1
-    let g:syntastic_check_on_open=1
-    let g:syntastic_check_on_wq=0
-    let g:syntastic_python_python_exec='/bin/python2.7'
-endfunction
 
 "" miranda
 au BufNewFile,BufRead *.m set filetype=miranda
