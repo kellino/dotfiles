@@ -10,7 +10,8 @@ flags = [
 '-DUSE_CLANG_COMPLETER',
 '-std=c11',
 '-x',
-'-I.',
+'c',
+'-I',
 '-I/usr/include/'
 ]
 
