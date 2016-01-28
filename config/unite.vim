@@ -18,8 +18,6 @@ let g:unite_enable_short_source_names = 1
 let g:unite_source_history_yank_enable = 1
 let g:unite_force_overwrite_statusline = 0
 let g:unite_source_grep_max_candidates = 200
-let g:neomru#file_mru_path = '~/.config/nvim/neomru/file'
-let g:neomru#directory_mru_path = '~/.config/nvim/neomru/directory'
 
 
 " menus
@@ -40,8 +38,6 @@ let g:unite_source_menu_menus.files = {
 let g:unite_source_menu_menus.files.command_candidates = [
     \['▷ open file                                                  ⌘ \mo',
         \'Unite -start-insert file'],
-    \['▷ open more recently used files                              ⌘ \mm',
-        \'Unite file_mru'],
     \['▷ open file with recursive search                            ⌘ \mO',
         \'Unite -start-insert file_rec/async'],
     \['▷ edit new file',
@@ -167,7 +163,7 @@ let g:unite_source_menu_menus.registers.command_candidates = [
     \]
 
 nnoremap <silent>[Unite]i :Unite -silent history/yank<CR>
-nnoremap <silent>q: :Unite history/command
+nnoremap <silent>H: :Unite history/command
 
 
 " text editing menu 
