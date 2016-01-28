@@ -14,13 +14,13 @@ Plug 'itchyny/lightline.vim'
 
 Plug 'Raimondi/delimitMate', { 'for' : ['c', 'cpp', 'java', 'vim', 'scheme',  'lisp', 'python', 'lua', 'clojure', 'haskell', 'javascript', 'css'] }
 Plug 'haya14busa/incsearch.vim'
-Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }  " F3
 Plug 'mhinz/vim-startify'
 
 
 "" Colourscheme(s)
 Plug 'altercation/vim-colors-solarized'
-Plug 'junegunn/limelight.vim'
+"Plug 'junegunn/limelight.vim'
 
 
 "" FZF
@@ -29,9 +29,7 @@ Plug 'junegunn/fzf.vim'
 
 
 "" Unite
-Plug 'Shougo/unite.vim' | Plug 'Shougo/neomru.vim' 
-            \ | Plug 'Shougo/unite-outline'
-            \ | Plug 'ujihisa/unite-colorscheme' 
+Plug 'Shougo/unite.vim'
 
 
 "" Text Editing
@@ -44,20 +42,20 @@ Plug 'vim-pandoc/vim-pandoc-syntax', {'for' : 'markdown'}
 
 
 "" Coding
-Plug 'ervandew/regex', {'for' : ['java', 'python']}
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
+Plug 'ervandew/regex', {'for' : ['java', 'python']}
 Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'tex', 'latex', 'haskell'] }
 Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell', 'javascript'] }
-Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'clojure', 'lisp', 'haskell'] }
+Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'clojure', 'lisp', 'haskell', 'python'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle'}
 Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk', 'sed'] }
 Plug 'Chiel92/vim-autoformat', { 'for' : ['java', 'javascript', 'latex', 'tex'] }
 
 
 "" YouCompleteMe, Snippets & Tags
-Plug 'xolox/vim-misc', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua']}
-Plug 'xolox/vim-easytags', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua']}
+Plug 'xolox/vim-misc', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua'] }
+Plug 'xolox/vim-easytags', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua'] }
 
 Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
 Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --clang-completer --system-libclang --system-boost --tern-completer'}
@@ -72,8 +70,9 @@ augroup END
 "" C and C++
 Plug 'brookhong/cscope.vim', { 'for' : ['c', 'cpp'] }
 Plug 'vim-jp/vim-cpp', { 'for' : 'cpp'}
-Plug 'critiqjo/lldb.nvim', { 'for' : ['c', 'cpp', 'h']}
-Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'flex', 'lex', 'yacc'] }
+Plug 'critiqjo/lldb.nvim', { 'for' : ['c', 'cpp', 'h'] }
+"Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'flex', 'lex', 'yacc'] }
+Plug 'bbchung/Clamp', { 'for' : ['c', 'cpp']}
 
 
 "" Lisps
@@ -92,7 +91,6 @@ Plug 'Twinside/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
-
 "" Miranda
 Plug '~/.config/nvim/bundle/miranda.nvim'
 
@@ -144,9 +142,9 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 hi FoldColumn ctermbg=235
 hi LineNr ctermfg=200
 
-let g:limelight_conceal_ctermfg=240
-let g:limelight_conceal_coefficient=0.7
-let g:limelight_priority=-1
+"let g:limelight_conceal_ctermfg=240
+"let g:limelight_conceal_coefficient=0.7
+"let g:limelight_priority=-1
 
 
  "======================="
@@ -244,7 +242,7 @@ let g:c_syntax_for_h=1
 let g:tex_conceal=''
 
 
-"" Autoload configuration when .vimrc changes
+"" Autoload configuration when init.vim changes
 autocmd! BufWritePost init.vim source %
 
 set autoread
@@ -259,9 +257,10 @@ au Cursorhold * checktime
 let g:EasyMotion_leader_key = '\#'
 
 "" Neomake
-autocmd! BufWritePost *.java Neomake
+" autocmd! BufWritePost *.java Neomake
 autocmd! BufWritePost *.js Neomake
 autocmd! BufWritePost *.latex Neomake
+autocmd! BufWritePost *.hs Neomake
 
 
 "" search with incsearch.vim
@@ -286,7 +285,7 @@ au FileType clojure let b:delimitMate_quotes = "\""
 
 "" Omnifunc completions
 "set ofu=syntaxcomplete#Complete
-autocmd FileType c set omnifunc=ccomplete#Complete
+" autocmd FileType c set omnifunc=ccomplete#CompleteC
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
@@ -315,8 +314,8 @@ nmap ga <Plug>(UnicodeGA)
 "" Tagbar
 map <F8> :TagbarToggle<CR>
 
+"" Eclim
 let g:EclimCompletionMethod='omnifunc'
-
 
 "" miranda
 au BufNewFile,BufRead *.m set filetype=miranda
