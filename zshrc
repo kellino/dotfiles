@@ -119,6 +119,6 @@ alias muclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Pr
 # sage notebook
 alias notebook="sage -c \"notebook(automatic_login=True)\""
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
