@@ -20,7 +20,6 @@ Plug 'mhinz/vim-startify'
 
 "" Colourscheme(s)
 Plug 'altercation/vim-colors-solarized'
-"Plug 'junegunn/limelight.vim'
 
 
 "" FZF
@@ -37,15 +36,15 @@ Plug 'luochen1990/rainbow'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'chrisbra/unicode.vim'
-Plug 'vim-pandoc/vim-pandoc', {'for' : 'markdown'}
-Plug 'vim-pandoc/vim-pandoc-syntax', {'for' : 'markdown'}
+Plug 'vim-pandoc/vim-pandoc', {'for' : 'markdown' }
+Plug 'vim-pandoc/vim-pandoc-syntax', {'for' : 'markdown' }
 
 
 "" Coding
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
-Plug 'ervandew/regex', {'for' : ['java', 'python']}
-Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'tex', 'latex', 'haskell'] }
+Plug 'ervandew/regex', {'for' : ['java', 'python'] }
+Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'tex', 'latex', 'haskell', 'vim'] }
 Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell', 'javascript'] }
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'clojure', 'lisp', 'haskell', 'python'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle'}
@@ -257,7 +256,7 @@ au Cursorhold * checktime
 let g:EasyMotion_leader_key = '\#'
 
 "" Neomake
-" autocmd! BufWritePost *.java Neomake
+autocmd! BufWritePost *.vim Neomake
 autocmd! BufWritePost *.js Neomake
 autocmd! BufWritePost *.latex Neomake
 autocmd! BufWritePost *.hs Neomake
@@ -284,16 +283,13 @@ nnoremap mips :set syntax=mips<CR>
 au FileType clojure let b:delimitMate_quotes = "\""
 
 "" Omnifunc completions
-"set ofu=syntaxcomplete#Complete
-" autocmd FileType c set omnifunc=ccomplete#CompleteC
+autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType miranda set omnifunc=mirandacomplete#CompleteMiranda
 
-"" html
-map <F11> :!html5check %<CR>
 
 "" Android
 let g:android_sdk_path="/opt/android-sdk/"
@@ -317,13 +313,14 @@ map <F8> :TagbarToggle<CR>
 "" Eclim
 let g:EclimCompletionMethod='omnifunc'
 
+
 "" miranda
 au BufNewFile,BufRead *.m set filetype=miranda
 
 
 ""javascript
 let g:used_javascript_libs = 'angularjs, jasmine'
-autocmd BufReadPre *.js let b:javascript_lib_use_angularjs = 1
+autocmd BufReadPre *.js let b:javascript_lib_use_angularjs=1
 
 source ~/.config/nvim/config/ultisnips.vim
 source ~/.config/nvim/config/cscope.vim
