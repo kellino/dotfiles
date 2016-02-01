@@ -12,7 +12,7 @@ call plug#begin('~/.config/nvim/bundle/')
 Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'itchyny/lightline.vim'
 
-Plug 'Raimondi/delimitMate', { 'for' : ['c', 'cpp', 'java', 'vim', 'scheme',  'lisp', 'python', 'lua', 'clojure', 'haskell', 'javascript', 'css'] }
+Plug 'Raimondi/delimitMate', { 'for' : ['c', 'cpp', 'java', 'vim', 'scheme',  'lisp', 'python', 'lua', 'haskell', 'javascript', 'css'] }
 Plug 'haya14busa/incsearch.vim'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }  " F3
 Plug 'mhinz/vim-startify'
@@ -46,7 +46,7 @@ Plug 'airblade/vim-rooter'
 Plug 'ervandew/regex', {'for' : ['java', 'python'] }
 Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'tex', 'latex', 'haskell', 'vim'] }
 Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell', 'javascript'] }
-Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'clojure', 'lisp', 'haskell', 'python'] }
+Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'lisp', 'haskell', 'python'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle'}
 Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk', 'sed'] }
 Plug 'Chiel92/vim-autoformat', { 'for' : ['java', 'javascript', 'latex', 'tex'] }
@@ -75,11 +75,8 @@ Plug 'bbchung/Clamp', { 'for' : ['c', 'cpp']}
 
 
 "" Lisps
-Plug 'guns/vim-sexp', { 'for' : ['lisp', 'scheme', 'clojure'] }
-Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for' : ['lisp', 'scheme', 'clojure'] }
-"" Clojure specific
-Plug 'guns/vim-clojure-static', { 'for' : 'clojure' }
-Plug 'guns/vim-clojure-highlight', { 'for' : 'clojure' }
+Plug 'guns/vim-sexp', { 'for' : ['lisp', 'scheme'] }
+Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for' : ['lisp', 'scheme'] }
 
 
 "" Haskell
@@ -279,17 +276,15 @@ noremap <F10> :Limelight!!<CR>
 "" mips
 nnoremap mips :set syntax=mips<CR>
 
-"" delimitMate
-au FileType clojure let b:delimitMate_quotes = "\""
 
 "" Omnifunc completions
-autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType miranda set omnifunc=mirandacomplete#CompleteMiranda
-
+set omnifunc=syntaxcomplete#Complete
+" autocmd FileType c set omnifunc=ccomplete#Complete
+" autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+" autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+" autocmd FileType miranda set omnifunc=mirandacomplete#CompleteMiranda
 
 "" Android
 let g:android_sdk_path="/opt/android-sdk/"
