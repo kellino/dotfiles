@@ -22,8 +22,26 @@ endfunction
 let g:ycm_semantic_triggers={'haskell' : ['.']}
 let g:necoghc_enable_detailed_browse=1
 
-let hscoptions = "*EfchCIT"
+let g:hscoptions = '*EfchCIT'
 
-au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> <silent> <F1>c :HdevtoolsClear<CR>
-au FileType haskell nnoremap <buffer> <silent> <F1>i :HdevtoolsInfo<CR>
+function! REPLSendHaskell()
+    save! %
+    let l:line = [join([':load', expand('%.t')], ' ')]
+    call jobsend(g:last_terminal_job_id, add(l:line, ''))
+endfunction
+
+function! HaskellRepl()
+    silent! 10 split term://ghci
+endfunction
+
+augroup haskellgroup
+    au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+    au FileType haskell nnoremap <buffer> <silent> <F1>c :HdevtoolsClear<CR>
+    au FileType haskell nnoremap <buffer> <silent> <F1>i :HdevtoolsInfo<CR>
+augroup END
+
+
+nnoremap <silent> <C-x><C-x> :REPLSendHaskell<CR>
+
+command! REPLSendHaskell call REPLSendHaskell()
+command! Haskell call HaskellRepl()
