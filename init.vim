@@ -138,10 +138,6 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 hi FoldColumn ctermbg=235
 hi LineNr ctermfg=200
 
-"let g:limelight_conceal_ctermfg=240
-"let g:limelight_conceal_coefficient=0.7
-"let g:limelight_priority=-1
-
 
  "======================="
  "      Navigation       "
@@ -238,11 +234,10 @@ let g:c_syntax_for_h=1
 let g:tex_conceal=''
 
 
-"" Autoload configuration when init.vim changes
-autocmd! BufWritePost init.vim source %
-
 set autoread
-au Cursorhold * checktime
+augroup cursor
+    au Cursorhold * checktime
+augroup END
 
 
 "============================="
@@ -253,11 +248,12 @@ au Cursorhold * checktime
 let g:EasyMotion_leader_key = '\#'
 
 "" Neomake
-autocmd! BufWritePost *.vim Neomake
-autocmd! BufWritePost *.js Neomake
-autocmd! BufWritePost *.latex Neomake
-autocmd! BufWritePost *.hs Neomake
-
+augroup neomake
+    autocmd! BufWritePost *.vim Neomake
+    autocmd! BufWritePost *.js Neomake
+    autocmd! BufWritePost *.latex Neomake
+    autocmd! BufWritePost *.hs Neomake
+augroup END
 
 "" search with incsearch.vim
 nmap / <Plug>(incsearch-forward)
@@ -270,24 +266,16 @@ let g:indentLine_color_term = 239
 "" Easytags
 let g:easytags_dynamic_files=2
 
-"" limelight
-noremap <F10> :Limelight!!<CR>
-
 "" mips
 nnoremap mips :set syntax=mips<CR>
 
 
 "" Omnifunc completions
 set omnifunc=syntaxcomplete#Complete
-" autocmd FileType c set omnifunc=ccomplete#Complete
-" autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-" autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-" autocmd FileType miranda set omnifunc=mirandacomplete#CompleteMiranda
+
 
 "" Android
-let g:android_sdk_path="/opt/android-sdk/"
+let g:android_sdk_path='/opt/android-sdk/'
 
 "" Fireplace
 noremap <F9> :Eval<CR>
@@ -309,13 +297,11 @@ map <F8> :TagbarToggle<CR>
 let g:EclimCompletionMethod='omnifunc'
 
 
-"" miranda
-au BufNewFile,BufRead *.m set filetype=miranda
-
-
 ""javascript
 let g:used_javascript_libs = 'angularjs, jasmine'
-autocmd BufReadPre *.js let b:javascript_lib_use_angularjs=1
+augroup angularjs
+    autocmd BufReadPre *.js let b:javascript_lib_use_angularjs=1
+augroup END
 
 source ~/.config/nvim/config/ultisnips.vim
 source ~/.config/nvim/config/cscope.vim
