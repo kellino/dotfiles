@@ -47,7 +47,7 @@ Plug 'ervandew/regex', {'for' : ['java', 'python'] }
 Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'tex', 'latex', 'haskell', 'vim'] }
 Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell', 'javascript'] }
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'lisp', 'haskell', 'python'] }
-Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle'}
+Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk', 'sed'] }
 Plug 'Chiel92/vim-autoformat', { 'for' : ['java', 'javascript', 'latex', 'tex'] }
 
@@ -70,8 +70,7 @@ augroup END
 Plug 'brookhong/cscope.vim', { 'for' : ['c', 'cpp'] }
 Plug 'vim-jp/vim-cpp', { 'for' : 'cpp'}
 Plug 'critiqjo/lldb.nvim', { 'for' : ['c', 'cpp', 'h'] }
-"Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'flex', 'lex', 'yacc'] }
-Plug 'bbchung/Clamp', { 'for' : ['c', 'cpp']}
+Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'flex', 'lex', 'yacc'] }
 
 
 "" Lisps
@@ -102,7 +101,6 @@ Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
 Plug 'marijnh/tern_for_vim', { 'for' : 'javascript' }
 Plug 'othree/html5.vim', { 'for' : ['html', 'css'] }
 Plug 'othree/javascript-libraries-syntax.vim', { 'for' : 'javascript' }
-Plug 'mattn/emmet-vim', { 'for' : ['html', 'css'] }
 Plug 'matthewsimo/angular-vim-snippets', { 'for' : 'javascript' }
 Plug 'burnettk/vim-angular', { 'for' : 'javascript' }
 
@@ -113,9 +111,7 @@ Plug 'hdima/python-syntax', { 'for' : 'python' }
 "" LaTeX
 Plug 'lervag/vimtex', { 'for' : ['tex', 'latex'] }
 
-
 "" Shell & Scripting
-Plug 'awk.vim', { 'for' : 'awk' }
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : ['zsh', 'sh'] }
 
 
@@ -303,12 +299,15 @@ augroup angularjs
     autocmd BufReadPre *.js let b:javascript_lib_use_angularjs=1
 augroup END
 
-source ~/.config/nvim/config/ultisnips.vim
-source ~/.config/nvim/config/cscope.vim
-source ~/.config/nvim/config/ycm.vim
-source ~/.config/nvim/config/unite.vim
-source ~/.config/nvim/config/lightline.vim
-source ~/.config/nvim/config/rainbow.vim
-source ~/.config/nvim/config/haskell.vim
-source ~/.config/nvim/config/terminal.vim
-source ~/.config/nvim/config/startify.vim
+try
+    source ~/.config/nvim/config/ultisnips.vim
+    source ~/.config/nvim/config/cscope.vim
+    source ~/.config/nvim/config/ycm.vim
+    source ~/.config/nvim/config/unite.vim
+    source ~/.config/nvim/config/lightline.vim
+    source ~/.config/nvim/config/rainbow.vim
+    source ~/.config/nvim/config/haskell.vim
+    source ~/.config/nvim/config/terminal.vim
+    source ~/.config/nvim/config/startify.vim
+catch
+endtry
