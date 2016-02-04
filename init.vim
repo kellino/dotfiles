@@ -5,8 +5,6 @@
 "   |_| \__| \_/ |_|_| |_| |_|_|  \___|()|____/|_| |_|\_/ |_||____/     	   
 "
 
-set nocompatible
-
 call plug#begin('~/.config/nvim/bundle/')
 
 Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
@@ -53,8 +51,8 @@ Plug 'Chiel92/vim-autoformat', { 'for' : ['java', 'javascript', 'latex', 'tex'] 
 
 
 "" YouCompleteMe, Snippets & Tags
-Plug 'xolox/vim-misc', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua'] }
-Plug 'xolox/vim-easytags', { 'for' : ['c', 'cpp', 'java', 'lisp', 'lua'] }
+Plug 'xolox/vim-misc', { 'for' : ['java', 'lisp'] }
+Plug 'xolox/vim-easytags', { 'for' : ['java', 'lisp'] }
 
 Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
 Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --clang-completer --system-libclang --system-boost --tern-completer'}
@@ -70,7 +68,7 @@ augroup END
 Plug 'brookhong/cscope.vim', { 'for' : ['c', 'cpp'] }
 Plug 'vim-jp/vim-cpp', { 'for' : 'cpp'}
 Plug 'critiqjo/lldb.nvim', { 'for' : ['c', 'cpp', 'h'] }
-Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'flex', 'lex', 'yacc'] }
+Plug 'bbchung/Clamp', { 'for' : ['c', 'cpp', 'lua']}
 
 
 "" Lisps
@@ -82,17 +80,19 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for' : ['lisp', 'scheme'] 
 Plug 'neovimhaskell/haskell-vim', { 'for' : 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
-Plug 'Twinside/vim-haskellConcealPlus', { 'for' : 'haskell' }
+Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
+
 "" Miranda
 Plug '~/.config/nvim/bundle/miranda.nvim'
 
 
-"" Java
+"" Java & Python
 Plug 'starcraftman/vim-eclim', { 'for' : ['java', 'python'] }
 Plug 'tfnico/vim-gradle', { 'for' : 'gradle' }
+Plug 'hdima/python-syntax', { 'for' : 'python' }
 
 
 "" Javascript, HTML5 and CSS
@@ -105,11 +105,9 @@ Plug 'matthewsimo/angular-vim-snippets', { 'for' : 'javascript' }
 Plug 'burnettk/vim-angular', { 'for' : 'javascript' }
 
 
-"" Python
-Plug 'hdima/python-syntax', { 'for' : 'python' }
-
 "" LaTeX
 Plug 'lervag/vimtex', { 'for' : ['tex', 'latex'] }
+
 
 "" Shell & Scripting
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : ['zsh', 'sh'] }
@@ -133,15 +131,13 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 hi FoldColumn ctermbg=235
 hi LineNr ctermfg=200
+"hi Conceal ctermfg=200
 
 
  "======================="
  "      Navigation       "
  "======================="
  
-"" shell
-set shell=/usr/bin/zsh
-
 "" unbind ESC
 inoremap fj <Esc>
 
@@ -157,9 +153,6 @@ nmap <silent> <C-h> :wincmd h<CR>
 nmap <silent> <C-l> :wincmd l<CR>
 " don't allow vim to resize splits
 set noequalalways
-
-set fileencodings=utf-8
-scriptencoding utf-8
 
 set cmdheight=2
 set showcmd
@@ -179,7 +172,6 @@ set softtabstop=4
 set expandtab
 
 "" search
-set incsearch
 set ignorecase
 set smartcase
 set nohlsearch
@@ -230,7 +222,6 @@ let g:c_syntax_for_h=1
 let g:tex_conceal=''
 
 
-set autoread
 augroup cursor
     au Cursorhold * checktime
 augroup END
@@ -265,16 +256,15 @@ let g:easytags_dynamic_files=2
 "" mips
 nnoremap mips :set syntax=mips<CR>
 
-
 "" Omnifunc completions
 set omnifunc=syntaxcomplete#Complete
+"" Eclim
+let g:EclimCompletionMethod='omnifunc'
 
 
 "" Android
 let g:android_sdk_path='/opt/android-sdk/'
 
-"" Fireplace
-noremap <F9> :Eval<CR>
 
 "" Multiple-cursors
 let g:multi_cursor_next_key='<C-u>'
@@ -288,10 +278,6 @@ nmap ga <Plug>(UnicodeGA)
 
 "" Tagbar
 map <F8> :TagbarToggle<CR>
-
-"" Eclim
-let g:EclimCompletionMethod='omnifunc'
-
 
 ""javascript
 let g:used_javascript_libs = 'angularjs, jasmine'
