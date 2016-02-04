@@ -14,7 +14,7 @@ Plug 'Raimondi/delimitMate', { 'for' : ['c', 'cpp', 'java', 'vim', 'scheme',  'l
 Plug 'haya14busa/incsearch.vim'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }  " F3
 Plug 'mhinz/vim-startify'
-
+Plug 'christoomey/vim-tmux-navigator'
 
 "" Colourscheme(s)
 Plug 'altercation/vim-colors-solarized'
@@ -42,18 +42,15 @@ Plug 'vim-pandoc/vim-pandoc-syntax', {'for' : 'markdown' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
 Plug 'ervandew/regex', {'for' : ['java', 'python'] }
-Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'tex', 'latex', 'haskell', 'vim'] }
+Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'latex', 'haskell', 'vim', 'python'] }
 Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell', 'javascript'] }
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'lisp', 'haskell', 'python'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk', 'sed'] }
-Plug 'Chiel92/vim-autoformat', { 'for' : ['java', 'javascript', 'latex', 'tex'] }
+Plug 'Chiel92/vim-autoformat', { 'for' : ['java', 'javascript', 'latex'] }
 
 
 "" YouCompleteMe, Snippets & Tags
-Plug 'xolox/vim-misc', { 'for' : ['java', 'lisp'] }
-Plug 'xolox/vim-easytags', { 'for' : ['java', 'lisp'] }
-
 Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
 Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --clang-completer --system-libclang --system-boost --tern-completer'}
 
@@ -240,6 +237,7 @@ augroup neomake
     autocmd! BufWritePost *.js Neomake
     autocmd! BufWritePost *.latex Neomake
     autocmd! BufWritePost *.hs Neomake
+    autocmd! BufWritePost *.py Neomake
 augroup END
 
 "" search with incsearch.vim
@@ -258,13 +256,14 @@ nnoremap mips :set syntax=mips<CR>
 
 "" Omnifunc completions
 set omnifunc=syntaxcomplete#Complete
+"" miranda
+autocmd filetype miranda setlocal omnifunc=mirandacomplete#CompleteMiranda
 "" Eclim
 let g:EclimCompletionMethod='omnifunc'
 
 
 "" Android
 let g:android_sdk_path='/opt/android-sdk/'
-
 
 "" Multiple-cursors
 let g:multi_cursor_next_key='<C-u>'
