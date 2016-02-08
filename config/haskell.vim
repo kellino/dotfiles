@@ -38,8 +38,10 @@ augroup haskellgroup
     au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
     au FileType haskell nnoremap <buffer> <silent> <F1>c :HdevtoolsClear<CR>
     au FileType haskell nnoremap <buffer> <silent> <F1>i :HdevtoolsInfo<CR>
+    au BufNewFile,BufRead *.hs map <buffer> <F1> :Hoogle 
+    au BufNewFile,BufRead *.hs map <buffer> <C-F1> :HoogleClose<CR>
+    au BufNewFile,BufRead *.hs map <buffer> <S-F1> :HoogleLine<CR>
 augroup END
-
 
 nnoremap <silent> <C-x><C-x> :REPLSendHaskell<CR>
 

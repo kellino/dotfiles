@@ -5,11 +5,10 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], 
       \             [ 'fugitive', 'readonly', 'filename' ] ],
-      \   'right': [ ['syntastic', 'trailing', 'indentation', 'lineinfo'], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \   'right': [ ['trailing', 'indentation', 'lineinfo'], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
       \ 'component_function': {
       \   'readonly': 'MyReadonly',
-      \   'fugitive': 'MyFugitive',
       \   'modified': 'MyModified',
       \   'filename': 'MyFilename',
       \   'fileformat': 'MyFileformat',
@@ -52,15 +51,6 @@ endfunction
 
 function! MyReadonly()
   return &ft !~? 'help\|vimfiler\|' && &readonly ? '' : ''
-endfunction
-
-
-function! LightLineFugitive()
-  if exists("*fugitive#head")
-    let _ = fugitive#head()
-    return strlen(_) ? ''._ : '' 
-  endif
-  return ''
 endfunction
 
 
