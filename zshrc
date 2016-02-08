@@ -8,6 +8,7 @@ export LANG=en_GB.UTF-8
 export EDITOR='nvim'
 
 autoload zmv
+autoload -Uz zcalc
 bindkey ' ' magic-space
 
 HISTFILE="$HOME/.zhistory"
@@ -101,6 +102,7 @@ alias down='shutdown -P now'
 alias usb='sudo mount /dev/sdb1 /mnt'
 alias umusb='sudo umount /mnt'
 alias modstat="stat --format '%a'" # returns the octal number of a file / directory
+alias k9="kill -9"
 # monitor
 alias mon='xrandr --output HDMI1 --auto --left-of eDP1'
 alias ut='transset-df -a 1'
@@ -121,6 +123,15 @@ alias pyclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Pr
 alias muclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Music"
 # sage notebook
 alias notebook="sage -c \"notebook(automatic_login=True)\""
+# openvpn
+alias vpn='sudo openvpn /home/david/bin/AirVPN_Europe_UDP-443.ovpn'
+
+## custom functions
+
+# calls cd, and lists contents of directory
+function cs {
+    cd "$@" && ls -A
+}
 
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
