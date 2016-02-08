@@ -11,8 +11,12 @@ flags = [
 '-std=c11',
 '-x',
 'c',
-'-I',
-'-I/usr/include/'
+'-I.',
+'-I/usr/include',
+'-I/usr/include/gtk-3.0',
+'-I/usr/include/vte-2.91',
+'-I/usr/include/glib-2.0',
+'-I/usr/include/pango-1.0'
 ]
 
 
