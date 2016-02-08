@@ -37,6 +37,9 @@ Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', {'for' : 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', {'for' : 'markdown' }
 
+"" Binary Editing
+Plug 'Shougo/vinarise.vim'
+
 
 "" Coding
 Plug 'scrooloose/nerdcommenter'
@@ -128,7 +131,6 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 hi FoldColumn ctermbg=235
 hi LineNr ctermfg=200
-"hi Conceal ctermfg=200
 
 
  "======================="
@@ -256,14 +258,13 @@ nnoremap mips :set syntax=mips<CR>
 
 "" Omnifunc completions
 set omnifunc=syntaxcomplete#Complete
-"" miranda
+" miranda
 autocmd filetype miranda setlocal omnifunc=mirandacomplete#CompleteMiranda
-"" Eclim
+" Eclim
 let g:EclimCompletionMethod='omnifunc'
 
-
-"" Android
-let g:android_sdk_path='/opt/android-sdk/'
+"" vinarise autodetect
+nnoremap <F9> :Vinarise<CR>
 
 "" Multiple-cursors
 let g:multi_cursor_next_key='<C-u>'
