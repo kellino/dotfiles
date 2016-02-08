@@ -1,3 +1,4 @@
+scriptencoding utf8
 
 "    __   ___   _( ) __   __  ________    ____   _____   _( ) ____   
 "   |  \ | | \ / / |/ _\_/_ \|  __/ __|  |  _ \ / _ \ \ / / ||  _ \     
@@ -141,7 +142,7 @@ hi LineNr ctermfg=200
 inoremap fj <Esc>
 
 "" local leader
-let maplocalleader=","
+let g:maplocalleader=','
 
 "" Switch between splits
 set splitbelow
