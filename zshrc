@@ -77,7 +77,7 @@ plugins=(git archlinux colored-man lein history vi-mode dirhistory zsh-syntax-hi
 
 # User configuration
 
-export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:/opt/jython/bin:"
+export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:/opt/jython/bin"
 
 
 source $ZSH/oh-my-zsh.sh
@@ -116,7 +116,6 @@ alias tdd='todo.sh del'
 # aliases for java
 alias javacp='java -cp src/'
 alias jj="java -jar"
-alias crepl='lein repl'
 # eclipse workspaces
 alias jclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Java"
 alias pyclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Python"
@@ -124,7 +123,7 @@ alias muclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Pr
 # sage notebook
 alias notebook="sage -c \"notebook(automatic_login=True)\""
 # openvpn
-alias vpn='sudo openvpn /home/david/bin/AirVPN_Europe_UDP-443.ovpn'
+alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
 
 ## custom functions
 
