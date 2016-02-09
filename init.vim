@@ -1,10 +1,15 @@
 scriptencoding utf8
 
+
+"   ================================================================ "
 "    __   ___   _( ) __   __  ________    ____   _____   _( ) ____   
 "   |  \ | | \ / / |/ _\_/_ \|  __/ __|  |  _ \ / _ \ \ / / ||  _ \     
 "   | |\\| |\ V /| | | | | | | | ( (__   | |_) / /_\ \ V /| || |_) )    
 "   |_| \__| \_/ |_|_| |_| |_|_|  \___|()|____/|_| |_|\_/ |_||____/     	   
 "
+"   ================================================================ "
+
+
 
 call plug#begin('~/.config/nvim/bundle/')
 
@@ -70,6 +75,7 @@ Plug 'brookhong/cscope.vim', { 'for' : ['c', 'cpp'] }
 Plug 'vim-jp/vim-cpp', { 'for' : 'cpp'}
 Plug 'critiqjo/lldb.nvim', { 'for' : ['c', 'cpp', 'h'] }
 Plug 'bbchung/Clamp', { 'for' : ['c', 'cpp', 'lua']}
+Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'lex'] }
 
 
 "" Lisps
