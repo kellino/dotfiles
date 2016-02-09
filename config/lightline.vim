@@ -17,12 +17,10 @@ let g:lightline = {
       \   'mode': 'MyMode',
       \ },
       \ 'component_expand': {
-      \ 'syntastic': "syntasticStatuslineFlag",
       \  'trailing': 'TrailingSpaceWarning',
       \  'indentation': 'MixedIndentSpaceWarning',
       \ },
       \ 'component_type': {
-      \ 'synastic': 'error',
       \ 'trailing': 'warning',
       \ 'indendation': 'warning',
       \ },
@@ -83,17 +81,6 @@ function! MyMode()
         \ &ft == 'unite' ? 'Unite' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction 
-
-
-augroup AutoSyntastic
-    autocmd!
-    autocmd BufWritePost *.java call s:syntastic()
-augroup END
-
-function! s:syntastic()
-    SyntasticCheck
-    call lightline#update()
-endfunction
 
 function! TrailingSpaceWarning()
       if winwidth(0) < 80
