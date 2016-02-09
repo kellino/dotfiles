@@ -228,9 +228,9 @@ let g:c_syntax_for_h=1
 let g:tex_conceal=''
 
 
-augroup cursor
-    au Cursorhold * checktime
-augroup END
+"augroup cursor
+    "au Cursorhold * checktime
+"augroup END
 
 
 "============================="
