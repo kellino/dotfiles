@@ -31,7 +31,10 @@ function! REPLSendHaskell()
 endfunction
 
 function! HaskellRepl()
-    silent! 10 split term://ghci
+    silent! 10 split
+    e ghci.hs
+    call termopen('ghci')
+    wincmd p
 endfunction
 
 augroup haskellgroup
