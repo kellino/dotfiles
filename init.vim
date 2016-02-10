@@ -241,7 +241,7 @@ let g:tex_conceal=''
 let g:EasyMotion_leader_key = '\#'
 
 "" Neomake
-augroup neomake
+augroup neomaketypes
     autocmd! BufWritePost *.vim Neomake
     autocmd! BufWritePost *.js Neomake
     autocmd! BufWritePost *.latex Neomake
