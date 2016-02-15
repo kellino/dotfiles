@@ -40,8 +40,8 @@ Plug 'luochen1990/rainbow'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'chrisbra/unicode.vim'
-Plug 'vim-pandoc/vim-pandoc', {'for' : 'markdown' }
-Plug 'vim-pandoc/vim-pandoc-syntax', {'for' : 'markdown' }
+Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
+Plug 'vim-pandoc/vim-pandoc-syntax', { 'for' : 'markdown' }
 
 "" Binary Editing
 Plug 'Shougo/vinarise.vim'
@@ -50,10 +50,10 @@ Plug 'Shougo/vinarise.vim'
 "" Coding
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
-Plug 'ervandew/regex', {'for' : ['java', 'python'] }
-Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'latex', 'haskell', 'vim', 'python'] }
+Plug 'ervandew/regex', { 'for' : ['java', 'python'] }
+Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'latex', 'haskell', 'vim', 'python', 'sh'] }
 Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell', 'javascript'] }
-Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'lisp', 'haskell', 'python'] }
+Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'haskell', 'python', 'sh'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk', 'sed'] }
 Plug 'Chiel92/vim-autoformat', { 'for' : ['java', 'javascript', 'latex'] }
@@ -72,9 +72,9 @@ augroup END
 
 "" C and C++
 Plug 'brookhong/cscope.vim', { 'for' : ['c', 'cpp'] }
-Plug 'vim-jp/vim-cpp', { 'for' : 'cpp'}
+Plug 'vim-jp/vim-cpp', { 'for' : 'cpp' }
 Plug 'critiqjo/lldb.nvim', { 'for' : ['c', 'cpp', 'h'] }
-Plug 'bbchung/Clamp', { 'for' : ['c', 'cpp', 'lua']}
+Plug 'bbchung/Clamp', { 'for' : ['c', 'cpp', 'h'] }
 Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'lex'] }
 
 
@@ -228,11 +228,6 @@ let g:c_syntax_for_h=1
 let g:tex_conceal=''
 
 
-"augroup cursor
-    "au Cursorhold * checktime
-"augroup END
-
-
 "============================="
 "      Plugin Options         "
 "============================="
@@ -247,6 +242,7 @@ augroup neomaketypes
     autocmd! BufWritePost *.latex Neomake
     autocmd! BufWritePost *.hs Neomake
     autocmd! BufWritePost *.py Neomake
+    autocmd! bufWritePost *.sh Neomake
 augroup END
 
 "" search with incsearch.vim
