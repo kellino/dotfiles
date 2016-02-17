@@ -106,8 +106,6 @@ alias k9="kill -9"
 # monitor
 alias mon='xrandr --output HDMI1 --auto --left-of eDP1'
 alias ut='transset-df -a 1'
-# Tmux
-alias T='tmux'
 #todo
 alias td='todo.sh'
 alias tda='todo.sh add'
@@ -118,12 +116,13 @@ alias javacp='java -cp src/'
 alias jj="java -jar"
 # eclipse workspaces
 alias jclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Java"
-alias pyclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Python"
 alias muclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Music"
 # sage notebook
 alias notebook="sage -c \"notebook(automatic_login=True)\""
 # openvpn
 alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
+# lambda calculator
+alias lambda='/home/david/Programming/Functional/ && jj lambda.jar &'
 
 ## custom functions
 
