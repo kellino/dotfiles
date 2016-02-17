@@ -116,7 +116,7 @@ alias javacp='java -cp src/'
 alias jj="java -jar"
 # eclipse workspaces
 alias jclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Java"
-alias muclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Music"
+alias pyclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Python"
 # sage notebook
 alias notebook="sage -c \"notebook(automatic_login=True)\""
 # openvpn
