@@ -122,7 +122,8 @@ alias notebook="sage -c \"notebook(automatic_login=True)\""
 # openvpn
 alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
 # lambda calculator
-alias lambda='/home/david/Programming/Functional/ && jj lambda.jar &'
+alias lambda='jj /usr/local/bin/lambda.jar'
+alias bool='jj /usr/local/bin/BExpred.jar'
 
 ## custom functions
 
