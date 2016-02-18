@@ -71,7 +71,6 @@ augroup END
 
 
 "" C and C++
-Plug 'brookhong/cscope.vim', { 'for' : ['c', 'cpp'] }
 Plug 'vim-jp/vim-cpp', { 'for' : 'cpp' }
 Plug 'critiqjo/lldb.nvim', { 'for' : ['c', 'cpp', 'h'] }
 Plug 'bbchung/Clamp', { 'for' : ['c', 'cpp', 'h'] }
