@@ -103,30 +103,36 @@ alias usb='sudo mount /dev/sdb1 /mnt'
 alias umusb='sudo umount /mnt'
 alias modstat="stat --format '%a'" # returns the octal number of a file / directory
 alias k9="kill -9"
+alias mmv='noglob zmv -W'
+
 # monitor
 alias mon='xrandr --output HDMI1 --auto --left-of eDP1'
 alias ut='transset-df -a 1'
+
 #todo
 alias td='todo.sh'
 alias tda='todo.sh add'
 alias tdl='todo.sh ls'
 alias tdd='todo.sh del'
+
 # aliases for java
 alias javacp='java -cp src/'
 alias jj="java -jar"
-# eclipse workspaces
 alias jclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Java"
 alias pyclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Python"
+
 # sage notebook
 alias notebook="sage -c \"notebook(automatic_login=True)\""
+
 # openvpn
 alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
-# lambda calculator
+
+# lambda and bool
 alias lambda='jj /usr/local/bin/lambda.jar'
 alias bool='jj /usr/local/bin/BExpred.jar'
 
-## custom functions
 
+## custom functions
 # calls cd, and lists contents of directory
 function cs {
     cd "$@" && ls -A
