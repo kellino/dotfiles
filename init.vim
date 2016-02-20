@@ -51,12 +51,12 @@ Plug 'Shougo/vinarise.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
 Plug 'ervandew/regex', { 'for' : ['java', 'python'] }
-Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'latex', 'haskell', 'vim', 'python', 'sh'] }
+Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'latex', 'haskell', 'vim', 'python', 'sh', 'lua'] }
 Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell', 'javascript'] }
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'haskell', 'python', 'sh'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk', 'sed'] }
-Plug 'Chiel92/vim-autoformat', { 'for' : ['java', 'javascript', 'latex'] }
+Plug 'Chiel92/vim-autoformat', { 'for' : ['javascript', 'latex'] }
 
 
 "" YouCompleteMe, Snippets & Tags
@@ -117,6 +117,9 @@ Plug 'lervag/vimtex', { 'for' : ['tex', 'latex'] }
 
 "" Shell & Scripting
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : ['zsh', 'sh'] }
+
+"" mips assembly
+Plug '~/.config/nvim/bundle/mips.nvim', { 'for' : 'asm' }
 
 
 call plug#end()
@@ -242,6 +245,7 @@ augroup neomaketypes
     autocmd! BufWritePost *.hs Neomake
     autocmd! BufWritePost *.py Neomake
     autocmd! bufWritePost *.sh Neomake
+    autocmd! bufWritePost *.lua Neomake
 augroup END
 
 "" search with incsearch.vim
