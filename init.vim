@@ -16,7 +16,7 @@ call plug#begin('~/.config/nvim/bundle/')
 Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'itchyny/lightline.vim'
 
-Plug 'Raimondi/delimitMate', { 'for' : ['c', 'cpp', 'java', 'vim', 'scheme',  'lisp', 'python', 'lua', 'haskell', 'javascript', 'css'] }
+Plug 'Raimondi/delimitMate'
 Plug 'haya14busa/incsearch.vim'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }  " F3
 Plug 'mhinz/vim-startify'
@@ -42,8 +42,6 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for' : 'markdown' }
-
-"" Binary Editing
 Plug 'Shougo/vinarise.vim'
 
 
@@ -51,7 +49,7 @@ Plug 'Shougo/vinarise.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
 Plug 'ervandew/regex', { 'for' : ['java', 'python'] }
-Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'latex', 'haskell', 'vim', 'python', 'sh', 'lua'] }
+Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'latex', 'haskell', 'vim', 'python', 'sh', 'lua', 'rust'] }
 Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell', 'javascript'] }
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'haskell', 'python', 'sh'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
@@ -61,7 +59,7 @@ Plug 'Chiel92/vim-autoformat', { 'for' : ['javascript', 'latex'] }
 
 "" YouCompleteMe, Snippets & Tags
 Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
-Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --clang-completer --system-libclang --system-boost --tern-completer'}
+Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --clang-completer --system-libclang --system-boost --tern-completer --racer-completer'}
 
 augroup load_us_ycm
   autocmd!
@@ -72,14 +70,9 @@ augroup END
 
 "" C and C++
 Plug 'vim-jp/vim-cpp', { 'for' : 'cpp' }
-Plug 'critiqjo/lldb.nvim', { 'for' : ['c', 'cpp', 'h'] }
+Plug 'critiqjo/lldb.nvim', { 'for' : ['c', 'cpp'] }
 Plug 'bbchung/Clamp', { 'for' : ['c', 'cpp', 'h'] }
 Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'lex'] }
-
-
-"" Lisps
-Plug 'guns/vim-sexp', { 'for' : ['lisp', 'scheme'] }
-Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for' : ['lisp', 'scheme'] }
 
 
 "" Haskell
@@ -91,13 +84,13 @@ Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 
+
 "" Miranda
 Plug '~/.config/nvim/bundle/miranda.nvim'
 
 
 "" Java & Python
 Plug 'starcraftman/vim-eclim', { 'for' : ['java', 'python'] }
-Plug 'tfnico/vim-gradle', { 'for' : 'gradle' }
 Plug 'hdima/python-syntax', { 'for' : 'python' }
 
 
@@ -118,8 +111,14 @@ Plug 'lervag/vimtex', { 'for' : ['tex', 'latex'] }
 "" Shell & Scripting
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : ['zsh', 'sh'] }
 
+
 "" mips assembly
-Plug '~/.config/nvim/bundle/mips.nvim', { 'for' : 'asm' }
+Plug '~/.config/nvim/bundle/mips.nvim'
+
+
+"" Rust
+Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
+let g:ycm_rust_src_path='/usr/src/rust/src'
 
 
 call plug#end()
@@ -246,6 +245,7 @@ augroup neomaketypes
     autocmd! BufWritePost *.py Neomake
     autocmd! bufWritePost *.sh Neomake
     autocmd! bufWritePost *.lua Neomake
+    autocmd! bufWritePost *.rs Neomake
 augroup END
 
 "" search with incsearch.vim
@@ -291,9 +291,11 @@ augroup angularjs
     autocmd BufReadPre *.js let b:javascript_lib_use_angularjs=1
 augroup END
 
+"" mutt 
+au BufRead /tmp/mutt-* set tw=72
+
 try
     source ~/.config/nvim/config/ultisnips.vim
-    source ~/.config/nvim/config/cscope.vim
     source ~/.config/nvim/config/ycm.vim
     source ~/.config/nvim/config/unite.vim
     source ~/.config/nvim/config/lightline.vim
@@ -301,5 +303,6 @@ try
     source ~/.config/nvim/config/haskell.vim
     source ~/.config/nvim/config/terminal.vim
     source ~/.config/nvim/config/startify.vim
+    source ~/.config/nvim/config/rust.vim
 catch
 endtry
