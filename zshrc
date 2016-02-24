@@ -6,6 +6,7 @@ export ANDROID_HOME=/opt/android-sdk
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 export LANG=en_GB.UTF-8
 export EDITOR='nvim'
+export BROWSER='chromium'
 
 autoload zmv
 autoload -Uz zcalc
@@ -131,6 +132,8 @@ alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
 alias lambda='jj /usr/local/bin/lambda.jar'
 alias bool='jj /usr/local/bin/BExpred.jar'
 
+# timidity
+alias tim='sudo rmmod snd_seq_dummy && timidity -iA -Os &'
 
 ## custom functions
 # calls cd, and lists contents of directory
