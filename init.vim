@@ -38,7 +38,6 @@ Plug 'Shougo/unite.vim'
 "" Text Editing
 Plug 'luochen1990/rainbow'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for' : 'markdown' }
@@ -221,10 +220,6 @@ set viewoptions=cursor,folds
 "" Recursively search for tagfiles
 set tags=./tags;
 
-
-let g:lisp_rainbow=1
-let g:listp_instring=1
-let g:lispsyntax_clisp=1
 let g:c_syntax_for_h=1
 let g:tex_conceal=''
 
@@ -271,12 +266,6 @@ let g:EclimCompletionMethod='omnifunc'
 
 "" vinarise autodetect
 nnoremap <F9> :Vinarise<CR>
-
-"" Multiple-cursors
-let g:multi_cursor_next_key='<C-u>'
-let g:multi_cursor_prev_key='<C-i>'
-let g:multi_cursor_skip_key='<C-o>'
-let g:multi_cursor_quit_key='<Esc>'
 
 "" Unicode
 map <F12> <Plug>(MakeDigraph)
