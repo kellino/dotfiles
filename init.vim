@@ -49,8 +49,8 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
 Plug 'ervandew/regex', { 'for' : ['java', 'python'] }
 Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'latex', 'haskell', 'vim', 'python', 'sh', 'lua', 'rust'] }
-Plug 'Yggdroot/indentLine', { 'for' : ['c', 'cpp', 'python', 'java', 'lua', 'haskell', 'javascript'] }
-Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'haskell', 'python', 'sh'] }
+Plug 'Yggdroot/indentLine', { 'for' : ['python', 'lua', 'haskell', 'javascript'] }
+Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'haskell', 'python', 'sh', 'rust'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk', 'sed'] }
 Plug 'Chiel92/vim-autoformat', { 'for' : ['javascript', 'latex'] }
@@ -90,7 +90,6 @@ Plug '~/.config/nvim/bundle/miranda.nvim'
 
 "" Java & Python
 Plug 'starcraftman/vim-eclim', { 'for' : ['java', 'python'] }
-"Plug 'hdima/python-syntax', { 'for' : 'python' }
 Plug 'klen/python-mode', { 'for' : 'python' }
 
 
@@ -112,13 +111,8 @@ Plug 'lervag/vimtex', { 'for' : ['tex', 'latex'] }
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : ['zsh', 'sh'] }
 
 
-"" mips assembly
-Plug '~/.config/nvim/bundle/mips.nvim'
-
-
 "" Rust
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
-let g:ycm_rust_src_path='/usr/src/rust/src'
 
 
 call plug#end()
@@ -230,7 +224,7 @@ let g:tex_conceal=''
 "============================="
 
 "" easymotion
-let g:EasyMotion_leader_key = '\#'
+let g:EasyMotion_leader_key = '##'
 
 "" Neomake
 augroup neomaketypes
@@ -252,17 +246,12 @@ nmap ? <Plug>(incsearch-backward)
 let g:indentLine_char='¦' 
 let g:indentLine_color_term = 239
 
-"" Easytags
-let g:easytags_dynamic_files=2
-
 "" mips
 nnoremap mips :set syntax=mips<CR>
 
 "" Omnifunc completions
 set omnifunc=syntaxcomplete#Complete
-" miranda
 autocmd filetype miranda setlocal omnifunc=mirandacomplete#CompleteMiranda
-" Eclim
 let g:EclimCompletionMethod='omnifunc'
 
 "" vinarise autodetect
@@ -283,6 +272,9 @@ augroup END
 
 "" mutt 
 au BufRead /tmp/mutt-* set tw=72
+
+"" rust
+let g:ycm_rust_src_path='/usr/src/rust/src'
 
 "" python 
 let g:pymode_rope = 0
