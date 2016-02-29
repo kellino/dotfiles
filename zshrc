@@ -78,7 +78,7 @@ plugins=(git archlinux colored-man history vi-mode dirhistory history-substring-
 
 # User configuration
 
-export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:/opt/jython/bin"
+export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:/opt/jython/bin:"
 
 
 source $ZSH/oh-my-zsh.sh
@@ -121,9 +121,6 @@ alias javacp='java -cp src/'
 alias jj="java -jar"
 alias jclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Java"
 alias pyclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Python"
-
-# sage notebook
-alias notebook="sage -c \"notebook(automatic_login=True)\""
 
 # openvpn
 alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
