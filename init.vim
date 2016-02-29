@@ -48,11 +48,11 @@ Plug 'Shougo/vinarise.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
 Plug 'ervandew/regex', { 'for' : ['java', 'python'] }
-Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'latex', 'haskell', 'vim', 'python', 'sh', 'lua', 'rust'] }
-Plug 'Yggdroot/indentLine', { 'for' : ['python', 'lua', 'haskell', 'javascript'] }
+Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'lua', 'rust'] }
+Plug 'Yggdroot/indentLine', { 'for' : ['python', 'lua', 'haskell'] }
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'haskell', 'python', 'sh', 'rust'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
-Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk', 'sed'] }
+Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk'] }
 Plug 'Chiel92/vim-autoformat', { 'for' : ['javascript', 'latex'] }
 
 
@@ -290,6 +290,7 @@ let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_folding = 0
+let g:pymode_options_max_line_length=150
 
 try
     source ~/.config/nvim/config/ultisnips.vim
