@@ -81,7 +81,7 @@ Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
-Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
+" Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 
 
 "" Miranda
@@ -91,6 +91,7 @@ Plug '~/.config/nvim/bundle/miranda.nvim'
 "" Java & Python
 Plug 'starcraftman/vim-eclim', { 'for' : ['java', 'python'] }
 Plug 'klen/python-mode', { 'for' : 'python' }
+Plug 'bfredl/nvim-ipy' ", { 'for' : 'python' }
 
 
 "" Javascript, HTML5 and CSS
