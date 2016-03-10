@@ -22,7 +22,7 @@ setopt bang_hist                 # Treat the '!' character specially during expa
 setopt inc_append_history        # Write to the history file immediately, not when the shell exits.
 setopt share_history             # Share history between all sessions.
 setopt hist_expire_dups_first    # Expire duplicate entries first when trimming history.
-setopt hist_ignore_dups          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
 setopt hist_ignore_all_dups      # Delete old recorded entry if new entry is a duplicate.
 setopt hist_find_no_dups         # Do not display a line previously found.
 setopt hist_ignore_space         # Don't record an entry starting with a space.
@@ -120,7 +120,6 @@ alias tdd='todo.sh del'
 alias javacp='java -cp src/'
 alias jj="java -jar"
 alias jclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Java"
-alias pyclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Python"
 
 # openvpn
 alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
@@ -139,4 +138,3 @@ function cs {
 }
 
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
