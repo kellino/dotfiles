@@ -7,8 +7,7 @@ let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_key_list_previous_completion=['<Up>']
 let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_use_ultisnips_completer=1
-
-"let g:ycm_filetype_specific_completion_to_disable = { 'javascript': 1 }
+let g:ycm_collect_identifiers_from_comments_and_strings=1
 
 nnoremap <leader>yc :YcmForceCompileAndDiagnostics<CR>
 nnoremap <leader>yd :YcmCompleter GoToDefinition<CR>
