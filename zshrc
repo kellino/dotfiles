@@ -124,6 +124,9 @@ alias jclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Pro
 # openvpn
 alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
 
+# npm 
+alias npmgls='npm list -g --depth=0'
+
 # lambda and bool
 alias lambda='jj /usr/local/bin/lambda.jar'
 alias bool='jj /usr/local/bin/BExpred.jar'
