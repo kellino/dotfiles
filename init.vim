@@ -81,7 +81,6 @@ Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
-" Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 
 
 "" Miranda
@@ -91,7 +90,6 @@ Plug '~/.config/nvim/bundle/miranda.nvim'
 "" Java & Python
 Plug 'starcraftman/vim-eclim', { 'for' : ['java', 'python'] }
 Plug 'klen/python-mode', { 'for' : 'python' }
-Plug 'bfredl/nvim-ipy' ", { 'for' : 'python' }
 
 
 "" Javascript, HTML5 and CSS
@@ -278,19 +276,19 @@ au BufRead /tmp/mutt-* set tw=72
 let g:ycm_rust_src_path='/usr/src/rust/src'
 
 "" python 
-let g:pymode_rope = 0
-let g:pymode_doc = 1
-let g:pymode_doc_key = 'K'
-let g:pymode_lint = 1
-let g:pymode_lint_write = 0
-let g:pymode_virtualenv = 1
-let g:pymode_breakpoint = 1
+let g:pymode_rope=0
+let g:pymode_doc=1
+let g:pymode_doc_key='K'
+let g:pymode_lint =1
+let g:pymode_lint_write=0
+let g:pymode_virtualenv=1
+let g:pymode_breakpoint=1
 let g:pymode_breakpoint_bind = '<leader>b'
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
-let g:pymode_folding = 0
+let g:pymode_syntax=1
+let g:pymode_syntax_all=1
+let g:pymode_syntax_indent_errors=g:pymode_syntax_all
+let g:pymode_syntax_space_errors=g:pymode_syntax_all
+let g:pymode_folding=0
 let g:pymode_options_max_line_length=150
 
 try
