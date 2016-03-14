@@ -133,8 +133,8 @@ alias tim='sudo rmmod snd_seq_dummy && timidity -iA -Os &'
 
 ## custom functions
 # calls cd, and lists contents of directory
-function cs {
-    cd "$@" && ls -A
+function cdl {
+    cd "$@" && ls -lAh
 }
 
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
