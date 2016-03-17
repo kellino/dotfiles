@@ -79,7 +79,6 @@ Plug 'neovimhaskell/haskell-vim', { 'for' : 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellConceal', { 'for' : 'haskell' }
-" Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 
@@ -275,6 +274,7 @@ au BufRead /tmp/mutt-* set tw=72
 
 "" rust
 let g:ycm_rust_src_path='/usr/src/rust/src'
+let g:rustfmt_autosave=1
 
 "" python 
 let g:pymode_rope=0
