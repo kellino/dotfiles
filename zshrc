@@ -127,6 +127,9 @@ alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
 # npm 
 alias npmgls='npm list -g --depth=0'
 
+# python
+alias pyrepl='ptipython'
+
 # lambda and bool
 alias lambda='jj /usr/local/bin/lambda.jar'
 alias bool='jj /usr/local/bin/BExpred.jar'
