@@ -24,7 +24,7 @@ Plug 'christoomey/vim-tmux-navigator'
 
 "" Colourscheme(s)
 Plug 'altercation/vim-colors-solarized'
-
+Plug 'Valloric/vim-operator-highlight'
 
 "" FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -57,8 +57,8 @@ Plug 'Chiel92/vim-autoformat', { 'for' : ['javascript', 'latex'] }
 
 
 "" YouCompleteMe, Snippets & Tags
-Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
-Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --clang-completer --system-libclang --system-boost --tern-completer --racer-completer'}
+ Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
+ Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.sh --system-boost --tern-completer --racer-completer'}
 
 augroup load_us_ycm
   autocmd!
@@ -87,9 +87,12 @@ Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug '~/.config/nvim/bundle/miranda.nvim'
 
 
-"" Java & Python
-Plug 'starcraftman/vim-eclim', { 'for' : ['java', 'python'] }
+"" Java
+Plug 'starcraftman/vim-eclim', { 'for' : 'java' }
+
+"" Python
 Plug 'klen/python-mode', { 'for' : 'python' }
+Plug 'hdima/python-syntax', { 'for' : 'python' }
 
 
 "" Javascript, HTML5 and CSS
@@ -278,19 +281,17 @@ let g:rustfmt_autosave=1
 
 "" python 
 let g:pymode_rope=0
-let g:pymode_doc=1
+let g:pymode_doc=0
 let g:pymode_doc_key='K'
 let g:pymode_lint =1
+let g:pymode_syntax=0
 let g:pymode_lint_write=0
-let g:pymode_virtualenv=1
 let g:pymode_breakpoint=1
 let g:pymode_breakpoint_bind = '<leader>b'
-let g:pymode_syntax=1
-let g:pymode_syntax_all=1
-let g:pymode_syntax_indent_errors=g:pymode_syntax_all
-let g:pymode_syntax_space_errors=g:pymode_syntax_all
-let g:pymode_folding=0
-let g:pymode_options_max_line_length=150
+let g:pymode_lint_cwindow=0
+let python_highlight_all=1
+
+let g:ophigh_color = 226
 
 try
     source ~/.config/nvim/config/ultisnips.vim
