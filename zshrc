@@ -117,6 +117,9 @@ alias bool='jj /usr/local/bin/BExpred.jar'
 # timidity
 alias tim='sudo rmmod snd_seq_dummy && timidity -iA -Os &'
 
+# reduce a pdf size
+alias redpdf="gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=output.pdf input.pdf"
+
 ## custom functions
 # calls cd, and lists contents of directory
 function cdl {
