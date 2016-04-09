@@ -58,7 +58,7 @@ Plug 'Chiel92/vim-autoformat', { 'for' : ['javascript', 'latex'] }
 
 "" YouCompleteMe, Snippets & Tags
  Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
- Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.sh --system-boost --tern-completer --racer-completer'}
+ Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --system-boost --tern-completer --racer-completer'}
 
 augroup load_us_ycm
   autocmd!
@@ -83,10 +83,6 @@ Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 
 
-"" Miranda
-Plug '~/.config/nvim/bundle/miranda.nvim'
-
-
 "" Java
 Plug 'starcraftman/vim-eclim', { 'for' : 'java' }
 
@@ -99,7 +95,7 @@ Plug 'hdima/python-syntax', { 'for' : 'python' }
 Plug 'jelera/vim-javascript-syntax', { 'for' : 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
 Plug 'marijnh/tern_for_vim', { 'for' : 'javascript' }
-Plug 'othree/html5.vim', { 'for' : ['html', 'css'] }
+Plug 'Valloric/MatchTagAlways', { 'for' : ['html', 'xml'] }
 Plug 'othree/javascript-libraries-syntax.vim', { 'for' : 'javascript' }
 Plug 'matthewsimo/angular-vim-snippets', { 'for' : 'javascript' }
 Plug 'burnettk/vim-angular', { 'for' : 'javascript' }
