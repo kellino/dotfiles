@@ -23,7 +23,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }  " F3
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'danro/rename.vim'
+Plug 'tpope/vim-eunuch'
 
 "" Colourscheme(s)
 Plug 'altercation/vim-colors-solarized'
