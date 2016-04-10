@@ -117,6 +117,9 @@ alias tim='sudo rmmod snd_seq_dummy && timidity -iA -Os &'
 # reduce a pdf size
 alias redpdf="gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=output.pdf input.pdf"
 
+# alsi
+alias alsi='alsi -t -u'
+
 ## custom functions
 # calls cd, and lists contents of directory
 function cdl {
