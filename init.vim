@@ -13,7 +13,9 @@ scriptencoding utf8
 
 call plug#begin('~/.config/nvim/bundle/')
 
+"" general
 Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
+Plug 'Shougo/unite.vim'
 Plug 'itchyny/lightline.vim'
 
 Plug 'Raimondi/delimitMate'
@@ -21,19 +23,11 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }  " F3
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'danro/rename.vim'
 
 "" Colourscheme(s)
 Plug 'altercation/vim-colors-solarized'
 Plug 'Valloric/vim-operator-highlight'
-
-"" FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-
-"" Unite
-Plug 'Shougo/unite.vim'
-
 
 "" Text Editing
 Plug 'luochen1990/rainbow'
@@ -57,8 +51,8 @@ Plug 'Chiel92/vim-autoformat', { 'for' : ['javascript', 'latex'] }
 
 
 "" YouCompleteMe, Snippets & Tags
- Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
- Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --system-boost --tern-completer --racer-completer'}
+Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
+Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --system-boost --tern-completer --racer-completer'}
 
 augroup load_us_ycm
   autocmd!
