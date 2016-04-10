@@ -71,9 +71,6 @@ plugins=(git archlinux colored-man history vi-mode dirhistory history-substring-
 export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:"
 
 source $ZSH/oh-my-zsh.sh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# You may need to manually set your language environment
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
@@ -110,9 +107,9 @@ alias npmgls='npm list -g --depth=0'
 # python
 alias pyrepl='ptipython'
 
-# lambda and bool
-alias lambda='jj /usr/local/bin/lambda.jar'
-alias bool='jj /usr/local/bin/BExpred.jar'
+# directories
+alias pf='cd ~/Programming/Functional/Haskell'
+alias pp='cd ~/Programming/Python'
 
 # timidity
 alias tim='sudo rmmod snd_seq_dummy && timidity -iA -Os &'
