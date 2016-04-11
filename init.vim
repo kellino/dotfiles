@@ -96,7 +96,7 @@ Plug 'burnettk/vim-angular', { 'for' : 'javascript' }
 
 
 "" LaTeX
-Plug 'lervag/vimtex', { 'for' : ['tex', 'latex'] }
+Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : ['text' , 'latex'] }
 
 
 "" Shell & Scripting
