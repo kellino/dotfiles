@@ -105,6 +105,7 @@ Plug 'vim-scripts/sh.vim--Cla', { 'for' : ['zsh', 'sh'] }
 
 "" Rust
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
+Plug 'rhysd/rust-doc.vim', { 'for' : 'rust' }
 
 
 call plug#end()
@@ -243,7 +244,6 @@ nnoremap mips :set syntax=mips<CR>
 
 "" Omnifunc completions
 set omnifunc=syntaxcomplete#Complete
-autocmd filetype miranda setlocal omnifunc=mirandacomplete#CompleteMiranda
 let g:EclimCompletionMethod='omnifunc'
 
 "" vinarise autodetect
@@ -269,21 +269,12 @@ au BufRead /tmp/mutt-* set tw=72
 let g:ycm_rust_src_path='/usr/src/rust/src'
 let g:rustfmt_autosave=1
 
-"" python 
-let g:pymode_rope=0
-let g:pymode_doc=0
-let g:pymode_doc_key='K'
-let g:pymode_lint =1
-let g:pymode_syntax=0
-let g:pymode_lint_write=0
-let g:pymode_breakpoint=1
-let g:pymode_breakpoint_bind = '<leader>b'
-let g:pymode_lint_cwindow=0
-let python_highlight_all=1
 
 let g:ophigh_color = 226
 
+
 try
+    source ~/.config/nvim/config/python.vim
     source ~/.config/nvim/config/ultisnips.vim
     source ~/.config/nvim/config/ycm.vim
     source ~/.config/nvim/config/unite.vim
