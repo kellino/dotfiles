@@ -96,7 +96,12 @@ Plug 'burnettk/vim-angular', { 'for' : 'javascript' }
 
 
 "" LaTeX
-Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : ['text' , 'latex'] }
+Plug 'LaTeX-Box-Team/LaTeX-Box'
+
+
+" perl
+Plug 'vim-perl/vim-perl', { 'for' : 'perl' }
+Plug 'c9s/perlomni.vim', { 'for' : 'perl' }
 
 
 "" Shell & Scripting
