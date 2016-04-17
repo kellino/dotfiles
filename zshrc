@@ -11,6 +11,7 @@ export BROWSER='chromium'
 autoload zmv
 autoload -Uz zcalc
 bindkey ' ' magic-space
+autoload -Uz colors && colors
 
 HISTFILE="$HOME/.zhistory"
 HISTSIZE=10000
@@ -68,7 +69,7 @@ plugins=(git archlinux colored-man history vi-mode dirhistory history-substring-
 
 # User configuration
 
-export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/android-sdk/tools:/opt/android-sdk/platform-tools:"
+export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/jython/bin:"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -102,7 +103,7 @@ alias jclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Pro
 alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
 
 # npm 
-alias npmgls='npm list -g --depth=0'
+alias npmgbls='npm list -g --depth=0'
 
 # python
 alias pyrepl='ptipython'
@@ -110,12 +111,6 @@ alias pyrepl='ptipython'
 # directories
 alias pf='cd ~/Programming/Functional/Haskell'
 alias pp='cd ~/Programming/Python'
-
-# timidity
-alias tim='sudo rmmod snd_seq_dummy && timidity -iA -Os &'
-
-# reduce a pdf size
-alias redpdf="gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=output.pdf input.pdf"
 
 # alsi
 alias alsi='alsi -t -u'
@@ -127,3 +122,9 @@ function cdl {
 }
 
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+PATH="/home/david/.perl5/bin${PATH+:}${PATH}"; export PATH;
+PERL5LIB="/home/david/.perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/david/.perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/david/.perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/david/.perl5"; export PERL_MM_OPT;
