@@ -74,7 +74,6 @@ Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellConceal', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
-Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 
 
 "" Java
