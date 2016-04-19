@@ -35,8 +35,7 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for' : 'markdown' }
-Plug 'Shougo/vinarise.vim'
-
+Plug 'godlygeek/tabular'
 
 "" Coding
 Plug 'scrooloose/nerdcommenter'
@@ -249,9 +248,6 @@ nnoremap mips :set syntax=mips<CR>
 "" Omnifunc completions
 set omnifunc=syntaxcomplete#Complete
 let g:EclimCompletionMethod='omnifunc'
-
-"" vinarise autodetect
-nnoremap <F9> :Vinarise<CR>
 
 "" Unicode
 map <F12> <Plug>(MakeDigraph)
