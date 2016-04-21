@@ -69,7 +69,7 @@ plugins=(git archlinux colored-man history vi-mode dirhistory history-substring-
 
 # User configuration
 
-export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/jython/bin:"
+export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/pypy/bin:/opt/anaconda2/bin:"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -128,3 +128,5 @@ PERL5LIB="/home/david/.perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB
 PERL_LOCAL_LIB_ROOT="/home/david/.perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/david/.perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/david/.perl5"; export PERL_MM_OPT;
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
