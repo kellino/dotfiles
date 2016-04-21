@@ -1,4 +1,4 @@
-let g:python_host_prog='/usr/bin/python2.7'
+let g:python_host_prog='/opt/anaconda2/bin/python2.7'
 let g:pymode_rope=0
 let g:pymode_doc=0
 let g:pymode_doc_key='K'
