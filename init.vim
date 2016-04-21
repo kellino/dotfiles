@@ -25,6 +25,10 @@ Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-eunuch'
 
+"" fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 "" Colourscheme(s)
 Plug 'altercation/vim-colors-solarized'
 Plug 'Valloric/vim-operator-highlight'
@@ -41,9 +45,9 @@ Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
 Plug 'ervandew/regex', { 'for' : ['java', 'python'] }
-Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'javascript', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'lua', 'rust'] }
+Plug 'benekastah/neomake', { 'for' : ['c', 'javascript', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'lua', 'rust'] }
 Plug 'Yggdroot/indentLine', { 'for' : ['python', 'lua', 'haskell'] }
-Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'cpp', 'java', 'javascript', 'haskell', 'python', 'sh', 'rust'] }
+Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'java', 'javascript', 'haskell', 'python', 'sh', 'rust'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk'] }
 Plug 'Chiel92/vim-autoformat', { 'for' : ['javascript', 'latex'] }
@@ -61,9 +65,8 @@ augroup END
 
 
 "" C and C++
-Plug 'vim-jp/vim-cpp', { 'for' : 'cpp' }
-Plug 'critiqjo/lldb.nvim', { 'for' : ['c', 'cpp'] }
-Plug 'bbchung/Clamp', { 'for' : ['c', 'cpp', 'h'] }
+Plug 'critiqjo/lldb.nvim', { 'for' : 'c' }
+Plug 'bbchung/Clamp', { 'for' : ['c', 'h'] }
 Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'lex'] }
 
 
@@ -73,6 +76,7 @@ Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellConceal', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
+Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 
 
 "" Java
@@ -269,9 +273,7 @@ au BufRead /tmp/mutt-* set tw=72
 let g:ycm_rust_src_path='/usr/src/rust/src'
 let g:rustfmt_autosave=1
 
-
 let g:ophigh_color = 226
-
 
 try
     source ~/.config/nvim/config/python.vim
