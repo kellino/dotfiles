@@ -2,20 +2,25 @@
 export ZSH=/usr/share/oh-my-zsh
 
 # environmental exports
-export ANDROID_HOME=/opt/android-sdk
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 export LANG=en_GB.UTF-8
 export EDITOR='nvim'
 export BROWSER='chromium'
 
 autoload zmv
-autoload -Uz zcalc
 bindkey ' ' magic-space
 autoload -Uz colors && colors
 
 HISTFILE="$HOME/.zhistory"
 HISTSIZE=10000
 SAVEHIST=10000
+
+# perl
+PATH="/home/david/.perl5/bin${PATH+:}${PATH}"; export PATH;
+PERL5LIB="/home/david/.perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/david/.perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/david/.perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/david/.perl5"; export PERL_MM_OPT;
 
 setopt login
 setopt prompt_subst
@@ -33,8 +38,6 @@ setopt hist_verify               # Don't execute immediately upon history expans
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
 ZSH_THEME="cypher"
 
 
@@ -65,11 +68,11 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git archlinux colored-man history vi-mode dirhistory history-substring-search zsh-syntax-highlighting)
+plugins=(git archlinux colored-man history vi-mode zsh-syntax-highlighting)
 
 # User configuration
 
-export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/pypy/bin:/opt/anaconda2/bin:"
+export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/pypy/bin:"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -123,10 +126,5 @@ function cdl {
 
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-PATH="/home/david/.perl5/bin${PATH+:}${PATH}"; export PATH;
-PERL5LIB="/home/david/.perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/david/.perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/david/.perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/david/.perl5"; export PERL_MM_OPT;
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
