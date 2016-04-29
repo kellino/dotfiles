@@ -118,13 +118,10 @@ alias pp='cd ~/Programming/Python'
 # alsi
 alias alsi='alsi -t -u'
 
-## custom functions
-# calls cd, and lists contents of directory
-function cdl {
-    cd "$@" && ls -lAh
-}
-
-[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# coloured cat
+alias ccat='pygmentize -g'
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ./zsh_funcs ] && source ./zsh_funcs
+[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
