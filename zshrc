@@ -15,12 +15,6 @@ HISTFILE="$HOME/.zhistory"
 HISTSIZE=10000
 SAVEHIST=10000
 
-# perl
-PATH="/home/david/.perl5/bin${PATH+:}${PATH}"; export PATH;
-PERL5LIB="/home/david/.perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/david/.perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/david/.perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/david/.perl5"; export PERL_MM_OPT;
 
 setopt login
 setopt prompt_subst
@@ -36,43 +30,30 @@ setopt hist_save_no_dups         # Don't write duplicate entries in the history 
 setopt hist_reduce_blanks        # Remove superfluous blanks before recording entry.
 setopt hist_verify               # Don't execute immediately upon history expansion.
 
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 ZSH_THEME="cypher"
 
-
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
 
-
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+## plugins
 plugins=(git archlinux colored-man history vi-mode zsh-syntax-highlighting)
+## syntax highlighting
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 # User configuration
 
-export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/pypy/bin:"
+export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/pypy3/bin:"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -123,5 +104,5 @@ alias ccat='pygmentize -g'
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ./zsh_funcs ] && source ./zsh_funcs
+[ -f ./zsh_funcs ] && source ~/dotfiles/zsh_funcs
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
