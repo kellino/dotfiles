@@ -86,9 +86,6 @@ alias jclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Pro
 # openvpn
 alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
 
-# npm 
-alias npmgbls='npm list -g --depth=0'
-
 # python
 alias pyrepl='ptipython'
 
