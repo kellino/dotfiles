@@ -40,22 +40,24 @@ Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for' : 'markdown' }
 Plug 'godlygeek/tabular'
+Plug 'Valloric/MatchTagAlways'
+
 
 "" Coding
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
 Plug 'ervandew/regex', { 'for' : ['java', 'python'] }
-Plug 'benekastah/neomake', { 'for' : ['c', 'javascript', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'lua', 'rust'] }
+Plug 'benekastah/neomake', { 'for' : ['c', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'rust'] }
 Plug 'Yggdroot/indentLine', { 'for' : ['python', 'lua', 'haskell'] }
-Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'java', 'javascript', 'haskell', 'python', 'sh', 'rust'] }
+Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
-Plug 'bruno-/vim-man', { 'for' : ['c', 'zsh', 'sh', 'awk'] }
-Plug 'Chiel92/vim-autoformat', { 'for' : ['javascript', 'latex'] }
+Plug 'bruno-/vim-man', { 'for' : ['c', 'sh'] }
+Plug 'Chiel92/vim-autoformat', { 'for' : 'latex' }
 
 
 "" YouCompleteMe, Snippets & Tags
 Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
-Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --system-boost --tern-completer --racer-completer'}
+Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --racer-completer'}
 
 augroup load_us_ycm
   autocmd!
@@ -64,7 +66,7 @@ augroup load_us_ycm
 augroup END
 
 
-"" C and C++
+"" C 
 Plug 'critiqjo/lldb.nvim', { 'for' : 'c' }
 Plug 'bbchung/Clamp', { 'for' : ['c', 'h'] }
 Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'lex'] }
@@ -82,20 +84,11 @@ Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 "" Java
 Plug 'starcraftman/vim-eclim', { 'for' : 'java' }
 
+
 "" Python
 Plug 'klen/python-mode', { 'for' : 'python' }
 Plug 'hdima/python-syntax', { 'for' : 'python' }
 Plug 'bfredl/nvim-ipy'
-
-
-"" Javascript, HTML5 and CSS
-Plug 'jelera/vim-javascript-syntax', { 'for' : 'javascript' }
-Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
-Plug 'marijnh/tern_for_vim', { 'for' : 'javascript' }
-Plug 'Valloric/MatchTagAlways', { 'for' : ['html', 'xml'] }
-Plug 'othree/javascript-libraries-syntax.vim', { 'for' : 'javascript' }
-Plug 'matthewsimo/angular-vim-snippets', { 'for' : 'javascript' }
-Plug 'burnettk/vim-angular', { 'for' : 'javascript' }
 
 
 "" LaTeX
@@ -108,7 +101,7 @@ Plug 'c9s/perlomni.vim', { 'for' : 'perl' }
 
 
 "" Shell & Scripting
-Plug 'vim-scripts/sh.vim--Cla', { 'for' : ['zsh', 'sh'] }
+Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
 
 
 "" Rust
@@ -230,7 +223,6 @@ let g:EasyMotion_leader_key = '##'
 "" Neomake
 augroup neomaketypes
     autocmd! BufWritePost *.vim Neomake
-    autocmd! BufWritePost *.js Neomake
     autocmd! BufWritePost *.latex Neomake
     autocmd! BufWritePost *.hs Neomake
     autocmd! BufWritePost *.py Neomake
@@ -261,11 +253,6 @@ nmap ga <Plug>(UnicodeGA)
 "" Tagbar
 map <F8> :TagbarToggle<CR>
 
-""javascript
-let g:used_javascript_libs = 'angularjs, jasmine'
-augroup angularjs
-    autocmd BufReadPre *.js let b:javascript_lib_use_angularjs=1
-augroup END
 
 "" mutt 
 au BufRead /tmp/mutt-* set tw=72
@@ -275,6 +262,8 @@ let g:ycm_rust_src_path='/usr/src/rust/src'
 let g:rustfmt_autosave=1
 
 let g:ophigh_color = 226
+
+" let g:latex_to_unicode_auto = 1 
 
 try
     source ~/.config/nvim/config/python.vim
