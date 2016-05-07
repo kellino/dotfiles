@@ -19,6 +19,8 @@ function! GhcModQuickFix()
   :Unite -no-empty quickfix
 endfunction
 
+let g:haskellmode_completion_ghc = 0
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 let g:ycm_semantic_triggers={'haskell' : ['.']}
 let g:necoghc_enable_detailed_browse=1
 
