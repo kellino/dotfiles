@@ -47,7 +47,7 @@ ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 ## plugins
-plugins=(git archlinux colored-man history vi-mode zsh-syntax-highlighting)
+plugins=(git archlinux colored-man history vi-mode ag zsh-syntax-highlighting)
 ## syntax highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
