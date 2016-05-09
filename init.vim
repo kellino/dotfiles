@@ -88,7 +88,6 @@ Plug 'starcraftman/vim-eclim', { 'for' : 'java' }
 "" Python
 Plug 'klen/python-mode', { 'for' : 'python' }
 Plug 'hdima/python-syntax', { 'for' : 'python' }
-Plug 'bfredl/nvim-ipy'
 
 
 "" LaTeX
