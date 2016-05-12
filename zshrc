@@ -53,7 +53,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 # User configuration
 
-export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/opt/pypy3/bin:"
+export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/home/david/.local/bin:"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -89,6 +89,9 @@ alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
 # python
 alias pyrepl='ptipython'
 
+# haskell
+alias hask='jupyter console --kernel haskell'
+
 # directories
 alias pf='cd ~/Programming/Functional/Haskell'
 alias pp='cd ~/Programming/Python'
@@ -101,5 +104,5 @@ alias ccat='pygmentize -g'
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ./zsh_funcs ] && source ~/dotfiles/zsh_funcs
+[ -f $HOME/dotfiles/zsh_funcs ] && source $HOME/dotfiles/zsh_funcs
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
