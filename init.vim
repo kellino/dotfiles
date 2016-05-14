@@ -15,7 +15,6 @@ call plug#begin('~/.config/nvim/bundle/')
 
 "" general
 Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
-Plug 'Shougo/unite.vim'
 Plug 'itchyny/lightline.vim'
 
 Plug 'Raimondi/delimitMate'
@@ -57,7 +56,7 @@ Plug 'Chiel92/vim-autoformat', { 'for' : 'latex' }
 
 "" YouCompleteMe, Snippets & Tags
 Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
-Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --racer-completer'}
+Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --system-libclang --clang-completer --racer-completer'}
 
 augroup load_us_ycm
   autocmd!
@@ -262,13 +261,10 @@ let g:rustfmt_autosave=1
 
 let g:ophigh_color = 226
 
-" let g:latex_to_unicode_auto = 1 
-
 try
     source ~/.config/nvim/config/python.vim
     source ~/.config/nvim/config/ultisnips.vim
     source ~/.config/nvim/config/ycm.vim
-    source ~/.config/nvim/config/unite.vim
     source ~/.config/nvim/config/lightline.vim
     source ~/.config/nvim/config/rainbow.vim
     source ~/.config/nvim/config/haskell.vim
