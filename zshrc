@@ -47,7 +47,7 @@ ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 ## plugins
-plugins=(git archlinux colored-man history vi-mode ag zsh-syntax-highlighting)
+plugins=(git archlinux history vi-mode ag ghc zsh-syntax-highlighting)
 ## syntax highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
@@ -93,8 +93,8 @@ alias pyrepl='ptipython'
 alias hask='jupyter console --kernel haskell'
 
 # directories
-alias pf='cd ~/Programming/Functional/Haskell'
-alias pp='cd ~/Programming/Python'
+alias pf='cd $HOME/Programming/Haskell'
+alias pp='cd $HOME/Programming/Python'
 
 # alsi
 alias alsi='alsi -t -u'
