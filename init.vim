@@ -51,7 +51,6 @@ Plug 'Yggdroot/indentLine', { 'for' : ['python', 'lua', 'haskell'] }
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 Plug 'bruno-/vim-man', { 'for' : ['c', 'sh'] }
-Plug 'Chiel92/vim-autoformat', { 'for' : 'latex' }
 
 
 "" YouCompleteMe, Snippets & Tags
@@ -247,6 +246,9 @@ let g:EclimCompletionMethod='omnifunc'
 "" Unicode
 map <F12> <Plug>(MakeDigraph)
 nmap ga <Plug>(UnicodeGA)
+
+"" nerd tree
+map <F3> :NERDTreeToggle<CR>
 
 "" Tagbar
 map <F8> :TagbarToggle<CR>
