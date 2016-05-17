@@ -14,15 +14,11 @@ let g:haskell_indent_in=1
 let g:ghcmod_hlint_options=['--ignore=Redundant $']
 let g:ghcmod_open_quickfix_function = 'GhcModQuickFix'
 
-function! GhcModQuickFix()
-  " for unite.vim and unite-quickfix
-  :Unite -no-empty quickfix
-endfunction
 
-let g:haskellmode_completion_ghc = 0
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 let g:ycm_semantic_triggers={'haskell' : ['.']}
 let g:necoghc_enable_detailed_browse=1
+
 
 function! REPLSendHaskell()
     save! %
@@ -31,16 +27,13 @@ function! REPLSendHaskell()
 endfunction
 
 function! HaskellRepl()
-    silent! 10 split
+    silent! 20 split
     e ghci.hs
     call termopen('ghci')
     wincmd p
 endfunction
 
 augroup haskellgroup
-    au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-    au FileType haskell nnoremap <buffer> <silent> <F1>c :HdevtoolsClear<CR>
-    au FileType haskell nnoremap <buffer> <silent> <F1>i :HdevtoolsInfo<CR>
     au BufNewFile,BufRead *.hs map <buffer> <F2> :Hoogle 
     au BufNewFile,BufRead *.hs map <buffer> <C-F2> :HoogleClose<CR>
     au BufNewFile,BufRead *.hs map <buffer> <S-F2> :HoogleLine<CR>
