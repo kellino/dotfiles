@@ -11,6 +11,8 @@ autoload zmv
 bindkey ' ' magic-space
 autoload -Uz colors && colors
 
+eval `dircolors -b $HOME/.ls_colours`
+
 HISTFILE="$HOME/.zhistory"
 HISTSIZE=10000
 SAVEHIST=10000
