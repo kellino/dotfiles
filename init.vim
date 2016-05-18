@@ -55,7 +55,7 @@ Plug 'bruno-/vim-man', { 'for' : ['c', 'sh'] }
 
 "" YouCompleteMe, Snippets & Tags
 Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
-Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --system-libclang --clang-completer --racer-completer'}
+Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --system-libclang --clang-completer --racer-completer --gocode-completer'}
 
 augroup load_us_ycm
   autocmd!
@@ -104,6 +104,10 @@ Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
 "" Rust
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 Plug 'rhysd/rust-doc.vim', { 'for' : 'rust' }
+
+
+"" Go
+Plug 'fatih/vim-go'
 
 
 call plug#end()
