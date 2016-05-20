@@ -19,10 +19,11 @@ Plug 'itchyny/lightline.vim'
 
 Plug 'Raimondi/delimitMate'
 Plug 'haya14busa/incsearch.vim'
-Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }  " F3
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-eunuch'
+Plug 'justinmk/vim-dirvish'
+Plug 'justinmk/vim-sneak'
 
 "" fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -30,17 +31,14 @@ Plug 'junegunn/fzf.vim'
 
 "" Colourscheme(s)
 Plug 'altercation/vim-colors-solarized'
-Plug 'Valloric/vim-operator-highlight'
 
 "" Text Editing
+Plug 'Valloric/vim-operator-highlight'
 Plug 'luochen1990/rainbow'
-Plug 'Lokaltog/vim-easymotion'
 Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for' : 'markdown' }
 Plug 'godlygeek/tabular'
-Plug 'Valloric/MatchTagAlways'
-
 
 "" Coding
 Plug 'scrooloose/nerdcommenter'
@@ -50,8 +48,6 @@ Plug 'benekastah/neomake', { 'for' : ['c', 'tex', 'latex', 'haskell', 'vim', 'py
 Plug 'Yggdroot/indentLine', { 'for' : ['python', 'lua', 'haskell'] }
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
-Plug 'bruno-/vim-man', { 'for' : ['c', 'sh'] }
-
 
 "" YouCompleteMe, Snippets & Tags
 Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
@@ -63,48 +59,38 @@ augroup load_us_ycm
                      \| call youcompleteme#Enable() | autocmd! load_us_ycm
 augroup END
 
-
 "" C 
 Plug 'critiqjo/lldb.nvim', { 'for' : 'c' }
 Plug 'bbchung/Clamp', { 'for' : ['c', 'h'] }
-Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'lex'] }
-
+Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'lex', 'bison'] }
 
 "" Haskell
 Plug 'neovimhaskell/haskell-vim', { 'for' : 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
-Plug 'Twinside/vim-haskellConceal', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 
-
 "" Java
 Plug 'starcraftman/vim-eclim', { 'for' : 'java' }
-
 
 "" Python
 Plug 'klen/python-mode', { 'for' : 'python' }
 Plug 'hdima/python-syntax', { 'for' : 'python' }
 
-
 "" LaTeX
 Plug 'LaTeX-Box-Team/LaTeX-Box'
-
 
 " perl
 Plug 'vim-perl/vim-perl', { 'for' : 'perl' }
 Plug 'c9s/perlomni.vim', { 'for' : 'perl' }
 
-
 "" Shell & Scripting
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
-
 
 "" Rust
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 Plug 'rhysd/rust-doc.vim', { 'for' : 'rust' }
-
 
 "" Go
 Plug 'fatih/vim-go'
@@ -211,15 +197,12 @@ set viewoptions=cursor,folds
 set tags=./tags;
 
 let g:c_syntax_for_h=1
-let g:tex_conceal=''
+" let g:tex_conceal=''
 
 
 "============================="
 "      Plugin Options         "
 "============================="
-
-"" easymotion
-let g:EasyMotion_leader_key = '##'
 
 "" Neomake
 augroup neomaketypes
@@ -228,7 +211,6 @@ augroup neomaketypes
     autocmd! BufWritePost *.hs Neomake
     autocmd! BufWritePost *.py Neomake
     autocmd! bufWritePost *.sh Neomake
-    autocmd! bufWritePost *.lua Neomake
     autocmd! bufWritePost *.rs Neomake
 augroup END
 
@@ -237,11 +219,8 @@ nmap / <Plug>(incsearch-forward)
 nmap ? <Plug>(incsearch-backward)
 
 "" IndentLine
-let g:indentLine_char='¦' 
+let g:indentLine_char='|' 
 let g:indentLine_color_term = 239
-
-"" mips
-nnoremap mips :set syntax=mips<CR>
 
 "" Omnifunc completions
 set omnifunc=syntaxcomplete#Complete
@@ -251,12 +230,8 @@ let g:EclimCompletionMethod='omnifunc'
 map <F12> <Plug>(MakeDigraph)
 nmap ga <Plug>(UnicodeGA)
 
-"" nerd tree
-map <F3> :NERDTreeToggle<CR>
-
 "" Tagbar
 map <F8> :TagbarToggle<CR>
-
 
 "" mutt 
 au BufRead /tmp/mutt-* set tw=72
@@ -265,6 +240,7 @@ au BufRead /tmp/mutt-* set tw=72
 let g:ycm_rust_src_path='/usr/src/rust/src'
 let g:rustfmt_autosave=1
 
+"" operator highlight
 let g:ophigh_color = 226
 
 try
