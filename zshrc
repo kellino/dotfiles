@@ -55,7 +55,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 # User configuration
 
-export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/home/david/.local/bin:"
+export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -90,9 +90,6 @@ alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
 
 # python
 alias pyrepl='ptipython'
-
-# haskell
-alias hask='jupyter console --kernel haskell'
 
 # directories
 alias pf='cd $HOME/Programming/Haskell'
