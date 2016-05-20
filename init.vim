@@ -1,6 +1,3 @@
-scriptencoding utf8
-
-
 "   ================================================================ "
 "    __   ___   _( ) __   __  ________    ____   _____   _( ) ____   
 "   |  \ | | \ / / |/ _\_/_ \|  __/ __|  |  _ \ / _ \ \ / / ||  _ \     
@@ -8,8 +5,6 @@ scriptencoding utf8
 "   |_| \__| \_/ |_|_| |_| |_|_|  \___|()|____/|_| |_|\_/ |_||____/     	   
 "
 "   ================================================================ "
-
-
 
 call plug#begin('~/.config/nvim/bundle/')
 
@@ -39,14 +34,17 @@ Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for' : 'markdown' }
 Plug 'godlygeek/tabular'
+Plug 'ervandew/regex', { 'for' : ['java', 'python'] }
 
-"" Coding
+"" Git
+Plug 'tpope/vim-fugitive', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] }
+Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] }
+Plug 'junegunn/gv.vim', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] }
+
+"" General coding
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter'
-Plug 'ervandew/regex', { 'for' : ['java', 'python'] }
 Plug 'benekastah/neomake', { 'for' : ['c', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'rust'] }
-Plug 'Yggdroot/indentLine', { 'for' : ['python', 'lua', 'haskell'] }
-Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 
 "" YouCompleteMe, Snippets & Tags
@@ -188,6 +186,11 @@ noremap <Leader>tt :tabclose<CR>
 map <Leader>yy "*y
 map <Leader>pp "*p
 
+
+"" quick quit
+map qq :wqa!<CR>
+map qa :qa!<CR>
+
 "" History settings
 set history=500
 set viminfo='1000,<500,f1
@@ -217,10 +220,6 @@ augroup END
 "" search with incsearch.vim
 nmap / <Plug>(incsearch-forward)
 nmap ? <Plug>(incsearch-backward)
-
-"" IndentLine
-let g:indentLine_char='|' 
-let g:indentLine_color_term = 239
 
 "" Omnifunc completions
 set omnifunc=syntaxcomplete#Complete
