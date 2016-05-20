@@ -34,9 +34,9 @@ function! HaskellRepl()
 endfunction
 
 augroup haskellgroup
-    au BufNewFile,BufRead *.hs map <buffer> <F2> :Hoogle 
-    au BufNewFile,BufRead *.hs map <buffer> <C-F2> :HoogleClose<CR>
-    au BufNewFile,BufRead *.hs map <buffer> <S-F2> :HoogleLine<CR>
+    au BufNewFile,BufRead *.hs map <buffer> <F2>   : Hoogle<CR>
+    au BufNewFile,BufRead *.hs map <buffer> <C-F2> : HoogleClose<CR>
+    au BufNewFile,BufRead *.hs map <buffer> <S-F2> : HoogleLine<CR>
 augroup END
 
 nnoremap <silent> <C-x><C-x> :REPLSendHaskell<CR>
