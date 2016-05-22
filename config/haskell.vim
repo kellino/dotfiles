@@ -12,10 +12,15 @@ let g:haskell_indent_do=3
 let g:haskell_indent_in=1
 
 let g:ghcmod_hlint_options=['--ignore=Redundant $']
-let g:ghcmod_open_quickfix_function = 'GhcModQuickFix'
+let g:ghcmod_open_quickfix_function='GhcModQuickFix'
 
+let g:haskellmode_completion_ghc=1
 
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+let g:haskell_tabular=1
+vmap a= :Tabularize /=<CR>
+vmap a; :Tabularize /::<CR>
+vmap a- :Tabularize /-><CR>
+
 let g:ycm_semantic_triggers={'haskell' : ['.']}
 let g:necoghc_enable_detailed_browse=1
 
