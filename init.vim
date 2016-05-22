@@ -1,10 +1,15 @@
-"   ================================================================ "
-"    __   ___   _( ) __   __  ________    ____   _____   _( ) ____   
-"   |  \ | | \ / / |/ _\_/_ \|  __/ __|  |  _ \ / _ \ \ / / ||  _ \     
-"   | |\\| |\ V /| | | | | | | | ( (__   | |_) / /_\ \ V /| || |_) )    
-"   |_| \__| \_/ |_|_| |_| |_|_|  \___|()|____/|_| |_|\_/ |_||____/     	   
-"
-"   ================================================================ "
+
+
+"   dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+"   ddd  dddddddddddd  dd  ddddddddddddddddd  dddddddddddddddddddd
+"   ddddddddddddddddddddd  ddddddddddddddddddddddddddddddddddddddd
+"   ddd  dd  dd   ddd  dd     dddd   dddddd   dd  dd   ddd   ddddd
+"   ddd  dd   ddd  dd  dd  dddddddd  ddddd    dd   dddd   ddd  ddd
+"   ddd  dd  dddd  dd  dd  ddddddddd  ddd  d  dd  ddddd  dddd  ddd
+"   ddd  dd  dddd  dd  dd  ddd  ddddd  d  dd  dd  ddddd  dddd  ddd
+"   ddd  dd  dddd  dd  ddd     dd  ddd   ddd  dd  ddddd  dddd  ddd
+"   dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+"   dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 
 call plug#begin('~/.config/nvim/bundle/')
 
@@ -19,6 +24,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-eunuch'
 Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
+Plug 'rhysd/clever-f.vim'
 
 "" fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -29,7 +35,7 @@ Plug 'altercation/vim-colors-solarized'
 
 "" Text Editing
 Plug 'Valloric/vim-operator-highlight'
-Plug 'luochen1990/rainbow'
+Plug 'luochen1990/rainbow', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim'] }
 Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for' : 'markdown' }
@@ -187,9 +193,10 @@ map <Leader>yy "*y
 map <Leader>pp "*p
 
 
-"" quick quit
+"" quick save and quit
 map qq :wqa!<CR>
 map qa :qa!<CR>
+map <leader>w :w<CR>
 
 "" History settings
 set history=500
