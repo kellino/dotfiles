@@ -9,9 +9,16 @@ export BROWSER='chromium'
 
 autoload zmv
 bindkey ' ' magic-space
-autoload -Uz colors && colors
 
+## ls colours
+autoload -Uz colors && colors
 eval `dircolors -b $HOME/.ls_colours`
+
+## stack completion
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+eval "$(stack --bash-completion-script stack)"
+
 
 HISTFILE="$HOME/.zhistory"
 HISTSIZE=10000
@@ -55,7 +62,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 # User configuration
 
-export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:"
+export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/home/david/.local/bin:"
 
 source $ZSH/oh-my-zsh.sh
 
