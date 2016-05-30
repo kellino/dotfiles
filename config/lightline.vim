@@ -30,30 +30,30 @@ let g:lightline = {
 
 
 function! MyModified()
-    return &ft =~ 'help\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    return &filetype =~# 'help\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 
 
 function! MyModified()
-  if &filetype == "help"
-    return ""
+  if &filetype ==# 'help'
+    return ''
   elseif &modified
-    return "+"
+    return '+'
   elseif &modifiable
-    return ""
+    return ''
   else
-    return ""
+    return ''
   endif
 endfunction
 
 
 function! MyReadonly()
-  return &ft !~? 'help\|vimfiler\|' && &readonly ? '' : ''
+  return &filetype !~? 'help\|vimfiler\|' && &readonly ? '' : ''
 endfunction
 
 
 function! MyFilename()
-  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+  return ('' !=# MyReadonly() ? MyReadonly() . ' ' : '') .
        \ (&ft == 'unite' ? unite#get_status_string() :
        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
        \ ('' != MyModified() ? ' ' . MyModified() : '')
@@ -71,12 +71,12 @@ endfunction
 
 
 function! MyFileencoding()
-  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+  return winwidth(0) > 70 ? (strlen(&fileencoding) ? &fileencoding: &encoding) : ''
 endfunction
 
 
 function! MyMode()
-  let fname = expand('%:t')
+  let l:fname = expand('%:t')
   return fname == '__Tagbar__' ? 'Tagbar' :
         \ &ft == 'unite' ? 'Unite' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
@@ -86,9 +86,9 @@ function! TrailingSpaceWarning()
       if winwidth(0) < 80
         return ''
       endif
-      let trailing = search('\s$', 'nw')
-      if trailing != 0
-        return '… trailing[' . trailing . ']'
+      let l:trailing = search('\s$', 'nw')
+      if l:trailing != 0
+        return '… trailing[' . l:trailing . ']'
       else
         return ''
       endif
@@ -98,10 +98,10 @@ function! MixedIndentSpaceWarning()
       if winwidth(0) < 80
         return ''
       endif
-      let tabs = search('^\t', 'nw')
-      let spaces = search('^ ', 'nw')
-      if (tabs != 0) && (spaces != 0)
-        return '» mixed-indent[' . tabs . ']'
+      let l:tabs = search('^\t', 'nw')
+      let l:spaces = search('^ ', 'nw')
+      if (l:tabs != 0) && (l:spaces != 0)
+        return '» mixed-indent[' . l:tabs . ']'
       else
         return ''
       endif
@@ -134,6 +134,6 @@ function! s:fzf_statusline()
   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
 
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
-
-" let g:unite_force_overwrite_statusline = 0
+augroup fzf
+    autocmd! User FzfStatusLine call <SID>fzf_statusline()
+augroup END

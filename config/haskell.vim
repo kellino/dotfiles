@@ -46,6 +46,8 @@ augroup END
 
 nnoremap <silent> <C-x><C-x> :REPLSendHaskell<CR>
 
+map <leader>ti :GhcModTypeInsert<CR>
+
 let g:tagbar_type_haskell = {
     \ 'ctagsbin'  : 'hasktags',
     \ 'ctagsargs' : '-x -c -o-',
