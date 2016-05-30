@@ -240,7 +240,9 @@ nmap ga <Plug>(UnicodeGA)
 map <F8> :TagbarToggle<CR>
 
 "" mutt 
-au BufRead /tmp/mutt-* set tw=72
+augroup mutt
+    au BufRead /tmp/mutt-* set tw=72
+augroup END
 
 "" rust
 let g:ycm_rust_src_path='/usr/src/rust/src'
