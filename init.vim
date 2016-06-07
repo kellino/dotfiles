@@ -17,14 +17,13 @@ call plug#begin('~/.config/nvim/bundle/')
 Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'itchyny/lightline.vim'
 
-Plug 'Raimondi/delimitMate'
-Plug 'haya14busa/incsearch.vim'
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-eunuch'
-Plug 'justinmk/vim-dirvish'
+Plug 'justinmk/vim-dirvish' " file browser
 Plug 'justinmk/vim-sneak'
 Plug 'rhysd/clever-f.vim'
+Plug 'haya14busa/incsearch.vim'
 
 "" fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -34,8 +33,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'altercation/vim-colors-solarized'
 
 "" Text Editing
+Plug 'Raimondi/delimitMate'
 Plug 'Valloric/vim-operator-highlight'
-Plug 'luochen1990/rainbow', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim'] }
+Plug 'luochen1990/rainbow', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim', 'haskell'] }
 Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for' : 'markdown' }
@@ -45,7 +45,7 @@ Plug 'ervandew/regex', { 'for' : ['java', 'python'] }
 "" Git
 Plug 'tpope/vim-fugitive', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] }
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] }
-Plug 'junegunn/gv.vim', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] }
+Plug 'junegunn/gv.vim', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] } " git source tree viewer
 
 "" General coding
 Plug 'scrooloose/nerdcommenter'
@@ -55,6 +55,7 @@ Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 
 "" YouCompleteMe, Snippets & Tags
 Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
+
 Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --system-libclang --clang-completer --racer-completer --gocode-completer'}
 
 augroup load_us_ycm
@@ -85,10 +86,6 @@ Plug 'hdima/python-syntax', { 'for' : 'python' }
 "" LaTeX
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 
-" perl
-Plug 'vim-perl/vim-perl', { 'for' : 'perl' }
-Plug 'c9s/perlomni.vim', { 'for' : 'perl' }
-
 "" Shell & Scripting
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
 
@@ -98,7 +95,6 @@ Plug 'rhysd/rust-doc.vim', { 'for' : 'rust' }
 
 "" Go
 Plug 'fatih/vim-go'
-
 
 call plug#end()
 
