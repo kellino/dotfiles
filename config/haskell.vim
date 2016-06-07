@@ -4,6 +4,7 @@ let g:haskell_enable_arrowsyntax=1
 let g:haskell_enable_pattern_synonyms=1
 let g:haskell_enable_typeroles=1
 let g:haskell_enable_static_pointers=1
+let g:hs_highlight_boolean=1
 
 let g:haskell_indent_if=3
 let g:haskell_indent_case=2
@@ -14,12 +15,14 @@ let g:haskell_indent_in=1
 let g:ghcmod_hlint_options=['--ignore=Redundant $']
 let g:ghcmod_open_quickfix_function='GhcModQuickFix'
 
-let g:haskellmode_completion_ghc=1
+"let g:haskellmode_completion_ghc=0
 
 let g:haskell_tabular=1
 vmap a= :Tabularize /=<CR>
-vmap a; :Tabularize /::<CR>
-vmap a- :Tabularize /-><CR>
+vmap a: :Tabularize /::<CR>
+vmap a> :Tabularize /-><CR>
+vmap a< :Tabularize /<-<CR>
+
 
 let g:ycm_semantic_triggers={'haskell' : ['.']}
 let g:necoghc_enable_detailed_browse=1
@@ -34,7 +37,7 @@ endfunction
 function! HaskellRepl()
     silent! 20 split
     e ghci.hs
-    call termopen('ghci')
+    call termopen('ghci -XOverloadedStrings')
     wincmd p
 endfunction
 
