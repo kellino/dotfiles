@@ -82,6 +82,7 @@ alias umusb='sudo umount /mnt'
 alias modstat="stat --format '%a'" # returns the octal number of a file / directory
 alias k9="kill -9"
 alias mmv='noglob zmv -W'
+alias sus='sudo pm-suspend'
 
 # monitor
 alias mon='xrandr --output HDMI1 --auto --left-of eDP1'
