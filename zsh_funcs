@@ -47,3 +47,32 @@ man() {
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
 }
+
+
+# taken from itchyny on Github, with some small alterations
+# suffix alias according to file extension
+alias -s txt=cat
+alias -s {csv,js,css,less,md}=vi
+alias -s tex=autolatex
+alias -s html=chromium
+alias -s pdf=zathura
+alias -s {png,jpg,bmp,PNG,JPG,BMP}=feh
+alias -s {mp3,mp4,wav,mkv,m4v,m4a,wmv,avi,mpeg,mpg,vob,mov,rm}=mplayer
+alias -s py=python
+alias -s hs=runhaskell
+alias -s sh=sh
+
+function extract() {
+  case $1 in
+    *.tar.gz|*.tgz) tar xzvf "$1";;
+    *.tar.xz) tar Jxvf "$1";;
+    *.zip) unzip "$1";;
+    *.tar.bz2|*.tbz) tar xjvf "$1";;
+    *.tar.Z) tar zxvf "$1";;
+    *.gz) gzip -d "$1";;
+    *.bz2) bzip2 -dc "$1";;
+    *.Z) uncompress "$1";;
+    *.tar) tar xvf "$1";;
+  esac
+}
+alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
