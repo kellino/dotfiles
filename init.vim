@@ -16,6 +16,7 @@ call plug#begin('~/.config/nvim/bundle/')
 "" general
 Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'itchyny/lightline.vim'
+Plug 'itchyny/calendar.vim'
 
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
@@ -75,6 +76,7 @@ Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
+Plug 'itchyny/vim-haskell-indent', { 'for' : 'haskell' }
 
 "" Java
 Plug 'starcraftman/vim-eclim', { 'for' : 'java' }
