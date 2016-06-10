@@ -6,16 +6,10 @@ let g:haskell_enable_typeroles=1
 let g:haskell_enable_static_pointers=1
 let g:hs_highlight_boolean=1
 
-let g:haskell_indent_if=3
-let g:haskell_indent_case=2
-let g:haskell_indent_let=4
-let g:haskell_indent_do=3
-let g:haskell_indent_in=1
-
 let g:ghcmod_hlint_options=['--ignore=Redundant $']
 let g:ghcmod_open_quickfix_function='GhcModQuickFix'
 
-"let g:haskellmode_completion_ghc=0
+let g:haskellmode_completion_ghc=0
 
 let g:haskell_tabular=1
 vmap a= :Tabularize /=<CR>
