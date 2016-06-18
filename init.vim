@@ -35,7 +35,7 @@ Plug 'altercation/vim-colors-solarized'
 
 "" Text Editing
 Plug 'Raimondi/delimitMate'
-Plug 'Valloric/vim-operator-highlight'
+Plug 'Valloric/vim-operator-highlight', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim', 'hasekll'] }
 Plug 'luochen1990/rainbow', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim', 'haskell'] }
 Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
@@ -44,13 +44,13 @@ Plug 'godlygeek/tabular'
 Plug 'ervandew/regex', { 'for' : ['java', 'python'] }
 
 "" Git
-Plug 'tpope/vim-fugitive', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] }
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] }
 Plug 'junegunn/gv.vim', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] } " git source tree viewer
 
 "" General coding
 Plug 'scrooloose/nerdcommenter'
-Plug 'airblade/vim-rooter'
+Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh'] }
 Plug 'benekastah/neomake', { 'for' : ['c', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'rust'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 
@@ -77,6 +77,7 @@ Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent', { 'for' : 'haskell' }
+Plug 'hspec/hspec.vim', { 'for' : 'haskell'}
 
 "" Java
 Plug 'starcraftman/vim-eclim', { 'for' : 'java' }
@@ -222,6 +223,8 @@ augroup neomaketypes
     autocmd! bufWritePost *.rs Neomake
 augroup END
 
+let g:neomake_open_list=2
+
 "" search with incsearch.vim
 nmap / <Plug>(incsearch-forward)
 nmap ? <Plug>(incsearch-backward)
@@ -248,6 +251,10 @@ let g:rustfmt_autosave=1
 
 "" operator highlight
 let g:ophigh_color = 226
+
+"" vim caldenar
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
 
 try
     source ~/.config/nvim/config/python.vim
