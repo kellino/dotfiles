@@ -109,6 +109,9 @@ alias alsi='alsi -t -u'
 # coloured cat
 alias ccat='pygmentize -g'
 
+# cabal
+alias cb='cabal build'
+alias cr='cabal run'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f $HOME/dotfiles/zsh_funcs ] && source $HOME/dotfiles/zsh_funcs
