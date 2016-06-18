@@ -7,7 +7,7 @@ let g:haskell_enable_static_pointers=1
 let g:hs_highlight_boolean=1
 
 let g:ghcmod_hlint_options=['--ignore=Redundant $']
-let g:ghcmod_open_quickfix_function='GhcModQuickFix'
+"let g:ghcmod_open_quickfix_function='GhcModQuickFix'
 
 let g:haskellmode_completion_ghc=0
 
@@ -32,6 +32,13 @@ function! HaskellRepl()
     silent! 20 split
     e ghci.hs
     call termopen('ghci -XOverloadedStrings')
+    wincmd p
+endfunction
+
+function! CabalRepl()
+    silent! 20 split
+    e ghci.hs
+    call termopen('cabal repl')
     wincmd p
 endfunction
 
@@ -79,3 +86,4 @@ let g:tagbar_type_haskell = {
 
 command! REPLSendHaskell call REPLSendHaskell()
 command! Haskell call HaskellRepl()
+command! CabalRepl call CabalRepl()
