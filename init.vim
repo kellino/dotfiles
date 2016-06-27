@@ -35,23 +35,22 @@ Plug 'altercation/vim-colors-solarized'
 
 "" Text Editing
 Plug 'Raimondi/delimitMate'
-Plug 'Valloric/vim-operator-highlight', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim', 'hasekll'] }
+Plug 'Valloric/vim-operator-highlight', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim', 'haskell'] }
 Plug 'luochen1990/rainbow', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim', 'haskell'] }
 Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for' : 'markdown' }
 Plug 'godlygeek/tabular'
-Plug 'ervandew/regex', { 'for' : ['java', 'python'] }
 
 "" Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] }
-Plug 'junegunn/gv.vim', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] } " git source tree viewer
+Plug 'junegunn/gv.vim', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim', 'cabal'] } " git source tree viewer
 
 "" General coding
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh'] }
-Plug 'benekastah/neomake', { 'for' : ['c', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'rust'] }
+Plug 'benekastah/neomake', { 'for' : ['c', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'rust', 'erlang'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 
 "" YouCompleteMe, Snippets & Tags
@@ -78,6 +77,7 @@ Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent', { 'for' : 'haskell' }
 Plug 'hspec/hspec.vim', { 'for' : 'haskell'}
+Plug 'Twinside/vim-syntax-haskell-cabal', { 'for' : 'cabal' }
 
 "" Java
 Plug 'starcraftman/vim-eclim', { 'for' : 'java' }
@@ -96,8 +96,11 @@ Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 Plug 'rhysd/rust-doc.vim', { 'for' : 'rust' }
 
-"" Go
-Plug 'fatih/vim-go'
+"" Erlang
+Plug 'vim-erlang/vim-erlang-omnicomplete', { 'for' : 'erlang' }
+Plug 'vim-erlang/erlang-motions.vim', { 'for' : 'erlang' }
+Plug 'vim-erlang/vim-erlang-tags', { 'for' : 'erlang' }
+
 
 call plug#end()
 
@@ -206,7 +209,6 @@ set viewoptions=cursor,folds
 set tags=./tags;
 
 let g:c_syntax_for_h=1
-" let g:tex_conceal=''
 
 
 "============================="
@@ -221,9 +223,11 @@ augroup neomaketypes
     autocmd! BufWritePost *.py Neomake
     autocmd! bufWritePost *.sh Neomake
     autocmd! bufWritePost *.rs Neomake
+    autocmd! bufWritePost *.erl Neomake
 augroup END
 
-let g:neomake_open_list=2
+map lo :lopen<CR>
+map lc :lclose<CR>
 
 "" search with incsearch.vim
 nmap / <Plug>(incsearch-forward)
