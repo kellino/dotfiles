@@ -35,7 +35,7 @@ Plug 'altercation/vim-colors-solarized'
 
 "" Text Editing
 Plug 'Raimondi/delimitMate'
-Plug 'Valloric/vim-operator-highlight', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim', 'haskell'] }
+Plug 'Valloric/vim-operator-highlight', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim'] }
 Plug 'luochen1990/rainbow', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim', 'haskell'] }
 Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
