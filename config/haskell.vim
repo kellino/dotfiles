@@ -9,16 +9,17 @@ let g:hs_highlight_boolean=1
 let g:ghcmod_hlint_options=['--ignore=Redundant $']
 "let g:ghcmod_open_quickfix_function='GhcModQuickFix'
 
-let g:haskellmode_completion_ghc=0
+"let g:haskellmode_completion_ghc=0
 
 let g:haskell_tabular=1
 vmap a= :Tabularize /=<CR>
 vmap a: :Tabularize /::<CR>
 vmap a> :Tabularize /-><CR>
 vmap a< :Tabularize /<-<CR>
+vmap a( :Tabularize /(<CR>
+vmap a[ :Tabularize /[<CR>
 
-
-let g:ycm_semantic_triggers={'haskell' : ['.']}
+"let g:ycm_semantic_triggers={'haskell' : ['.']}
 let g:necoghc_enable_detailed_browse=1
 
 
