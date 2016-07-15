@@ -1,16 +1,11 @@
 
-
-"   dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-"   ddd  dddddddddddd  dd  ddddddddddddddddd  dddddddddddddddddddd
-"   ddddddddddddddddddddd  ddddddddddddddddddddddddddddddddddddddd
-"   ddd  dd  dd   ddd  dd     dddd   dddddd   dd  dd   ddd   ddddd
-"   ddd  dd   ddd  dd  dd  dddddddd  ddddd    dd   dddd   ddd  ddd
-"   ddd  dd  dddd  dd  dd  ddddddddd  ddd  d  dd  ddddd  dddd  ddd
-"   ddd  dd  dddd  dd  dd  ddd  ddddd  d  dd  dd  ddddd  dddd  ddd
-"   ddd  dd  dddd  dd  ddd     dd  ddd   ddd  dd  ddddd  dddd  ddd
-"   dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-"   dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-
+"    d888888b d8b   db d888888b d888888b    db    db d888888b .88b  d88. 
+"      `88'   888o  88   `88'      88       88    88   `88'   88'YbdP`88 
+"       88    88V8o 88    88       88       Y8    8P    88    88  88  88 
+"       88    88 V8o88    88       88       `8b  d8'    88    88  88  88 
+"      .88.   88  V888   .88.      88    db  `8bd8'    .88.   88  88  88 
+"    Y888888P VP   V8P Y888888P    YP    VP    YP    Y888888P YP  YP  YP 
+                                                                    
 call plug#begin('~/.config/nvim/bundle/')
 
 "" general
@@ -36,11 +31,12 @@ Plug 'altercation/vim-colors-solarized'
 "" Text Editing
 Plug 'Raimondi/delimitMate'
 Plug 'Valloric/vim-operator-highlight', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim'] }
-Plug 'luochen1990/rainbow', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim', 'haskell'] }
+Plug 'luochen1990/rainbow', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim'] }
 Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for' : 'markdown' }
 Plug 'godlygeek/tabular'
+Plug 'matze/vim-move'
 
 "" Git
 Plug 'tpope/vim-fugitive'
@@ -52,22 +48,21 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh'] }
 Plug 'benekastah/neomake', { 'for' : ['c', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'rust', 'erlang'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
+Plug 'Konfekt/FastFold'
 
-"" YouCompleteMe, Snippets & Tags
-Plug 'SirVer/ultisnips', { 'on' : [] } | Plug 'honza/vim-snippets', { 'on' : [] }
-
-Plug 'Valloric/YouCompleteMe', { 'on': [] , 'do' : './install.py --system-libclang --clang-completer --racer-completer --gocode-completer'}
-
-augroup load_us_ycm
-  autocmd!
-  autocmd InsertEnter * call plug#load('ultisnips', 'YouCompleteMe', 'vim-snippets')
-                     \| call youcompleteme#Enable() | autocmd! load_us_ycm
-augroup END
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 
 "" C 
 Plug 'critiqjo/lldb.nvim', { 'for' : 'c' }
 Plug 'bbchung/Clamp', { 'for' : ['c', 'h'] }
 Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'lex', 'bison'] }
+Plug 'zchee/deoplete-clang', { 'for' : ['c', 'cpp' ] }
+Plug 'Shougo/neoinclude.vim', { 'for' : 'c' }
 
 "" Haskell
 Plug 'neovimhaskell/haskell-vim', { 'for' : 'haskell' }
@@ -79,22 +74,29 @@ Plug 'itchyny/vim-haskell-indent', { 'for' : 'haskell' }
 Plug 'hspec/hspec.vim', { 'for' : 'haskell'}
 Plug 'Twinside/vim-syntax-haskell-cabal', { 'for' : 'cabal' }
 
+"" Idris
+Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
+
 "" Java
 Plug 'starcraftman/vim-eclim', { 'for' : 'java' }
 
 "" Python
+Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
 Plug 'klen/python-mode', { 'for' : 'python' }
 Plug 'hdima/python-syntax', { 'for' : 'python' }
 
 "" LaTeX
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 
-"" Shell & Scripting
+"" Shell Scripting and Vim
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
+Plug 'Shougo/neco-vim' 
+
 
 "" Rust
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 Plug 'rhysd/rust-doc.vim', { 'for' : 'rust' }
+Plug 'phildawes/racer', { 'for' : 'racer' }
 
 "" Erlang
 Plug 'vim-erlang/vim-erlang-omnicomplete', { 'for' : 'erlang' }
@@ -146,7 +148,9 @@ set cmdheight=2
 set showcmd
 set showmatch
 set nowrap
+set relativenumber
 set number
+set numberwidth=2
 set mousefocus
 set sidescrolloff=0
 set autoindent
@@ -179,13 +183,6 @@ set completeopt=longest,menuone
 set wildmenu
 set wildmode=longest:list,full
 
-"" Folding
-set foldenable
-set foldcolumn=1
-set foldmethod=manual
-set foldnestmax=1
-set foldlevel=0
-
 "" Tab
 noremap <Leader>to :tabnew<CR>
 noremap <Leader>tt :tabclose<CR>
@@ -193,7 +190,6 @@ noremap <Leader>tt :tabclose<CR>
 "" Copy / Paste
 map <Leader>yy "*y
 map <Leader>pp "*p
-
 
 "" quick save and quit
 map qq :wqa!<CR>
@@ -208,12 +204,10 @@ set viewoptions=cursor,folds
 "" Recursively search for tagfiles
 set tags=./tags;
 
-let g:c_syntax_for_h=1
-
-
 "============================="
 "      Plugin Options         "
 "============================="
+
 
 "" Neomake
 augroup neomaketypes
@@ -237,6 +231,33 @@ nmap ? <Plug>(incsearch-backward)
 set omnifunc=syntaxcomplete#Complete
 let g:EclimCompletionMethod='omnifunc'
 
+
+"" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.rust = '[(\.)(::)]'
+
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+imap <s-tab>     <Plug>(neosnippet_expand_or_jump)
+smap <s-tab>     <Plug>(neosnippet_expand_or_jump)
+xmap <s-tab>     <Plug>(neosnippet_expand_target)
+
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+let g:deoplete#sources#clang#libclang_path='/usr/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header = '/usr/include/clang/'
+let g:deoplete#sources#clang#std#cpp = 'c++11'
+let g:deoplete#sources#clang#sort_algo = 'priority'
+
 "" Unicode
 map <F12> <Plug>(MakeDigraph)
 nmap ga <Plug>(UnicodeGA)
@@ -250,20 +271,17 @@ augroup mutt
 augroup END
 
 "" rust
-let g:ycm_rust_src_path='/usr/src/rust/src'
 let g:rustfmt_autosave=1
 
 "" operator highlight
 let g:ophigh_color = 226
 
-"" vim caldenar
+"" vim calendar
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
 
 try
     source ~/.config/nvim/config/python.vim
-    source ~/.config/nvim/config/ultisnips.vim
-    source ~/.config/nvim/config/ycm.vim
     source ~/.config/nvim/config/lightline.vim
     source ~/.config/nvim/config/rainbow.vim
     source ~/.config/nvim/config/haskell.vim
