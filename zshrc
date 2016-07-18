@@ -7,7 +7,6 @@ export LANG=en_GB.UTF-8
 export EDITOR='nvim'
 export BROWSER='chromium'
 
-autoload zmv
 bindkey ' ' magic-space
 
 ## ls colours
