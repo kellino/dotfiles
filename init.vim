@@ -15,7 +15,7 @@ Plug 'itchyny/calendar.vim'
 
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch' " unix commands
 Plug 'justinmk/vim-dirvish' " file browser
 Plug 'justinmk/vim-sneak'
 Plug 'rhysd/clever-f.vim'
@@ -30,7 +30,7 @@ Plug 'altercation/vim-colors-solarized'
 
 "" Text Editing
 Plug 'Raimondi/delimitMate'
-Plug 'Valloric/vim-operator-highlight', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim'] }
+Plug 'Valloric/vim-operator-highlight', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim', 'elixir'] }
 Plug 'luochen1990/rainbow', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim'] }
 Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
@@ -45,14 +45,17 @@ Plug 'junegunn/gv.vim', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust
 
 "" General coding
 Plug 'scrooloose/nerdcommenter'
-Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh'] }
-Plug 'benekastah/neomake', { 'for' : ['c', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'rust', 'erlang'] }
+Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh', 'elixir'] } 
+Plug 'benekastah/neomake', { 'for' : ['c', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'rust', 'erlang', 'elixir'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 Plug 'Konfekt/FastFold'
+Plug 'thinca/vim-ref'
 
+" deoplete 
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
+
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
@@ -86,23 +89,21 @@ Plug 'klen/python-mode', { 'for' : 'python' }
 Plug 'hdima/python-syntax', { 'for' : 'python' }
 
 "" LaTeX
-Plug 'LaTeX-Box-Team/LaTeX-Box'
+Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : ['tex', 'latex'] }
 
-"" Shell Scripting and Vim
+"" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
-Plug 'Shougo/neco-vim' 
-
+Plug 'zchee/deoplete-zsh', { 'for' : 'sh' }
+Plug 'Shougo/neco-vim', { 'for' : 'vim' }
 
 "" Rust
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 Plug 'rhysd/rust-doc.vim', { 'for' : 'rust' }
 Plug 'phildawes/racer', { 'for' : 'racer' }
 
-"" Erlang
-Plug 'vim-erlang/vim-erlang-omnicomplete', { 'for' : 'erlang' }
-Plug 'vim-erlang/erlang-motions.vim', { 'for' : 'erlang' }
-Plug 'vim-erlang/vim-erlang-tags', { 'for' : 'erlang' }
-
+"" elixir / erlang
+Plug 'elixir-lang/vim-elixir', { 'for' : 'elixir' }
+Plug 'awetzel/elixir.nvim', { 'for' : 'elixir' }
 
 call plug#end()
 
