@@ -32,7 +32,7 @@ endfunction
 function! HaskellRepl()
     silent! 20 split
     e ghci.hs
-    call termopen('ghci -XOverloadedStrings')
+    call termopen('ghci') " -XOverloadedStrings')
     wincmd p
 endfunction
 
