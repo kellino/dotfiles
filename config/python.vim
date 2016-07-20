@@ -1,4 +1,4 @@
-let g:ycm_python_binary_path='/usr/bin/python3'
+"let g:ycm_python_binary_path='/usr/bin/python3'
 let g:pymode_rope=0
 let g:pymode_doc=0
 let g:pymode_doc_key='K'
