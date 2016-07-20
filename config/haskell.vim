@@ -7,9 +7,7 @@ let g:haskell_enable_static_pointers=1
 let g:hs_highlight_boolean=1
 
 let g:ghcmod_hlint_options=['--ignore=Redundant $']
-"let g:ghcmod_open_quickfix_function='GhcModQuickFix'
-
-"let g:haskellmode_completion_ghc=0
+let g:ghcmod_open_quickfix_function='GhcModQuickFix'
 
 let g:haskell_tabular=1
 vmap a= :Tabularize /=<CR>
@@ -19,7 +17,6 @@ vmap a< :Tabularize /<-<CR>
 vmap a( :Tabularize /(<CR>
 vmap a[ :Tabularize /[<CR>
 
-"let g:ycm_semantic_triggers={'haskell' : ['.']}
 let g:necoghc_enable_detailed_browse=1
 
 
@@ -52,6 +49,10 @@ augroup END
 nnoremap <silent> <C-x><C-x> :REPLSendHaskell<CR>
 
 map <leader>ti :GhcModTypeInsert<CR>
+augroup hdevtools
+    autocmd FileType haskell nnoremap <buffer> <F5> :HdevtoolsType<CR>
+    autocmd FileType haskell nnoremap <buffer> <F6> :HdevtoolsClear<CR>
+augroup END
 
 let g:tagbar_type_haskell = {
     \ 'ctagsbin'  : 'hasktags',
