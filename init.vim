@@ -36,12 +36,10 @@ Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for' : 'markdown' }
 Plug 'godlygeek/tabular'
-Plug 'matze/vim-move'
 
 "" Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] }
-Plug 'junegunn/gv.vim', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim', 'cabal'] } " git source tree viewer
 
 "" General coding
 Plug 'scrooloose/nerdcommenter'
@@ -57,14 +55,13 @@ function! DoRemote(arg)
 endfunction
 
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 
 "" C 
 Plug 'critiqjo/lldb.nvim', { 'for' : 'c' }
-Plug 'bbchung/Clamp', { 'for' : ['c', 'h'] }
-Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'lex', 'bison'] }
 Plug 'zchee/deoplete-clang', { 'for' : ['c', 'cpp' ] }
+Plug 'bbchung/Clamp', { 'for' : ['c', 'cpp', 'h'] }
+Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'lex', 'bison'] }
 Plug 'Shougo/neoinclude.vim', { 'for' : 'c' }
 
 "" Haskell
@@ -74,19 +71,13 @@ Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent', { 'for' : 'haskell' }
-Plug 'hspec/hspec.vim', { 'for' : 'haskell'}
-Plug 'Twinside/vim-syntax-haskell-cabal', { 'for' : 'cabal' }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
-
-"" Idris
-Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
 
 "" Java
 Plug 'starcraftman/vim-eclim', { 'for' : 'java' }
 
 "" Python
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
-Plug 'klen/python-mode', { 'for' : 'python' }
 Plug 'hdima/python-syntax', { 'for' : 'python' }
 
 "" LaTeX
@@ -104,7 +95,7 @@ Plug 'phildawes/racer', { 'for' : 'racer' }
 
 "" elixir / erlang
 Plug 'elixir-lang/vim-elixir', { 'for' : 'elixir' }
-Plug 'awetzel/elixir.nvim' ", { 'for' : 'elixir' }
+Plug 'awetzel/elixir.nvim', { 'for' : 'elixir' }
 
 call plug#end()
 
@@ -285,6 +276,14 @@ let g:ophigh_color = 226
 "" vim calendar
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
+
+"" tabular
+vmap a= :Tabularize /=<CR>
+vmap a: :Tabularize /::<CR>
+vmap a> :Tabularize /-><CR>
+vmap a< :Tabularize /<-<CR>
+vmap a( :Tabularize /(<CR>
+vmap a[ :Tabularize /[<CR>
 
 try
     source ~/.config/nvim/config/python.vim
