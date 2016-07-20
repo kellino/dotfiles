@@ -46,7 +46,7 @@ Plug 'junegunn/gv.vim', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust
 "" General coding
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh', 'elixir'] } 
-Plug 'benekastah/neomake', { 'for' : ['c', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'rust', 'erlang', 'elixir'] }
+Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'rust', 'erlang', 'elixir', 'markdown'] }
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 Plug 'Konfekt/FastFold'
 Plug 'thinca/vim-ref'
@@ -76,6 +76,7 @@ Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent', { 'for' : 'haskell' }
 Plug 'hspec/hspec.vim', { 'for' : 'haskell'}
 Plug 'Twinside/vim-syntax-haskell-cabal', { 'for' : 'cabal' }
+Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
@@ -103,7 +104,7 @@ Plug 'phildawes/racer', { 'for' : 'racer' }
 
 "" elixir / erlang
 Plug 'elixir-lang/vim-elixir', { 'for' : 'elixir' }
-Plug 'awetzel/elixir.nvim', { 'for' : 'elixir' }
+Plug 'awetzel/elixir.nvim' ", { 'for' : 'elixir' }
 
 call plug#end()
 
@@ -212,6 +213,8 @@ set tags=./tags;
 
 "" Neomake
 augroup neomaketypes
+    autocmd! BufWritePost *.c Neomake
+    autocmd! BufWritePost *.cpp Neomake
     autocmd! BufWritePost *.vim Neomake
     autocmd! BufWritePost *.latex Neomake
     autocmd! BufWritePost *.hs Neomake
@@ -219,6 +222,8 @@ augroup neomaketypes
     autocmd! bufWritePost *.sh Neomake
     autocmd! bufWritePost *.rs Neomake
     autocmd! bufWritePost *.erl Neomake
+    autocmd! BufWritePost *.exs Neomake
+    autocmd! BufWritePost *.md Neomake
 augroup END
 
 map lo :lopen<CR>
@@ -268,7 +273,7 @@ map <F8> :TagbarToggle<CR>
 
 "" mutt 
 augroup mutt
-    au BufRead /tmp/mutt-* set tw=72
+    au BufRead /tmp/mutt-* set tw = 72
 augroup END
 
 "" rust
