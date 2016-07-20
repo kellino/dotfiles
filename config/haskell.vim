@@ -10,12 +10,6 @@ let g:ghcmod_hlint_options=['--ignore=Redundant $']
 let g:ghcmod_open_quickfix_function='GhcModQuickFix'
 
 let g:haskell_tabular=1
-vmap a= :Tabularize /=<CR>
-vmap a: :Tabularize /::<CR>
-vmap a> :Tabularize /-><CR>
-vmap a< :Tabularize /<-<CR>
-vmap a( :Tabularize /(<CR>
-vmap a[ :Tabularize /[<CR>
 
 let g:necoghc_enable_detailed_browse=1
 
