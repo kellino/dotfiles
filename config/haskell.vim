@@ -36,13 +36,12 @@ endfunction
 
 augroup haskellgroup
     au BufNewFile,BufRead *.hs map <buffer> <F2>   : Hoogle<CR>
-    au BufNewFile,BufRead *.hs map <buffer> <C-F2> : HoogleClose<CR>
-    au BufNewFile,BufRead *.hs map <buffer> <S-F2> : HoogleLine<CR>
 augroup END
 
 nnoremap <silent> <C-x><C-x> :REPLSendHaskell<CR>
 
 map <leader>ti :GhcModTypeInsert<CR>
+
 augroup hdevtools
     autocmd FileType haskell nnoremap <buffer> <F5> :HdevtoolsType<CR>
     autocmd FileType haskell nnoremap <buffer> <F6> :HdevtoolsClear<CR>
