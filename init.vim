@@ -42,6 +42,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] }
 
 "" General coding
+Plug 'eugen0329/vim-esearch'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh', 'elixir'] } 
 Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'rust', 'erlang', 'elixir', 'markdown'] }
@@ -60,8 +61,7 @@ Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 "" C 
 Plug 'critiqjo/lldb.nvim', { 'for' : 'c' }
 Plug 'zchee/deoplete-clang', { 'for' : ['c', 'cpp' ] }
-Plug 'bbchung/Clamp', { 'for' : ['c', 'cpp', 'h'] }
-Plug 'justinmk/vim-syntax-extra', { 'for' : ['c', 'lex', 'bison'] }
+Plug 'arakashic/chromatica.nvim', { 'for' : ['c', 'cpp' ] }
 Plug 'Shougo/neoinclude.vim', { 'for' : 'c' }
 
 "" Haskell
@@ -72,6 +72,7 @@ Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent', { 'for' : 'haskell' }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
+"Plug 'pbrisbin/vim-syntax-shakespeare'
 
 "" Java
 Plug 'starcraftman/vim-eclim', { 'for' : 'java' }
@@ -91,7 +92,7 @@ Plug 'Shougo/neco-vim', { 'for' : 'vim' }
 "" Rust
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 Plug 'rhysd/rust-doc.vim', { 'for' : 'rust' }
-Plug 'phildawes/racer', { 'for' : 'racer' }
+Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
 
 "" elixir / erlang
 Plug 'elixir-lang/vim-elixir', { 'for' : 'elixir' }
@@ -254,6 +255,18 @@ let g:deoplete#sources#clang#libclang_path='/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/include/clang/'
 let g:deoplete#sources#clang#std#cpp = 'c++11'
 let g:deoplete#sources#clang#sort_algo = 'priority'
+
+"" Chromatica
+let g:chromatica#libclang_path='/usr/lib/libclang.so'
+
+"" ESearch
+let g:esearch = {
+    \ 'adapter':    'ag',
+    \ 'backend':    'nvim',
+    \ 'out':        'win',
+    \ 'batch_size': 1000,
+    \ 'use':      ['visual', 'hlsearch', 'last'],
+    \}
 
 "" Unicode
 map <F12> <Plug>(MakeDigraph)
