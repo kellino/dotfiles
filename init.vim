@@ -72,10 +72,6 @@ Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent', { 'for' : 'haskell' }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
-"Plug 'pbrisbin/vim-syntax-shakespeare'
-
-"" Java
-Plug 'starcraftman/vim-eclim', { 'for' : 'java' }
 
 "" Python
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
@@ -97,6 +93,10 @@ Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
 "" elixir / erlang
 Plug 'elixir-lang/vim-elixir', { 'for' : 'elixir' }
 Plug 'awetzel/elixir.nvim', { 'for' : 'elixir' }
+
+
+"" Scala
+Plug 'derekwyatt/vim-scala', { 'for' : 'scala' }
 
 call plug#end()
 
@@ -227,7 +227,6 @@ nmap ? <Plug>(incsearch-backward)
 
 "" Omnifunc completions
 set omnifunc=syntaxcomplete#Complete
-let g:EclimCompletionMethod='omnifunc'
 
 
 "" deoplete
@@ -306,5 +305,6 @@ try
     source ~/.config/nvim/config/terminal.vim
     source ~/.config/nvim/config/startify.vim
     source ~/.config/nvim/config/rust.vim
+    source ~/.config/nvim/config/elixir.vim
 catch
 endtry
