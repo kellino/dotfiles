@@ -31,22 +31,21 @@ Plug 'altercation/vim-colors-solarized'
 "" Text Editing
 Plug 'Raimondi/delimitMate'
 Plug 'Valloric/vim-operator-highlight', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim', 'elixir'] }
-Plug 'luochen1990/rainbow', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim'] }
+Plug 'luochen1990/rainbow',             { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim'] }
 Plug 'chrisbra/unicode.vim'
-Plug 'vim-pandoc/vim-pandoc', { 'for' : 'markdown' }
-Plug 'vim-pandoc/vim-pandoc-syntax', { 'for' : 'markdown' }
+Plug 'vim-pandoc/vim-pandoc',           { 'for' : 'markdown' }
+Plug 'vim-pandoc/vim-pandoc-syntax',    { 'for' : 'markdown' }
 Plug 'godlygeek/tabular'
 
 "" Git
-Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] }
 
 "" General coding
 Plug 'eugen0329/vim-esearch'
 Plug 'scrooloose/nerdcommenter'
-Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh', 'elixir'] } 
-Plug 'benekastah/neomake', { 'for' : ['c', 'cpp', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'rust', 'erlang', 'elixir', 'markdown'] }
-Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
+Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh', 'elixir'] }
+Plug 'benekastah/neomake',  { 'for' : ['c', 'cpp', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'rust', 'erlang', 'elixir', 'markdown'] }
+Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
 Plug 'Konfekt/FastFold'
 Plug 'thinca/vim-ref'
 
@@ -58,45 +57,44 @@ endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 
-"" C 
-Plug 'critiqjo/lldb.nvim', { 'for' : 'c' }
-Plug 'zchee/deoplete-clang', { 'for' : ['c', 'cpp' ] }
+"" C
+Plug 'critiqjo/lldb.nvim',        { 'for' : 'c' }
+Plug 'zchee/deoplete-clang',      { 'for' : ['c', 'cpp' ] }
 Plug 'arakashic/chromatica.nvim', { 'for' : ['c', 'cpp' ] }
-Plug 'Shougo/neoinclude.vim', { 'for' : 'c' }
+Plug 'Shougo/neoinclude.vim',     { 'for' : 'c' }
 
 "" Haskell
-Plug 'neovimhaskell/haskell-vim', { 'for' : 'haskell' }
-Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
-Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
-Plug 'Twinside/vim-haskellFold', { 'for' : 'haskell' }
-Plug 'Twinside/vim-hoogle', { 'for' : 'haskell' }
+Plug 'neovimhaskell/haskell-vim',  { 'for' : 'haskell' }
+Plug 'eagletmt/ghcmod-vim',        { 'for' : 'haskell' }
+Plug 'eagletmt/neco-ghc',          { 'for' : 'haskell' }
+Plug 'Twinside/vim-haskellFold',   { 'for' : 'haskell' }
+Plug 'Twinside/vim-hoogle',        { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent', { 'for' : 'haskell' }
-Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
+Plug 'bitc/vim-hdevtools',         { 'for' : 'haskell' }
+
+"" Idris
+Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
 
 "" Python
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
 Plug 'hdima/python-syntax', { 'for' : 'python' }
 
 "" LaTeX
-Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : ['tex', 'latex'] }
+Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : ['tex', 'latex', 'bib'] }
 
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
-Plug 'zchee/deoplete-zsh', { 'for' : 'sh' }
-Plug 'Shougo/neco-vim', { 'for' : 'vim' }
+Plug 'zchee/deoplete-zsh',      { 'for' : 'sh' }
+Plug 'Shougo/neco-vim',         { 'for' : 'vim' }
 
 "" Rust
-Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
-Plug 'rhysd/rust-doc.vim', { 'for' : 'rust' }
+Plug 'rust-lang/rust.vim',   { 'for' : 'rust' }
+Plug 'rhysd/rust-doc.vim',   { 'for' : 'rust' }
 Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
 
 "" elixir / erlang
 Plug 'elixir-lang/vim-elixir', { 'for' : 'elixir' }
-Plug 'awetzel/elixir.nvim', { 'for' : 'elixir' }
-
-
-"" Scala
-Plug 'derekwyatt/vim-scala', { 'for' : 'scala' }
+Plug 'awetzel/elixir.nvim',    { 'for' : 'elixir' }
 
 call plug#end()
 
@@ -126,7 +124,7 @@ hi LineNr ctermfg=200
 inoremap fj <Esc>
 
 "" local leader
-let g:maplocalleader=','
+"let g:maplocalleader=','
 
 "" Switch between splits
 set splitbelow
@@ -279,9 +277,6 @@ augroup mutt
     au BufRead /tmp/mutt-* set tw = 72
 augroup END
 
-"" rust
-let g:rustfmt_autosave=1
-
 "" operator highlight
 let g:ophigh_color = 226
 
@@ -296,6 +291,7 @@ vmap a> :Tabularize /-><CR>
 vmap a< :Tabularize /<-<CR>
 vmap a( :Tabularize /(<CR>
 vmap a[ :Tabularize /[<CR>
+vmap a{ :Tabularize /{<CR>
 
 try
     source ~/.config/nvim/config/python.vim
