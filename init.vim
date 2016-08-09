@@ -20,6 +20,8 @@ Plug 'justinmk/vim-dirvish' " file browser
 Plug 'justinmk/vim-sneak'
 Plug 'rhysd/clever-f.vim'
 Plug 'haya14busa/incsearch.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 
 "" fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -30,8 +32,6 @@ Plug 'altercation/vim-colors-solarized'
 
 "" Text Editing
 Plug 'Raimondi/delimitMate'
-Plug 'Valloric/vim-operator-highlight', { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim', 'elixir'] }
-Plug 'luochen1990/rainbow',             { 'for' : ['c', 'java', 'python', 'sh', 'rust', 'vim'] }
 Plug 'chrisbra/unicode.vim'
 Plug 'vim-pandoc/vim-pandoc',           { 'for' : 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax',    { 'for' : 'markdown' }
@@ -48,6 +48,7 @@ Plug 'benekastah/neomake',  { 'for' : ['c', 'cpp', 'tex', 'latex', 'haskell', 'v
 Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
 Plug 'Konfekt/FastFold'
 Plug 'thinca/vim-ref'
+Plug 'kassio/neoterm'
 
 " deoplete 
 function! DoRemote(arg)
@@ -64,13 +65,13 @@ Plug 'arakashic/chromatica.nvim', { 'for' : ['c', 'cpp' ] }
 Plug 'Shougo/neoinclude.vim',     { 'for' : 'c' }
 
 "" Haskell
-Plug 'neovimhaskell/haskell-vim',  { 'for' : 'haskell' }
-Plug 'eagletmt/ghcmod-vim',        { 'for' : 'haskell' }
-Plug 'eagletmt/neco-ghc',          { 'for' : 'haskell' }
-Plug 'Twinside/vim-haskellFold',   { 'for' : 'haskell' }
-Plug 'Twinside/vim-hoogle',        { 'for' : 'haskell' }
-Plug 'itchyny/vim-haskell-indent', { 'for' : 'haskell' }
-Plug 'bitc/vim-hdevtools',         { 'for' : 'haskell' }
+Plug 'eagletmt/ghcmod-vim',         { 'for' : 'haskell' }
+Plug 'eagletmt/neco-ghc',           { 'for' : 'haskell' }
+Plug 'Twinside/vim-haskellFold',    { 'for' : 'haskell' }
+Plug 'Twinside/vim-hoogle',         { 'for' : 'haskell' }
+Plug 'Twinside/vim-haskellConceal', { 'for' : 'haskell' }
+Plug 'itchyny/vim-haskell-indent',  { 'for' : 'haskell' }
+Plug 'bitc/vim-hdevtools',          { 'for' : 'haskell' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
@@ -78,6 +79,9 @@ Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
 "" Python
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
 Plug 'hdima/python-syntax', { 'for' : 'python' }
+
+"" JavaScript
+Plug 'carlitux/deoplete-ternjs'
 
 "" LaTeX
 Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : ['tex', 'latex', 'bib'] }
@@ -120,11 +124,9 @@ hi LineNr ctermfg=200
  "      Navigation       "
  "======================="
  
+
 "" unbind ESC
 inoremap fj <Esc>
-
-"" local leader
-"let g:maplocalleader=','
 
 "" Switch between splits
 set splitbelow
@@ -205,6 +207,7 @@ set tags=./tags;
 augroup neomaketypes
     autocmd! BufWritePost *.c Neomake
     autocmd! BufWritePost *.cpp Neomake
+    autocmd! BufWritePost *.js Neomake
     autocmd! BufWritePost *.vim Neomake
     autocmd! BufWritePost *.latex Neomake
     autocmd! BufWritePost *.hs Neomake
@@ -213,6 +216,7 @@ augroup neomaketypes
     autocmd! bufWritePost *.rs Neomake
     autocmd! bufWritePost *.erl Neomake
     autocmd! BufWritePost *.exs Neomake
+    autocmd! BufWritePost *.ex Neomake
     autocmd! BufWritePost *.md Neomake
 augroup END
 
@@ -253,8 +257,16 @@ let g:deoplete#sources#clang#clang_header = '/usr/include/clang/'
 let g:deoplete#sources#clang#std#cpp = 'c++11'
 let g:deoplete#sources#clang#sort_algo = 'priority'
 
+let g:neosnippet#enable_snipmate_compatibility=1
+let g:neosnippet#snippets_directory='~/.config/nvim/after/snippets'
+
 "" Chromatica
 let g:chromatica#libclang_path='/usr/lib/libclang.so'
+
+"" limelight
+let g:limelight_conceal_ctermfg = 240
+map <Leader>l :Limelight<CR>
+map <Leader>L :Limelight!<CR>
 
 "" ESearch
 let g:esearch = {
@@ -277,8 +289,9 @@ augroup mutt
     au BufRead /tmp/mutt-* set tw = 72
 augroup END
 
-"" operator highlight
-let g:ophigh_color = 226
+"" tern
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = 0
 
 "" vim calendar
 let g:calendar_google_calendar = 1
@@ -293,10 +306,15 @@ vmap a( :Tabularize /(<CR>
 vmap a[ :Tabularize /[<CR>
 vmap a{ :Tabularize /{<CR>
 
+" neoterm
+au VimEnter,BufRead,BufNewFile *.idr set filetype=idris
+
+"" microML
+au BufRead,BufNewFile *.mml setfiletype mml
+
 try
     source ~/.config/nvim/config/python.vim
     source ~/.config/nvim/config/lightline.vim
-    source ~/.config/nvim/config/rainbow.vim
     source ~/.config/nvim/config/haskell.vim
     source ~/.config/nvim/config/terminal.vim
     source ~/.config/nvim/config/startify.vim
