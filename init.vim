@@ -17,10 +17,8 @@ Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-eunuch' " unix commands
 Plug 'justinmk/vim-dirvish' " file browser
-Plug 'justinmk/vim-sneak'
 Plug 'rhysd/clever-f.vim'
 Plug 'haya14busa/incsearch.vim'
-Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
 "" fzf
@@ -33,24 +31,22 @@ Plug 'altercation/vim-colors-solarized'
 "" Text Editing
 Plug 'Raimondi/delimitMate'
 Plug 'chrisbra/unicode.vim'
-Plug 'vim-pandoc/vim-pandoc',           { 'for' : 'markdown' }
-Plug 'vim-pandoc/vim-pandoc-syntax',    { 'for' : 'markdown' }
 Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 "" Git
-Plug 'airblade/vim-gitgutter', { 'for' : ['c', 'java', 'haskell', 'python', 'sh', 'rust', 'vim'] }
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 "" General coding
 Plug 'eugen0329/vim-esearch'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh', 'elixir'] }
-Plug 'benekastah/neomake',  { 'for' : ['c', 'cpp', 'tex', 'latex', 'haskell', 'vim', 'python', 'sh', 'rust', 'erlang', 'elixir', 'markdown'] }
+Plug 'benekastah/neomake' 
 Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
 Plug 'Konfekt/FastFold'
-Plug 'thinca/vim-ref'
-Plug 'kassio/neoterm'
 
-" deoplete 
+"" deoplete 
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
@@ -58,20 +54,19 @@ endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 
-"" C
-Plug 'critiqjo/lldb.nvim',        { 'for' : 'c' }
+"" C (and C++)
+Plug 'critiqjo/lldb.nvim',        { 'for' : ['c', 'cpp' ] }
 Plug 'zchee/deoplete-clang',      { 'for' : ['c', 'cpp' ] }
 Plug 'arakashic/chromatica.nvim', { 'for' : ['c', 'cpp' ] }
-Plug 'Shougo/neoinclude.vim',     { 'for' : 'c' }
+Plug 'Shougo/neoinclude.vim',     { 'for' : ['c', 'cpp' ] }
 
 "" Haskell
-Plug 'eagletmt/ghcmod-vim',         { 'for' : 'haskell' }
+Plug 'parsonsmatt/intero-neovim',   { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc',           { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold',    { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',         { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellConceal', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',  { 'for' : 'haskell' }
-Plug 'bitc/vim-hdevtools',          { 'for' : 'haskell' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
@@ -111,7 +106,7 @@ filetype plugin indent on
 
 set background=dark
 let g:solarized_termtrans=1
-let g:solarized_termcolors=256
+let g:solarized_termcolors=1
 colorscheme solarized
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
@@ -123,7 +118,6 @@ hi LineNr ctermfg=200
  "======================="
  "      Navigation       "
  "======================="
- 
 
 "" unbind ESC
 inoremap fj <Esc>
@@ -139,13 +133,10 @@ nmap <silent> <C-l> :wincmd l<CR>
 set noequalalways
 
 set cmdheight=2
-set showcmd
-set showmatch
 set nowrap
 set relativenumber
 set number
-set numberwidth=2
-set mousefocus
+set numberwidth=1
 set sidescrolloff=0
 set autoindent
 set copyindent
@@ -164,7 +155,6 @@ set nohlsearch
 set wrapscan
 
 set scrolloff=10
-set scrolljump=3
 
 set hidden
 
@@ -182,8 +172,8 @@ noremap <Leader>to :tabnew<CR>
 noremap <Leader>tt :tabclose<CR>
 
 "" Copy / Paste
-map <Leader>yy "*y
-map <Leader>pp "*p
+map yy "*y
+map pp "*p
 
 "" quick save and quit
 map qq :wqa!<CR>
@@ -204,22 +194,11 @@ set tags=./tags;
 
 
 "" Neomake
-augroup neomaketypes
-    autocmd! BufWritePost *.c Neomake
-    autocmd! BufWritePost *.cpp Neomake
-    autocmd! BufWritePost *.js Neomake
-    autocmd! BufWritePost *.vim Neomake
-    autocmd! BufWritePost *.latex Neomake
-    autocmd! BufWritePost *.hs Neomake
-    autocmd! BufWritePost *.py Neomake
-    autocmd! bufWritePost *.sh Neomake
-    autocmd! bufWritePost *.rs Neomake
-    autocmd! bufWritePost *.erl Neomake
-    autocmd! BufWritePost *.exs Neomake
-    autocmd! BufWritePost *.ex Neomake
-    autocmd! BufWritePost *.md Neomake
+augroup Neomake
+    autocmd! BufWritePost * Neomake
 augroup END
 
+"" location window
 map lo :lopen<CR>
 map lc :lclose<CR>
 
@@ -229,7 +208,6 @@ nmap ? <Plug>(incsearch-backward)
 
 "" Omnifunc completions
 set omnifunc=syntaxcomplete#Complete
-
 
 "" deoplete
 let g:deoplete#enable_at_startup = 1
@@ -249,7 +227,7 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 
 " For conceal markers.
 if has('conceal')
-  set conceallevel=2 concealcursor=niv
+  set conceallevel=0 concealcursor=niv
 endif
 
 let g:deoplete#sources#clang#libclang_path='/usr/lib/libclang.so'
@@ -305,9 +283,6 @@ vmap a< :Tabularize /<-<CR>
 vmap a( :Tabularize /(<CR>
 vmap a[ :Tabularize /[<CR>
 vmap a{ :Tabularize /{<CR>
-
-" neoterm
-au VimEnter,BufRead,BufNewFile *.idr set filetype=idris
 
 "" microML
 au BufRead,BufNewFile *.mml setfiletype mml
