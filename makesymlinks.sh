@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 ############################
 # .make.sh
 # This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
@@ -21,7 +21,7 @@ echo "done"
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
 for file in $files; do
     echo "Creating symlink to $file in home directory."
-    ln -s $dir/$file ~/.$file
+    ln -s "$dir"/"$file" ~/."$file"
 done
 
 install_zsh () {
@@ -32,8 +32,8 @@ if [ -f /bin/zsh -o -f /usr/bin/zsh ]; then
         git clone http://github.com/robbyrussell/oh-my-zsh.git
     fi
     # Set the default shell to zsh if it isn't currently set to zsh
-    if [[ ! $(echo $SHELL) == $(which zsh) ]]; then
-        chsh -s $(which zsh)
+    if [[ ! $SHELL == $(which zsh) ]]; then
+        chsh -s "$(which zsh)"
     fi
 else
     # If zsh isn't installed, get the platform of the current machine
