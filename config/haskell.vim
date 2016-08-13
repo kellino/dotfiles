@@ -1,19 +1,28 @@
-"let g:haskell_enable_quantification=1
-"let g:haskell_enable_recursivedo=1
-"let g:haskell_enable_arrowsyntax=1
-"let g:haskell_enable_pattern_synonyms=1
-"let g:haskell_enable_typeroles=1
-"let g:haskell_enable_static_pointers=1
-"let g:hs_highlight_boolean=1
+" Process management:
+nnoremap <Leader>io :InteroOpen<CR>
+nnoremap <Leader>ik :InteroKill<CR>
+nnoremap <Leader>ih :InteroHide<CR>
+nnoremap <Leader>ilo :InteroLoadCurrentModule<CR>
+
+" REPL commands
+nnoremap <Leader>ie :InteroEval<CR>
+nnoremap <Leader>igt :InteroGenericType<CR>
+nnoremap <Leader>it :InteroType<CR>
+nnoremap <Leader>ii :InteroInfo<CR>
+nnoremap <Leader>iI :InteroTypeInsert<CR>
+
+" Go to definition:
+nnoremap <Leader>id :InteroGoToDef<CR>
+
+" Highlight uses of identifier:
+nnoremap <Leader>iu :InteroUses<CR>
+
+" Reload the file in Intero after saving
+autocmd! BufWritePost *.hs InteroReload
+
 
 let g:neomake_haskell_enable_makers=['hlint', 'hdevtools']
-let g:ghcmod_hlint_options=['--ignore=Redundant $']
-let g:ghcmod_open_quickfix_function='GhcModQuickFix'
-
-"let g:haskell_tabular=1
-
 let g:necoghc_enable_detailed_browse=1
-
 
 function! REPLSendHaskell()
     save! %

@@ -1,23 +1,24 @@
+scriptencoding utf-8
+
 set laststatus=2
 
 let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], 
-      \             [ 'fugitive', 'readonly', 'filename' ] ],
-      \   'right': [ ['trailing', 'indentation', 'lineinfo'], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \   'left'  : [ [ 'mode', 'paste' ], [ 'fugitive', 'readonly', 'filename' ] ],
+      \   'right' : [ ['trailing', 'indentation', 'lineinfo'], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
       \ 'component_function': {
-      \   'readonly': 'MyReadonly',
-      \   'modified': 'MyModified',
-      \   'filename': 'MyFilename',
-      \   'fileformat': 'MyFileformat',
-      \   'filetype': 'MyFiletype',
-      \   'fileencoding': 'MyFileencoding',
-      \   'mode': 'MyMode',
+      \   'readonly'     : 'MyReadonly',
+      \   'modified'     : 'MyModified',
+      \   'fugitive'     : 'MyFugitive',
+      \   'filename'     : 'MyFilename',
+      \   'fileformat'   : 'MyFileformat',
+      \   'filetype'     : 'MyFiletype',
+      \   'fileencoding' : 'MyFileencoding',
+      \   'mode'         : 'MyMode',
       \ },
       \ 'component_expand': {
-      \  'trailing': 'TrailingSpaceWarning',
       \  'indentation': 'MixedIndentSpaceWarning',
       \ },
       \ 'component_type': {
@@ -27,12 +28,6 @@ let g:lightline = {
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': ''}
       \ }
-
-
-function! MyModified()
-    return &filetype =~# 'help\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
 
 function! MyModified()
   if &filetype ==# 'help'
@@ -46,19 +41,29 @@ function! MyModified()
   endif
 endfunction
 
-
-function! MyReadonly()
-  return &filetype !~? 'help\|vimfiler\|' && &readonly ? '' : ''
+function! MyFugitive()
+  if exists('*fugitive#head')
+    let l:branch = fugitive#head()
+    return l:branch !=# '' ? ' ' . l:branch : ''
+  endif
+  return ''
 endfunction
 
+function! MyReadonly()
+  if &filetype ==# 'help'
+    return ''
+  elseif &readonly
+    return ''
+  else
+    return ''
+  endif
+endfunction
 
 function! MyFilename()
   return ('' !=# MyReadonly() ? MyReadonly() . ' ' : '') .
-       \ (&ft == 'unite' ? unite#get_status_string() :
-       \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-       \ ('' != MyModified() ? ' ' . MyModified() : '')
+       \ ('' !=# expand('%:t') ? expand('%:t') : '[No Name]') .
+       \ ('' !=# MyModified() ? ' ' . MyModified() : '')
 endfunction
-
 
 function! MyFileformat()
   return winwidth(0) > 70 ? &fileformat : ''
@@ -69,29 +74,15 @@ function! MyFiletype()
   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
 endfunction
 
-
 function! MyFileencoding()
   return winwidth(0) > 70 ? (strlen(&fileencoding) ? &fileencoding: &encoding) : ''
 endfunction
 
-
 function! MyMode()
   let l:fname = expand('%:t')
-  return fname == '__Tagbar__' ? 'Tagbar' :
-        \ &ft == 'unite' ? 'Unite' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
-endfunction 
-
-function! TrailingSpaceWarning()
-      if winwidth(0) < 80
-        return ''
-      endif
-      let l:trailing = search('\s$', 'nw')
-      if l:trailing != 0
-        return '… trailing[' . l:trailing . ']'
-      else
-        return ''
-      endif
+  return l:fname ==# '__Tagbar__' ? 'Tagbar' :
+        \ &filetype ==# 'unite' ? 'Unite' :
+         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
 function! MixedIndentSpaceWarning()
@@ -114,7 +105,6 @@ augroup END
 
 function! s:flags()
       if exists('#LightLine')
-        call TrailingSpaceWarning()
         call MixedIndentSpaceWarning()
         call lightline#update()
       endif
