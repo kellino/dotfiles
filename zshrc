@@ -115,3 +115,6 @@ alias cr='cabal run'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f $HOME/dotfiles/zsh_funcs ] && source $HOME/dotfiles/zsh_funcs
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# OPAM configuration
+. /home/david/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
