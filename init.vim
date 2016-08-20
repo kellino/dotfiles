@@ -32,7 +32,9 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'Raimondi/delimitMate'
 Plug 'chrisbra/unicode.vim'
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
+Plug 'reedes/vim-pencil', { 'for' : ['markdown', 'tex', 'latex', 'txt']}
+Plug 'reedes/vim-lexical' ", { 'for' : ['markdown', 'tex', 'latex', 'txt']}
 
 "" Git
 Plug 'tpope/vim-fugitive'
@@ -41,7 +43,7 @@ Plug 'airblade/vim-gitgutter'
 "" General coding
 Plug 'eugen0329/vim-esearch'
 Plug 'scrooloose/nerdcommenter'
-Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh', 'elixir'] }
+Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh', 'elixir', 'scala'] }
 Plug 'benekastah/neomake' 
 Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
 Plug 'Konfekt/FastFold'
@@ -55,10 +57,10 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 
 "" C (and C++)
-Plug 'critiqjo/lldb.nvim',        { 'for' : ['c', 'cpp' ] }
-Plug 'zchee/deoplete-clang',      { 'for' : ['c', 'cpp' ] }
-Plug 'arakashic/chromatica.nvim', { 'for' : ['c', 'cpp' ] }
-Plug 'Shougo/neoinclude.vim',     { 'for' : ['c', 'cpp' ] }
+Plug 'critiqjo/lldb.nvim',        { 'for' : ['c', 'cpp'] }
+Plug 'zchee/deoplete-clang',      { 'for' : ['c', 'cpp'] }
+Plug 'arakashic/chromatica.nvim', { 'for' : ['c', 'cpp'] }
+Plug 'Shougo/neoinclude.vim',     { 'for' : ['c', 'cpp'] }
 
 "" Haskell
 Plug 'parsonsmatt/intero-neovim',   { 'for' : 'haskell' }
@@ -76,7 +78,7 @@ Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
 Plug 'hdima/python-syntax', { 'for' : 'python' }
 
 "" JavaScript
-Plug 'carlitux/deoplete-ternjs'
+Plug 'carlitux/deoplete-ternjs', { 'for' : 'javascript' }
 
 "" LaTeX
 Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : ['tex', 'latex', 'bib'] }
@@ -94,6 +96,12 @@ Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
 "" elixir / erlang
 Plug 'elixir-lang/vim-elixir', { 'for' : 'elixir' }
 Plug 'awetzel/elixir.nvim',    { 'for' : 'elixir' }
+
+"" scala
+Plug 'derekwyatt/vim-scala', { 'for' : 'scala' }
+
+"" mml
+Plug '~/Programming/Haskell/microML/utils/vim-mmlFold'
 
 call plug#end()
 
@@ -185,6 +193,13 @@ set history=500
 set viminfo='1000,<500,f1
 set viewoptions=cursor,folds
 
+"" location window
+map lo :lopen<CR>
+map lc :lclose<CR>
+
+"" Omnifunc completions
+set omnifunc=syntaxcomplete#Complete
+
 "" Recursively search for tagfiles
 set tags=./tags;
 
@@ -192,22 +207,21 @@ set tags=./tags;
 "      Plugin Options         "
 "============================="
 
-
 "" Neomake
 augroup Neomake
     autocmd! BufWritePost * Neomake
 augroup END
 
-"" location window
-map lo :lopen<CR>
-map lc :lclose<CR>
-
 "" search with incsearch.vim
 nmap / <Plug>(incsearch-forward)
 nmap ? <Plug>(incsearch-backward)
 
-"" Omnifunc completions
-set omnifunc=syntaxcomplete#Complete
+"" ocaml
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute 'set rtp+=' . g:opamshare . '/merlin/vim'
+augroup ocaml
+    autocmd FileType ocaml source '"$(opam config var prefix)"'/share/typerex/ocp-indent/ocp-indent.vim
+augroup END
 
 "" deoplete
 let g:deoplete#enable_at_startup = 1
@@ -240,6 +254,12 @@ let g:neosnippet#snippets_directory='~/.config/nvim/after/snippets'
 
 "" Chromatica
 let g:chromatica#libclang_path='/usr/lib/libclang.so'
+
+"" vim-lexical
+let g:lexical#spelllang = ['en_gb',]
+let g:lexical#spellfile = ['~/.config/nvim/spell/en.utf-8.spl',]
+let g:lexical#thesaurus = ['~/.config/nvim/thesaurus/mthesaur.txt',]
+let g:lexical#thesaurus_key = '<leader>h'
 
 "" limelight
 let g:limelight_conceal_ctermfg = 240
@@ -295,5 +315,6 @@ try
     source ~/.config/nvim/config/startify.vim
     source ~/.config/nvim/config/rust.vim
     source ~/.config/nvim/config/elixir.vim
+    source ~/.config/nvim/config/ml.vim
 catch
 endtry
