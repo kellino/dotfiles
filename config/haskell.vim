@@ -18,7 +18,7 @@ nnoremap <Leader>id :InteroGoToDef<CR>
 nnoremap <Leader>iu :InteroUses<CR>
 
 " Reload the file in Intero after saving
-autocmd! BufWritePost *.hs InteroReload
+"autocmd! BufWritePost *.hs InteroReload
 
 
 let g:neomake_haskell_enable_makers=['hlint', 'hdevtools']
@@ -33,7 +33,7 @@ endfunction
 function! HaskellRepl()
     silent! 20 split
     e ghci.hs
-    call termopen('ghci') " -XOverloadedStrings')
+    call termopen('ghci') 
     wincmd p
 endfunction
 
