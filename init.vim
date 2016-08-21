@@ -151,7 +151,6 @@ set cmdheight=2
 set nowrap
 set relativenumber
 set number
-set numberwidth=1
 set sidescrolloff=0
 set autoindent
 set copyindent
@@ -178,9 +177,14 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+set list
+set listchars=tab:▸\ ,nbsp:%,extends:,precedes:
+set linebreak
 set completeopt=longest,menuone
 set wildmenu
-set wildmode=longest:list,full
+set wildmode=longest,list:longest,full
+set wildignore=*.o,*~,*.pyc,.git/*
+set shortmess=aoOtT
 
 "" Tab
 noremap <Leader>to :tabnew<CR>
@@ -280,7 +284,7 @@ let g:esearch = {
     \}
 
 "" Unicode
-map <F12> <Plug>(MakeDigraph)
+map md <Plug>(MakeDigraph)
 nmap ga <Plug>(UnicodeGA)
 
 "" Tagbar
@@ -308,9 +312,29 @@ vmap a( :Tabularize /(<CR>
 vmap a[ :Tabularize /[<CR>
 vmap a{ :Tabularize /{<CR>
 
+" latex settings
+if !exists('g:deoplete#omni#input_patterns')
+    let g:deoplete#omni#input_patterns = {}
+endif
+let g:deoplete#omni#input_patterns.tex = 
+        \   '\\(?:'
+        \  .   '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+        \  .  '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+        \  .  '|hyperref\s*\[[^]]*'
+        \  .  '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+        \  .  '|(?:include(?:only)?|input)\s*\{[^}]*'
+        \  .')'
+
+let g:tex_flavor = 'latex'
+let g:tex_stylish = 1
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_index_split_pos = 'below'
+let g:vimtex_fold_enabled=1
+
 "" microML
 au BufRead,BufNewFile *.mml setfiletype mml
 
+" other stuff
 try
     source ~/.config/nvim/config/python.vim
     source ~/.config/nvim/config/lightline.vim
@@ -320,6 +344,5 @@ try
     source ~/.config/nvim/config/rust.vim
     source ~/.config/nvim/config/elixir.vim
     source ~/.config/nvim/config/ml.vim
-    source ~/.config/nvim/config/tex.vim
 catch
 endtry
