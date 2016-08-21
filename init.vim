@@ -1,3 +1,5 @@
+scriptencoding=utf-8
+
 
 "    d888888b d8b   db d888888b d888888b    db    db d888888b .88b  d88. 
 "      `88'   888o  88   `88'      88       88    88   `88'   88'YbdP`88 
@@ -6,6 +8,7 @@
 "      .88.   88  V888   .88.      88    db  `8bd8'    .88.   88  88  88 
 "    Y888888P VP   V8P Y888888P    YP    VP    YP    Y888888P YP  YP  YP 
                                                                     
+
 call plug#begin('~/.config/nvim/bundle/')
 
 "" general
@@ -17,13 +20,12 @@ Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-eunuch' " unix commands
 Plug 'justinmk/vim-dirvish' " file browser
-Plug 'rhysd/clever-f.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'junegunn/limelight.vim'
 
 "" fzf
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } 
+Plug 'junegunn/fzf.vim' 
 
 "" Colourscheme(s)
 Plug 'altercation/vim-colors-solarized'
@@ -140,10 +142,10 @@ inoremap fj <Esc>
 "" Switch between splits
 set splitbelow
 set splitright
-nmap <silent> <C-k> :wincmd k<CR>
-nmap <silent> <C-j> :wincmd j<CR>
-nmap <silent> <C-h> :wincmd h<CR>
-nmap <silent> <C-l> :wincmd l<CR>
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
 " don't allow vim to resize splits
 set noequalalways
 
@@ -201,7 +203,6 @@ map <leader>w :w<CR>
 
 "" History settings
 set history=500
-set viewoptions=cursor,folds
 
 "" location window
 map lo :lopen<CR>
@@ -210,13 +211,19 @@ map lc :lclose<CR>
 "" Omnifunc completions
 set omnifunc=syntaxcomplete#Complete
 
+" conceal level
+set conceallevel=2
+set concealcursor=c
+
 "" Recursively search for tagfiles
 set tags=./tags;
+
+"" mru
+nnoremap <silent> <c-p> :FileMru --tiebreak=end<CR>
 
 "" spelling
 augroup spelling
     au BufRead *.md setlocal spell spelllang=en_gb
-    au BufRead *.txt setlocal spell spelllang=en_gb
     au BufRead *.tex setlocal spell spelllang=en_gb
     au BufRead *.latex setlocal spell spelllang=en_gb
 augroup END
@@ -224,6 +231,14 @@ augroup END
 "============================="
 "      Plugin Options         "
 "============================="
+
+"" tmux
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <BS> :TmuxNavigateRight<cr>
+nnoremap <silent> <c-p> :TmuxNavigatePrevious<cr>
 
 "" Neomake
 augroup Neomake
@@ -245,21 +260,20 @@ augroup END
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#omni_patterns = {}
+
 " rust
 let g:deoplete#omni_patterns.rust = '[(\.)(::)]'
 
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
+" neosnippet
 imap <s-tab>     <Plug>(neosnippet_expand_or_jump)
 smap <s-tab>     <Plug>(neosnippet_expand_or_jump)
 xmap <s-tab>     <Plug>(neosnippet_expand_target)
 
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-set conceallevel=2
-set concealcursor=c
 
 let g:deoplete#sources#clang#libclang_path='/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/include/clang/'
@@ -305,12 +319,7 @@ let g:calendar_google_task = 1
 
 "" tabular
 vmap a= :Tabularize /=<CR>
-vmap a: :Tabularize /::<CR>
 vmap a> :Tabularize /-><CR>
-vmap a< :Tabularize /<-<CR>
-vmap a( :Tabularize /(<CR>
-vmap a[ :Tabularize /[<CR>
-vmap a{ :Tabularize /{<CR>
 
 " latex settings
 if !exists('g:deoplete#omni#input_patterns')
@@ -331,12 +340,15 @@ let g:vimtex_view_method = 'zathura'
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
 
+nnoremap <silent> vtv :VimtexView<cr>
+nnoremap <silent> vtc :VimtexCompile<cr>
+nnoremap <silent> vtT :VimtexTocOpen<cr>
+
 "" microML
 au BufRead,BufNewFile *.mml setfiletype mml
 
 " other stuff
 try
-    source ~/.config/nvim/config/python.vim
     source ~/.config/nvim/config/lightline.vim
     source ~/.config/nvim/config/haskell.vim
     source ~/.config/nvim/config/terminal.vim
