@@ -6,6 +6,7 @@ export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 export LANG=en_GB.UTF-8
 export EDITOR='nvim'
 export BROWSER='chromium'
+export TERM='xterm-256color'
 
 bindkey ' ' magic-space
 
