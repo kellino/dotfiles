@@ -33,8 +33,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'chrisbra/unicode.vim'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
-Plug 'reedes/vim-pencil', { 'for' : ['markdown', 'tex', 'latex', 'txt']}
-Plug 'reedes/vim-lexical' ", { 'for' : ['markdown', 'tex', 'latex', 'txt']}
+Plug 'reedes/vim-pencil', { 'for' : ['markdown', 'tex', 'text'] }
 
 "" Git
 Plug 'tpope/vim-fugitive'
@@ -59,7 +58,6 @@ Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 "" C (and C++)
 Plug 'critiqjo/lldb.nvim',        { 'for' : ['c', 'cpp'] }
 Plug 'zchee/deoplete-clang',      { 'for' : ['c', 'cpp'] }
-Plug 'arakashic/chromatica.nvim', { 'for' : ['c', 'cpp'] }
 Plug 'Shougo/neoinclude.vim',     { 'for' : ['c', 'cpp'] }
 
 "" Haskell
@@ -75,13 +73,13 @@ Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
 
 "" Python
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
-Plug 'hdima/python-syntax', { 'for' : 'python' }
+Plug 'mitsuhiko/vim-python-combined', { 'for' : 'python' }
 
 "" JavaScript
 Plug 'carlitux/deoplete-ternjs', { 'for' : 'javascript' }
 
 "" LaTeX
-Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : ['tex', 'latex', 'bib'] }
+Plug 'lervag/vimtex', { 'for' : 'tex' }
 
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
@@ -119,8 +117,17 @@ colorscheme solarized
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
+hi SpellBad ctermfg=1
+hi SpellCap ctermfg=9
+hi SpellRare cterm=undercurl
+hi SpellLocal cterm=undercurl
 hi FoldColumn ctermbg=235
 hi LineNr ctermfg=200
+hi Comment cterm=italic
+
+"" italics
+set t_ZH=3m
+set t_ZR=23m
 
 
  "======================="
@@ -190,7 +197,6 @@ map <leader>w :w<CR>
 
 "" History settings
 set history=500
-set viminfo='1000,<500,f1
 set viewoptions=cursor,folds
 
 "" location window
@@ -202,6 +208,14 @@ set omnifunc=syntaxcomplete#Complete
 
 "" Recursively search for tagfiles
 set tags=./tags;
+
+"" spelling
+augroup spelling
+    au BufRead *.md setlocal spell spelllang=en_gb
+    au BufRead *.txt setlocal spell spelllang=en_gb
+    au BufRead *.tex setlocal spell spelllang=en_gb
+    au BufRead *.latex setlocal spell spelllang=en_gb
+augroup END
 
 "============================="
 "      Plugin Options         "
@@ -227,6 +241,7 @@ augroup END
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#omni_patterns = {}
+" rust
 let g:deoplete#omni_patterns.rust = '[(\.)(::)]'
 
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -239,10 +254,8 @@ xmap <s-tab>     <Plug>(neosnippet_expand_target)
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
-" For conceal markers.
-if has('conceal')
-  set conceallevel=0 concealcursor=niv
-endif
+set conceallevel=2
+set concealcursor=c
 
 let g:deoplete#sources#clang#libclang_path='/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/include/clang/'
@@ -251,15 +264,6 @@ let g:deoplete#sources#clang#sort_algo = 'priority'
 
 let g:neosnippet#enable_snipmate_compatibility=1
 let g:neosnippet#snippets_directory='~/.config/nvim/after/snippets'
-
-"" Chromatica
-let g:chromatica#libclang_path='/usr/lib/libclang.so'
-
-"" vim-lexical
-let g:lexical#spelllang = ['en_gb',]
-let g:lexical#spellfile = ['~/.config/nvim/spell/en.utf-8.spl',]
-let g:lexical#thesaurus = ['~/.config/nvim/thesaurus/mthesaur.txt',]
-let g:lexical#thesaurus_key = '<leader>h'
 
 "" limelight
 let g:limelight_conceal_ctermfg = 240
@@ -316,5 +320,6 @@ try
     source ~/.config/nvim/config/rust.vim
     source ~/.config/nvim/config/elixir.vim
     source ~/.config/nvim/config/ml.vim
+    source ~/.config/nvim/config/tex.vim
 catch
 endtry
