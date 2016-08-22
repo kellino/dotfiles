@@ -20,7 +20,8 @@ Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-eunuch' " unix commands
 Plug 'justinmk/vim-dirvish' " file browser
-Plug 'haya14busa/incsearch.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'haya14busa/incsearch.vim' 
 Plug 'junegunn/limelight.vim'
 
 "" fzf
@@ -218,8 +219,9 @@ set concealcursor=c
 "" Recursively search for tagfiles
 set tags=./tags;
 
-"" mru
-nnoremap <silent> <c-p> :FileMru --tiebreak=end<CR>
+"" formatting
+set formatprg=par\ -w100
+set equalprg=par\ -w100
 
 "" spelling
 augroup spelling
@@ -245,9 +247,10 @@ augroup Neomake
     autocmd! BufWritePost * Neomake
 augroup END
 
-"" search with incsearch.vim
-nmap / <Plug>(incsearch-forward)
-nmap ? <Plug>(incsearch-backward)
+"" incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 
 "" ocaml
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
