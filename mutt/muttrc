@@ -1,0 +1,112 @@
+source "gpg2 -dq $HOME/.mutt/passwords.gpg |"
+
+set imap_pass=$my_imap_pass
+
+set header_cache="~/.mutt/cache/headers"
+set mailcap_path="~/.mutt/mailcap"
+set imap_check_subscribed
+set imap_keepalive=300
+set mail_check=60
+set mbox_type=Maildir
+set ssl_starttls=yes
+set ssl_force_tls=yes
+set ssl_use_sslv3=yes
+unset imap_passive
+
+set alias_file=~/.mutt/aliases
+source ~/.mutt/aliases
+
+## show newest messages first
+set sort = reverse-date-received
+
+## gmail account
+source "~/.mutt/gmail"
+folder-hook $folder 'source ~/.mutt/gmail'
+
+## UCL account
+#source "~/.mutt/ucl"
+#folder-hook $folder 'source ~/.mutt/ucl'
+
+## sidebar
+set sidebar_visible = yes
+set sidebar_width = 30
+set sidebar_short_path = no
+set sidebar_delim_chars = '/.'
+set sidebar_folder_indent = no
+set sidebar_indent_string = '  '
+set sidebar_new_mail_only = no
+sidebar_whitelist '~/.mutt/mail'
+set sidebar_next_new_wrap = no
+set sidebar_divider_char = '|'
+set sidebar_format = '%B%?F? [%F]?%* %?N?%N/?%S'
+ 
+## --------------------------------------------------------------------------
+## FUNCTIONS - shown with an example mapping
+## --------------------------------------------------------------------------
+ 
+## Move the highlight to the previous mailbox
+bind index,pager \Cp sidebar-prev
+ 
+## Move the highlight to the next mailbox
+bind index,pager \Cn sidebar-next
+ 
+## Open the highlighted mailbox
+bind index,pager \Co sidebar-open
+ 
+## Move the highlight to the previous page
+## This is useful if you have a LOT of mailboxes.
+bind index,pager <F3> sidebar-page-up
+ 
+## Move the highlight to the next page
+## This is useful if you have a LOT of mailboxes.
+bind index,pager <F4> sidebar-page-down
+ 
+## Move the highlight to the previous mailbox containing new, or flagged,
+## mail.
+bind index,pager <F5> sidebar-prev-new
+ 
+## Move the highlight to the next mailbox containing new, or flagged, mail.
+bind index,pager <F6> sidebar-next-new
+ 
+## Toggle the visibility of the Sidebar.
+bind index,pager B sidebar-toggle-visible
+ 
+## Color of the highlighted, but not open, mailbox.
+color sidebar_highlight black color8
+ 
+## Color of the divider separating the Sidebar from Mutt panels
+color sidebar_divider color8 black
+ 
+## Color to give mailboxes containing flagged mail
+color sidebar_flagged red black
+ 
+## Color to give mailboxes containing new mail
+color sidebar_new green black
+ 
+## --------------------------------------------------------------------------
+
+## progress bar
+color indicator cyan black
+
+## From field gets 30% of remaining space, Subject gets 70%.
+## Remaining space is the total width minus the other fields (35), minus the sidebar (24)
+set my_index_format_pre='set my_col_from = `echo $((30 * ($(tput cols)-35-24) / 100))`; set my_col_subject = `echo $((70 * ($(tput cols)-35-24) / 100))`; set index_format="%2C | %Z [%d] %-$my_col_from.${my_col_from}'
+set my_index_format_post=' (%-4.4c) %?M?<%M> ?%-$my_col_subject.${my_col_subject}s"'
+
+folder-hook .*[sS]ent.* "$my_index_format_pre"t"$my_index_format_post"
+folder-hook ! .*[sS]ent.* "$my_index_format_pre"F"$my_index_format_post"
+
+bind pager k previous-line #scroll inside the message rather than the index
+bind pager j next-line
+
+#auto_view text/html
+alternative_order text/plain text/enriched text/html 
+
+set smart_wrap
+
+## progress bar
+color progress white red
+
+## colourscheme
+source ~/.mutt/colour.mutt
+source ~/.mutt/gpg.rc
