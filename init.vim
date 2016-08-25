@@ -64,12 +64,13 @@ Plug 'zchee/deoplete-clang',      { 'for' : ['c', 'cpp'] }
 Plug 'Shougo/neoinclude.vim',     { 'for' : ['c', 'cpp'] }
 
 "" Haskell
-Plug 'parsonsmatt/intero-neovim',   { 'for' : 'haskell' }
+"Plug 'parsonsmatt/intero-neovim',   { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc',           { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold',    { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',         { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellConceal', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',  { 'for' : 'haskell' }
+Plug 'hspec/hspec.vim',             { 'for' : 'haskell' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
@@ -100,6 +101,9 @@ Plug 'awetzel/elixir.nvim',    { 'for' : 'elixir' }
 
 "" scala
 Plug 'derekwyatt/vim-scala', { 'for' : 'scala' }
+
+"" fsharp
+Plug 'fsharp/vim-fsharp', { 'for': 'fsharp', 'do':  'make fsautocomplete', }
 
 "" mml
 Plug '~/Programming/Haskell/microML/utils/vim-mmlFold'
@@ -225,8 +229,8 @@ set equalprg=par\ -w100
 
 "" spelling
 augroup spelling
-    au BufRead *.md setlocal spell spelllang=en_gb
-    au BufRead *.tex setlocal spell spelllang=en_gb
+    au BufRead *.md    setlocal spell spelllang=en_gb
+    au BufRead *.tex   setlocal spell spelllang=en_gb
     au BufRead *.latex setlocal spell spelllang=en_gb
 augroup END
 
@@ -236,28 +240,32 @@ augroup END
 
 "" tmux
 let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <BS> :TmuxNavigateRight<cr>
-nnoremap <silent> <c-p> :TmuxNavigatePrevious<cr>
+nnoremap <silent> <c-h> : TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> : TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> : TmuxNavigateUp<cr>
+nnoremap <silent> <BS>  : TmuxNavigateRight<cr>
+nnoremap <silent> <c-p> : TmuxNavigatePrevious<cr>
 
 "" Neomake
 augroup Neomake
     autocmd! BufWritePost * Neomake
 augroup END
 
+"" easymotion
+nmap <Leader>s  <Plug>(easymotion-s2)
+map  <Leader>f  <Plug>(easymotion-bd-f)
+nmap <Leader>f  <Plug>(easymotion-overwin-f)
+map  <Leader>li <Plug>(easymotion-bd-jk)
+nmap <Leader>li <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>W <Plug>(easymotion-bd-w)
+nmap <Leader>W <Plug>(easymotion-overwin-w)
+
 "" incsearch
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
-
-"" ocaml
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute 'set rtp+=' . g:opamshare . '/merlin/vim'
-augroup ocaml
-    autocmd FileType ocaml source '"$(opam config var prefix)"'/share/typerex/ocp-indent/ocp-indent.vim
-augroup END
 
 "" deoplete
 let g:deoplete#enable_at_startup = 1
@@ -271,9 +279,9 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " neosnippet
-imap <s-tab>     <Plug>(neosnippet_expand_or_jump)
-smap <s-tab>     <Plug>(neosnippet_expand_or_jump)
-xmap <s-tab>     <Plug>(neosnippet_expand_target)
+imap <s-tab> <Plug>(neosnippet_expand_or_jump)
+smap <s-tab> <Plug>(neosnippet_expand_or_jump)
+xmap <s-tab> <Plug>(neosnippet_expand_target)
 
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
@@ -306,11 +314,6 @@ nmap ga <Plug>(UnicodeGA)
 
 "" Tagbar
 map <F8> :TagbarToggle<CR>
-
-"" mutt 
-augroup mutt
-    au BufRead /tmp/mutt-* set tw = 72
-augroup END
 
 "" tern
 let g:tern_request_timeout = 1
