@@ -17,7 +17,7 @@ eval `dircolors -b $HOME/.ls_colours`
 ## stack completion
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
-eval "$(stack --bash-completion-script stack)"
+#eval "$(stack --bash-completion-script stack)"
 
 
 HISTFILE="$HOME/.zhistory"
