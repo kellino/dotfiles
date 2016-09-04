@@ -1,3 +1,5 @@
+## config for neomutt
+
 source "gpg2 -dq $HOME/.mutt/passwords.gpg |"
 
 set imap_pass=$my_imap_pass
@@ -16,9 +18,6 @@ unset imap_passive
 set alias_file=~/.mutt/aliases
 source ~/.mutt/aliases
 
-## show newest messages first
-set sort = reverse-date-received
-
 ## gmail account
 source "~/.mutt/gmail"
 folder-hook $folder 'source ~/.mutt/gmail'
@@ -26,6 +25,9 @@ folder-hook $folder 'source ~/.mutt/gmail'
 ## UCL account
 #source "~/.mutt/ucl"
 #folder-hook $folder 'source ~/.mutt/ucl'
+
+## show newest messages first
+set sort = reverse-date-received
 
 ## sidebar
 set sidebar_visible = yes
@@ -39,6 +41,9 @@ sidebar_whitelist '~/.mutt/mail'
 set sidebar_next_new_wrap = no
 set sidebar_divider_char = '|'
 set sidebar_format = '%B%?F? [%F]?%* %?N?%N/?%S'
+
+## status bar format
+set status_format='-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---'
  
 ## --------------------------------------------------------------------------
 ## FUNCTIONS - shown with an example mapping
@@ -96,10 +101,11 @@ set my_index_format_post=' (%-4.4c) %?M?<%M> ?%-$my_col_subject.${my_col_subject
 folder-hook .*[sS]ent.* "$my_index_format_pre"t"$my_index_format_post"
 folder-hook ! .*[sS]ent.* "$my_index_format_pre"F"$my_index_format_post"
 
+## vim-style navigation
 bind pager k previous-line #scroll inside the message rather than the index
 bind pager j next-line
 
-#auto_view text/html
+auto_view text/html
 alternative_order text/plain text/enriched text/html 
 
 set smart_wrap
@@ -107,6 +113,13 @@ set smart_wrap
 ## progress bar
 color progress white red
 
+## mark all messages as read
+macro index A \
+    "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
+    "mark all new as read"
+
 ## colourscheme
 source ~/.mutt/colour.mutt
+
+## gpg settings
 source ~/.mutt/gpg.rc

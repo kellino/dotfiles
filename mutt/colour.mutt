@@ -21,9 +21,14 @@ color message       cyan            default
 color markers       red             white           
 color attachment    white           default         
 color search        brightmagenta   default         
+# new or flagged emails
 color status        brightyellow    black           
 color indicator     brightblack     yellow          
 color tree          yellow          default                                     # arrow in threads
+
+# status bar
+color status color61 default
+color status brightred white '(New|Del|Flag):[0-9]+'
 
 # index stuff
 color indicator  color223 color236
