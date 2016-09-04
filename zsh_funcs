@@ -85,6 +85,6 @@ function extract() {
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
-alias ml='$HOME/Programming/Haskell/microML/.stack-work/install/x86_64-linux/ghc-7.10.3/7.10.3/bin/microML'
+alias ml='microML'
 
 alias pe='$HOME/Programming/Elixir'

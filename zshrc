@@ -61,8 +61,7 @@ plugins=(git archlinux history vi-mode ag ghc zsh-syntax-highlighting)
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 # User configuration
-
-export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.cabal/bin:/home/david/.local/bin:"
+export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.local/bin:"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -109,13 +108,9 @@ alias alsi='alsi -t -u'
 # coloured cat
 alias ccat='pygmentize -g'
 
-# cabal
-alias cb='cabal build'
-alias cr='cabal run'
+# i3lock-fancy
+alias lock='i3lock-fancy && echo mem > /sys/power/state'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f $HOME/dotfiles/zsh_funcs ] && source $HOME/dotfiles/zsh_funcs
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# OPAM configuration
-. /home/david/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
