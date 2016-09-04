@@ -22,7 +22,6 @@ Plug 'tpope/vim-eunuch' " unix commands
 Plug 'justinmk/vim-dirvish' " file browser
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim' 
-Plug 'junegunn/limelight.vim'
 
 "" fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } 
@@ -45,7 +44,7 @@ Plug 'airblade/vim-gitgutter'
 "" General coding
 Plug 'eugen0329/vim-esearch'
 Plug 'scrooloose/nerdcommenter'
-Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh', 'elixir', 'scala'] }
+Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh', 'elixir', 'scala', 'tex'] }
 Plug 'benekastah/neomake' 
 Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
 Plug 'Konfekt/FastFold'
@@ -59,7 +58,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 
 "" C (and C++)
-Plug 'critiqjo/lldb.nvim',        { 'for' : ['c', 'cpp'] }
+Plug 'critiqjo/lldb.nvim',        { 'do': function('DoRemote'),  'for' : ['c', 'cpp'] }
 Plug 'zchee/deoplete-clang',      { 'for' : ['c', 'cpp'] }
 Plug 'Shougo/neoinclude.vim',     { 'for' : ['c', 'cpp'] }
 
@@ -70,10 +69,12 @@ Plug 'Twinside/vim-haskellFold',    { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',         { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellConceal', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',  { 'for' : 'haskell' }
-Plug 'hspec/hspec.vim',             { 'for' : 'haskell' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
+
+"" Coq
+Plug 'the-lambda-church/coquille', { 'for' : 'coq' }
 
 "" Python
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
@@ -89,6 +90,7 @@ Plug 'lervag/vimtex', { 'for' : 'tex' }
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
 Plug 'zchee/deoplete-zsh',      { 'for' : 'sh' }
 Plug 'Shougo/neco-vim',         { 'for' : 'vim' }
+Plug 'Shougo/neco-syntax',      { 'for' : 'vim' }
 
 "" Rust
 Plug 'rust-lang/rust.vim',   { 'for' : 'rust' }
@@ -106,7 +108,11 @@ Plug 'derekwyatt/vim-scala', { 'for' : 'scala' }
 Plug 'fsharp/vim-fsharp', { 'for': 'fsharp', 'do':  'make fsautocomplete', }
 
 "" mml
-Plug '~/Programming/Haskell/microML/utils/vim-mmlFold'
+Plug '~/Programming/Haskell/microML/utils/microML.vim'
+"Plug '~/Programming/Python/deoplete-microML'
+
+"" wordnet wip
+Plug 'kellino/wordnet.nvim', { 'for' : ['tex', 'text', 'markdown'] }
 
 call plug#end()
 
@@ -294,11 +300,6 @@ let g:deoplete#sources#clang#sort_algo = 'priority'
 let g:neosnippet#enable_snipmate_compatibility=1
 let g:neosnippet#snippets_directory='~/.config/nvim/after/snippets'
 
-"" limelight
-let g:limelight_conceal_ctermfg = 240
-map <Leader>l :Limelight<CR>
-map <Leader>L :Limelight!<CR>
-
 "" ESearch
 let g:esearch = {
     \ 'adapter':    'ag',
@@ -345,13 +346,6 @@ let g:tex_stylish = 1
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
-
-nnoremap <silent> vtv :VimtexView<cr>
-nnoremap <silent> vtc :VimtexCompile<cr>
-nnoremap <silent> vtT :VimtexTocOpen<cr>
-
-"" microML
-au BufRead,BufNewFile *.mml setfiletype mml
 
 " other stuff
 try
