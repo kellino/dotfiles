@@ -108,11 +108,10 @@ Plug 'derekwyatt/vim-scala', { 'for' : 'scala' }
 Plug 'fsharp/vim-fsharp', { 'for': 'fsharp', 'do':  'make fsautocomplete', }
 
 "" mml
-Plug '~/Programming/Haskell/microML/utils/microML.vim'
-"Plug '~/Programming/Python/deoplete-microML'
+Plug '~/Programming/microML.vim', { 'for' : 'microML' }
 
 "" wordnet wip
-Plug 'kellino/wordnet.nvim', { 'for' : ['tex', 'text', 'markdown'] }
+Plug 'kellino/wordnet.nvim' ", { 'for' : ['tex', 'text', 'markdown'] }
 
 call plug#end()
 
@@ -273,7 +272,10 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
-"" deoplete
+"----------------"
+""   Deoplete   ""
+"----------------"
+
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#omni_patterns = {}
@@ -300,33 +302,9 @@ let g:deoplete#sources#clang#sort_algo = 'priority'
 let g:neosnippet#enable_snipmate_compatibility=1
 let g:neosnippet#snippets_directory='~/.config/nvim/after/snippets'
 
-"" ESearch
-let g:esearch = {
-    \ 'adapter':    'ag',
-    \ 'backend':    'nvim',
-    \ 'out':        'win',
-    \ 'batch_size': 1000,
-    \ 'use':      ['visual', 'hlsearch', 'last'],
-    \}
-
-"" Unicode
-map md <Plug>(MakeDigraph)
-nmap ga <Plug>(UnicodeGA)
-
-"" Tagbar
-map <F8> :TagbarToggle<CR>
-
 "" tern
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = 0
-
-"" vim calendar
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-
-"" tabular
-vmap a= :Tabularize /=<CR>
-vmap a> :Tabularize /-><CR>
 
 " latex settings
 if !exists('g:deoplete#omni#input_patterns')
@@ -347,6 +325,31 @@ let g:vimtex_view_method = 'zathura'
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
 
+"" ESearch
+let g:esearch = {
+    \ 'adapter':    'ag',
+    \ 'backend':    'nvim',
+    \ 'out':        'win',
+    \ 'batch_size': 1000,
+    \ 'use':      ['visual', 'hlsearch', 'last'],
+    \}
+
+"" Unicode
+map md <Plug>(MakeDigraph)
+nmap ga <Plug>(UnicodeGA)
+
+"" Tagbar
+map <F8> :TagbarToggle<CR>
+
+
+"" vim calendar
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
+
+"" tabular
+vmap a= :Tabularize /=<CR>
+vmap a> :Tabularize /-><CR>
+
 " other stuff
 try
     source ~/.config/nvim/config/lightline.vim
@@ -355,6 +358,5 @@ try
     source ~/.config/nvim/config/startify.vim
     source ~/.config/nvim/config/rust.vim
     source ~/.config/nvim/config/elixir.vim
-    source ~/.config/nvim/config/ml.vim
 catch
 endtry
