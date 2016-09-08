@@ -39,6 +39,11 @@ function cdl {
     cd "$@" && ls -lAh
 }
 
+function runHaskTagsVim {
+  # use --etags instead of --ctags for emacs
+  hasktags --ignore-close-implementation --ctags .; sort tags
+}
+
 function prepend {
     if [ -e $2 ]; then
         sed -i -e '1i$2\' $2
@@ -55,7 +60,6 @@ man() {
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
 }
-
 
 # taken from itchyny on Github, with some small alterations
 # suffix alias according to file extension
@@ -83,8 +87,44 @@ function extract() {
     *.tar) tar xvf "$1";;
   esac
 }
+
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
 alias ml='microML'
 
-alias pe='$HOME/Programming/Elixir'
+function termcolors() {
+    print TERM
+    print -P "Foreground: >█<"
+    print -P "Background: >%S█%s<\n"
+
+    print "      0 1 2 3 4 5 6 7" 
+    for b (0 1)
+    do
+        printf "%d %2d " $b $(( 8 * b ))
+        for r (0 1 2 3 4 5 6 7)
+        do
+            c=$(( 8 * b + r ))
+            print -nP "%K{$c}  %k"
+        done
+        printf " %2d\n" $(( 8 * b + 7 ))
+    done
+
+    print
+
+    print RGB
+    for r (0 1 2 3 4 5)
+    do 
+        print "$r $(( 16 + 36 * r )) - $(( 16 + 36 * r + 35 ))\n       0 1 2 3 4 5"
+        for g (0 1 2 3 4 5)
+        do
+            printf "%d %3d " $g $(( 16 + 36 * r + 6 * g ))
+            for b (0 1 2 3 4 5)
+            do
+                c=$(( 16 + 36 * r + 6 * g + b ))
+                print -nP "%K{$c}  %k"
+            done
+            printf " %3d\n" $(( 16 + 36 * r + 6 * g + 5))
+        done
+        print
+    done
+}
