@@ -5,8 +5,14 @@ set laststatus=2
 let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ 'active': {
-      \   'left'  : [ [ 'mode', 'paste' ], [ 'fugitive', 'readonly', 'filename' ] ],
-      \   'right' : [ ['trailing', 'indentation', 'lineinfo'], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \   'left'  : [ 
+      \         [ 'mode', 'paste' ], 
+      \         [ 'fugitive', 'readonly', 'filename' ], 
+      \         ['neomake'] ],
+      \   'right' : [ 
+      \         ['trailing', 'indentation', 'lineinfo'], 
+      \         ['percent'], 
+      \         [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
       \ 'component_function': {
       \   'readonly'     : 'MyReadonly',
@@ -19,11 +25,13 @@ let g:lightline = {
       \   'mode'         : 'MyMode',
       \ },
       \ 'component_expand': {
-      \  'indentation': 'MixedIndentSpaceWarning',
+          \ 'indentation': 'MixedIndentSpaceWarning',
+          \ 'neomake':     'MyNeomake',
       \ },
       \ 'component_type': {
-      \ 'trailing': 'warning',
-      \ 'indendation': 'warning',
+          \ 'trailing': 'warning',
+          \ 'indendation': 'warning',
+          \ 'neomake': 'error',
       \ },
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': ''}
@@ -66,16 +74,19 @@ function! MyFilename()
 endfunction
 
 function! MyFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
+    if &filetype ==# 'startify' | return '' | endif
+    return winwidth(0) > 70 ? &fileformat : ''
 endfunction
 
 
 function! MyFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+    if &filetype ==# 'startify' | return '' | endif
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
 endfunction
 
 function! MyFileencoding()
-  return winwidth(0) > 70 ? (strlen(&fileencoding) ? &fileencoding: &encoding) : ''
+    if &filetype ==# 'startify' | return '' | endif
+    return winwidth(0) > 70 ? (strlen(&fileencoding) ? &fileencoding: &encoding) : ''
 endfunction
 
 function! MyMode()
@@ -108,6 +119,24 @@ function! s:flags()
         call MixedIndentSpaceWarning()
         call lightline#update()
       endif
+endfunction
+
+function! MyNeomake()
+    if !exists('*neomake#statusline#LoclistCounts')
+        return ''
+    endif
+    " Count all the errors, warnings
+    let l:total = 0
+    for l:v in values(neomake#statusline#LoclistCounts())
+        let l:total += l:v
+    endfor
+    for l:v in items(neomake#statusline#QflistCounts())
+        let l:total += l:v
+    endfor
+    if l:total == 0
+        return ''
+    endif
+    return 'line '.getloclist(0)[0].lnum. ', 1 of '.l:total
 endfunction
 
 let g:tagbar_status_func = 'TagbarStatusFunc'

@@ -31,7 +31,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'altercation/vim-colors-solarized'
 
 "" Text Editing
-Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 Plug 'chrisbra/unicode.vim'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
@@ -42,10 +42,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 "" General coding
-Plug 'eugen0329/vim-esearch'
 Plug 'scrooloose/nerdcommenter'
-Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh', 'elixir', 'scala', 'tex'] }
-Plug 'benekastah/neomake' 
+Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh', 'elixir', 'tex'] }
+Plug 'neomake/neomake' 
 Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
 Plug 'Konfekt/FastFold'
 
@@ -58,7 +57,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 
 "" C (and C++)
-Plug 'critiqjo/lldb.nvim',        { 'do': function('DoRemote'),  'for' : ['c', 'cpp'] }
 Plug 'zchee/deoplete-clang',      { 'for' : ['c', 'cpp'] }
 Plug 'Shougo/neoinclude.vim',     { 'for' : ['c', 'cpp'] }
 
@@ -70,27 +68,18 @@ Plug 'Twinside/vim-hoogle',         { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellConceal', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',  { 'for' : 'haskell' }
 
-"" Idris
-Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
-
-"" Coq
-Plug 'the-lambda-church/coquille', { 'for' : 'coq' }
-
 "" Python
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
 Plug 'mitsuhiko/vim-python-combined', { 'for' : 'python' }
-
-"" JavaScript
-Plug 'carlitux/deoplete-ternjs', { 'for' : 'javascript' }
 
 "" LaTeX
 Plug 'lervag/vimtex', { 'for' : 'tex' }
 
 "" Shell Scripting & Vim
-Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
-Plug 'zchee/deoplete-zsh',      { 'for' : 'sh' }
-Plug 'Shougo/neco-vim',         { 'for' : 'vim' }
-Plug 'Shougo/neco-syntax',      { 'for' : 'vim' }
+Plug 'vim-scripts/sh.vim--Cla'
+Plug 'zchee/deoplete-zsh', { 'for' : 'zsh' }
+Plug 'Shougo/neco-vim',    { 'for' : 'vim' }
+Plug 'Shougo/neco-syntax', { 'for' : 'vim' }
 
 "" Rust
 Plug 'rust-lang/rust.vim',   { 'for' : 'rust' }
@@ -99,19 +88,25 @@ Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
 
 "" elixir / erlang
 Plug 'elixir-lang/vim-elixir', { 'for' : 'elixir' }
-Plug 'awetzel/elixir.nvim',    { 'for' : 'elixir' }
+Plug 'slashmili/alchemist.vim', { 'for' : 'elixir' }
+Plug 'vim-erlang/vim-erlang-omnicomplete', { 'for' : 'erlang' }
+Plug 'vim-erlang/vim-erlang-runtime', { 'for' : 'erlang' }
+Plug 'vim-erlang/vim-erlang-tags', { 'for' : 'erlang' }
 
-"" scala
-Plug 'derekwyatt/vim-scala', { 'for' : 'scala' }
+"" JavaScript
+Plug 'carlitux/deoplete-ternjs', { 'for' : 'javascript' }
 
-"" fsharp
-Plug 'fsharp/vim-fsharp', { 'for': 'fsharp', 'do':  'make fsautocomplete', }
+"" typescript
+Plug 'HerringtonDarkholme/yats.vim', { 'for' : 'typescript' }
+Plug 'clausreinke/typescript-tools.vim', { 'do' : 'npm install'}
+Plug 'Quramy/tsuquyomi', { 'for' : 'typescript' }
+Plug 'mhartington/deoplete-typescript', { 'for' : 'typescript' }
 
 "" mml
-Plug '~/Programming/microML.vim', { 'for' : 'microML' }
+Plug '~/Programming/Haskell/microML/utils/microML.vim', { 'for' : 'microML' }
 
 "" wordnet wip
-Plug 'kellino/wordnet.nvim' ", { 'for' : ['tex', 'text', 'markdown'] }
+Plug 'kellino/wordnet.nvim' 
 
 call plug#end()
 
@@ -229,8 +224,8 @@ set concealcursor=c
 set tags=./tags;
 
 "" formatting
-set formatprg=par\ -w100
-set equalprg=par\ -w100
+set formatprg=par\ -w120
+set equalprg=par\ -w120
 
 "" spelling
 augroup spelling
@@ -251,7 +246,7 @@ nnoremap <silent> <c-k> : TmuxNavigateUp<cr>
 nnoremap <silent> <BS>  : TmuxNavigateRight<cr>
 nnoremap <silent> <c-p> : TmuxNavigatePrevious<cr>
 
-"" Neomake
+" Neomake
 augroup Neomake
     autocmd! BufWritePost * Neomake
 augroup END
@@ -279,6 +274,7 @@ map g/ <Plug>(incsearch-stay)
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#omni_patterns = {}
+let g:deoplete#omni#input_patterns = {}
 
 " rust
 let g:deoplete#omni_patterns.rust = '[(\.)(::)]'
@@ -307,9 +303,6 @@ let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = 0
 
 " latex settings
-if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-endif
 let g:deoplete#omni#input_patterns.tex = 
         \   '\\(?:'
         \  .   '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
@@ -325,14 +318,22 @@ let g:vimtex_view_method = 'zathura'
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
 
-"" ESearch
-let g:esearch = {
-    \ 'adapter':    'ag',
-    \ 'backend':    'nvim',
-    \ 'out':        'win',
-    \ 'batch_size': 1000,
-    \ 'use':      ['visual', 'hlsearch', 'last'],
-    \}
+"" typescript
+let g:deoplete#sources#tss#javascript_support = 1
+
+let g:tagbar_type_typescript = {
+  \ 'ctagstype': 'typescript',
+  \ 'kinds': [
+    \ 'c:classes',
+    \ 'n:modules',
+    \ 'f:functions',
+    \ 'v:variables',
+    \ 'v:varlambdas',
+    \ 'm:members',
+    \ 'i:interfaces',
+    \ 'e:enums',
+  \ ]
+\ }
 
 "" Unicode
 map md <Plug>(MakeDigraph)
@@ -341,7 +342,6 @@ nmap ga <Plug>(UnicodeGA)
 "" Tagbar
 map <F8> :TagbarToggle<CR>
 
-
 "" vim calendar
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
@@ -349,6 +349,9 @@ let g:calendar_google_task = 1
 "" tabular
 vmap a= :Tabularize /=<CR>
 vmap a> :Tabularize /-><CR>
+
+"" gitgutter
+let g:gitgutter_async=0
 
 " other stuff
 try
