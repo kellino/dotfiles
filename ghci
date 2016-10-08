@@ -1,0 +1,19 @@
+:set prompt "\ESC[1;34m%s\n\ESC[0;34mDavid λ> \ESC[m"
+:set prompt2 "continued > "
+:m - Prelude
+:m + GOA
+:set +m
+setLambdabotHome "/home/david/.cabal/bin"
+:def bs        lambdabot "botsnack"
+:def pl        lambdabot "pl"
+:def unpl      lambdabot "unpl"
+:def redo      lambdabot "redo"
+:def undo      lambdabot "undo"
+:def index     lambdabot "index"
+:def docs      lambdabot "docs"
+:def instances lambdabot "instances"
+:def hoogle    lambdabot "hoogle"
+:def source    lambdabot "fptools"
+:def where     lambdabot "where"
+:def version   lambdabot "version"
+:def src       lambdabot "src"
