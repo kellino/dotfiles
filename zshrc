@@ -56,7 +56,7 @@ ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 ## plugins
-plugins=(git archlinux history vi-mode ag ghc zsh-syntax-highlighting)
+plugins=(git archlinux history vi-mode ag ghc virtualenv zsh-syntax-highlighting)
 ## syntax highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
@@ -109,7 +109,7 @@ alias alsi='alsi -t -u'
 alias ccat='pygmentize -g'
 
 # i3lock-fancy
-alias lock='i3lock-fancy && echo mem > /sys/power/state'
+alias lock='i3lock-fancy && echo disk > /sys/power/state'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f $HOME/dotfiles/zsh_funcs ] && source $HOME/dotfiles/zsh_funcs

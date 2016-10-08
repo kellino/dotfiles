@@ -15,4 +15,4 @@ set signature="David Kelly"
 # Connection options
 
 ## Hook -- IMPORTANT!
-account-hook $folder "set imap_user=dkellino@gmail.com imap_pass=$imap_pass"
+account-hook $folder "set imap_user=dkellino@gmail.com imap_pass=$my_imap_pass"
