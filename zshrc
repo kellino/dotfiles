@@ -42,7 +42,8 @@ setopt hist_verify               # Don't execute immediately upon history expans
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-ZSH_THEME="cypher"
+# ZSH_THEME="cypher"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
@@ -110,6 +111,8 @@ alias ccat='pygmentize -g'
 
 # i3lock-fancy
 alias lock='i3lock-fancy && echo disk > /sys/power/state'
+
+alias tmux="env TERM=xterm-256color tmux"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f $HOME/dotfiles/zsh_funcs ] && source $HOME/dotfiles/zsh_funcs
