@@ -28,7 +28,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim' 
 
 "" Colourscheme(s)
-Plug 'altercation/vim-colors-solarized'
+Plug 'frankier/neovim-colors-solarized-truecolor-only'
 
 "" Text Editing
 Plug 'jiangmiao/auto-pairs'
@@ -117,12 +117,13 @@ filetype plugin indent on
  "      Appearance       "
  "======================="
 
+set termguicolors
 set background=dark
 let g:solarized_termtrans=1
-let g:solarized_termcolors=1
 colorscheme solarized
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 hi SpellBad ctermfg=1
 hi SpellCap ctermfg=9
@@ -268,7 +269,7 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
 "----------------"
-""   Deoplete   ""
+""   Deoplete    "
 "----------------"
 
 let g:deoplete#enable_at_startup = 1
