@@ -17,7 +17,6 @@ eval `dircolors -b $HOME/.ls_colours`
 ## stack completion
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
-#eval "$(stack --bash-completion-script stack)"
 
 
 HISTFILE="$HOME/.zhistory"
@@ -39,7 +38,6 @@ setopt hist_save_no_dups         # Don't write duplicate entries in the history 
 setopt hist_reduce_blanks        # Remove superfluous blanks before recording entry.
 setopt hist_verify               # Don't execute immediately upon history expansion.
 
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # ZSH_THEME="cypher"
@@ -57,7 +55,7 @@ ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 ## plugins
-plugins=(git archlinux history vi-mode ag ghc virtualenv zsh-syntax-highlighting)
+plugins=(git archlinux history vi-mode ag ghc stack zsh-syntax-highlighting)
 ## syntax highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
@@ -91,7 +89,6 @@ alias ut='transset-df -a 1'
 # aliases for java
 alias javacp='java -cp src/'
 alias jj="java -jar"
-alias jclim="/usr/lib/eclipse/eclimd -Dosgi.instance.area.default=@user.home/Programming/Java"
 
 # openvpn
 alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
@@ -117,3 +114,6 @@ alias tmux="env TERM=xterm-256color tmux"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f $HOME/dotfiles/zsh_funcs ] && source $HOME/dotfiles/zsh_funcs
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# OPAM configuration
+. /home/david/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
