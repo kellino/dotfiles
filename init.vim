@@ -28,14 +28,13 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim' 
 
 "" Colourscheme(s)
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
+Plug 'iCyMind/NeoSolarized'
 
 "" Text Editing
 Plug 'jiangmiao/auto-pairs'
 Plug 'chrisbra/unicode.vim'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
-Plug 'reedes/vim-pencil', { 'for' : ['markdown', 'tex', 'text'] }
 
 "" Git
 Plug 'tpope/vim-fugitive'
@@ -61,12 +60,19 @@ Plug 'zchee/deoplete-clang',      { 'for' : ['c', 'cpp'] }
 Plug 'Shougo/neoinclude.vim',     { 'for' : ['c', 'cpp'] }
 
 "" Haskell
-"Plug 'parsonsmatt/intero-neovim',   { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc',           { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold',    { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',         { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellConceal', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',  { 'for' : 'haskell' }
+
+"" Agda, Coq, OCaml
+Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
+Plug 'the-lambda-church/coquille', { 'for' : 'coq' }
+Plug 'let-def/ocp-indent-vim', { 'for' : 'ocaml' }
+
+"" Idris
+Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
 
 "" Python
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
@@ -77,7 +83,6 @@ Plug 'lervag/vimtex', { 'for' : 'tex' }
 
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla'
-Plug 'zchee/deoplete-zsh', { 'for' : 'zsh' }
 Plug 'Shougo/neco-vim',    { 'for' : 'vim' }
 Plug 'Shougo/neco-syntax', { 'for' : 'vim' }
 
@@ -98,7 +103,7 @@ Plug 'carlitux/deoplete-ternjs', { 'for' : 'javascript' }
 
 "" typescript
 Plug 'HerringtonDarkholme/yats.vim', { 'for' : 'typescript' }
-Plug 'clausreinke/typescript-tools.vim', { 'do' : 'npm install'}
+Plug 'clausreinke/typescript-tools.vim', { 'do' : 'npm install', 'for' : 'typescript' }
 Plug 'Quramy/tsuquyomi', { 'for' : 'typescript' }
 Plug 'mhartington/deoplete-typescript', { 'for' : 'typescript' }
 
@@ -119,8 +124,8 @@ filetype plugin indent on
 
 set termguicolors
 set background=dark
-let g:solarized_termtrans=1
-colorscheme solarized
+let g:neosolarized_termtrans=1
+colorscheme NeoSolarized
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -136,6 +141,8 @@ hi Comment cterm=italic
 "" italics
 set t_ZH=3m
 set t_ZR=23m
+set t_8f=[38;2;%lu;%lu;%lum
+set t_8b=[48;2;%lu;%lu;%lum
 
 
  "======================="
@@ -202,6 +209,9 @@ noremap <Leader>tt :tabclose<CR>
 map yy "*y
 map pp "*p
 
+""
+let maplocalleader = ','
+
 "" quick save and quit
 map qq :wqa!<CR>
 map qa :qa!<CR>
@@ -249,6 +259,8 @@ nnoremap <silent> <c-p> : TmuxNavigatePrevious<cr>
 
 " Neomake
 augroup Neomake
+    autocmd! BufWritePost *.py Neomake mypy
+    autocmd! BufWritePost *.py Neomake vulture
     autocmd! BufWritePost * Neomake
 augroup END
 
@@ -354,7 +366,25 @@ vmap a> :Tabularize /-><CR>
 "" gitgutter
 let g:gitgutter_async=0
 
-" other stuff
+"" agda, coq, ocaml
+au BufNewFile,BufRead *.agda setfiletype agda
+
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute 'set rtp+=' . g:opamshare . '/merlin/vim'
+
+let g:deoplete#omni_patterns.ocaml = '[^ ,;\t\[()\]]'
+
+
+"" idris
+let g:idris_indent_if = 3
+let g:idris_indent_case = 5
+let g:idris_indent_let = 4
+let g:idris_indent_where = 6
+let g:idris_indent_do = 3
+let g:idris_indent_rewrite = 8
+let g:idris_conceal = 1
+
+"" other stuff
 try
     source ~/.config/nvim/config/lightline.vim
     source ~/.config/nvim/config/haskell.vim
