@@ -42,7 +42,6 @@ Plug 'airblade/vim-gitgutter'
 
 "" General coding
 Plug 'scrooloose/nerdcommenter'
-Plug 'airblade/vim-rooter', { 'for' : ['c', 'python', 'rust', 'sh', 'elixir', 'tex'] }
 Plug 'neomake/neomake' 
 Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
 Plug 'Konfekt/FastFold'
@@ -92,11 +91,11 @@ Plug 'rhysd/rust-doc.vim',   { 'for' : 'rust' }
 Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
 
 "" elixir / erlang
-Plug 'elixir-lang/vim-elixir', { 'for' : 'elixir' }
-Plug 'slashmili/alchemist.vim', { 'for' : 'elixir' }
+Plug 'elixir-lang/vim-elixir',             { 'for' : 'elixir' }
+Plug 'slashmili/alchemist.vim',            { 'for' : 'elixir' }
 Plug 'vim-erlang/vim-erlang-omnicomplete', { 'for' : 'erlang' }
-Plug 'vim-erlang/vim-erlang-runtime', { 'for' : 'erlang' }
-Plug 'vim-erlang/vim-erlang-tags', { 'for' : 'erlang' }
+Plug 'vim-erlang/vim-erlang-runtime',      { 'for' : 'erlang' }
+Plug 'vim-erlang/vim-erlang-tags',         { 'for' : 'erlang' }
 
 "" JavaScript
 Plug 'carlitux/deoplete-ternjs', { 'for' : 'javascript' }
@@ -210,7 +209,7 @@ map yy "*y
 map pp "*p
 
 ""
-let maplocalleader = ','
+let g:maplocalleader = ','
 
 "" quick save and quit
 map qq :wqa!<CR>
@@ -243,6 +242,7 @@ augroup spelling
     au BufRead *.md    setlocal spell spelllang=en_gb
     au BufRead *.tex   setlocal spell spelllang=en_gb
     au BufRead *.latex setlocal spell spelllang=en_gb
+    au BufRead  mail   setlocal spell spelllang=en_gb
 augroup END
 
 "============================="
@@ -332,7 +332,7 @@ let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
 
 "" typescript
-let g:deoplete#sources#tss#javascript_support = 1
+let g:deoplete#sources#tss#javascript_support=1
 
 let g:tagbar_type_typescript = {
   \ 'ctagstype': 'typescript',
@@ -368,7 +368,6 @@ let g:gitgutter_async=0
 
 "" agda, coq, ocaml
 au BufNewFile,BufRead *.agda setfiletype agda
-
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 
