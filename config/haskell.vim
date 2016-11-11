@@ -1,27 +1,3 @@
-" Process management:
-nnoremap <Leader>io :InteroOpen<CR>
-nnoremap <Leader>ik :InteroKill<CR>
-nnoremap <Leader>ih :InteroHide<CR>
-nnoremap <Leader>ilo :InteroLoadCurrentModule<CR>
-
-" REPL commands
-nnoremap <Leader>ie :InteroEval<CR>
-nnoremap <Leader>igt :InteroGenericType<CR>
-nnoremap <Leader>it :InteroType<CR>
-nnoremap <Leader>ii :InteroInfo<CR>
-nnoremap <Leader>iI :InteroTypeInsert<CR>
-
-" Go to definition:
-nnoremap <Leader>id :InteroGoToDef<CR>
-
-" Highlight uses of identifier:
-nnoremap <Leader>iu :InteroUses<CR>
-
-" Reload the file in Intero after saving
-"autocmd! BufWritePost *.hs InteroReload
-
-
-let g:neomake_haskell_enable_makers=['hlint', 'hdevtools']
 let g:necoghc_enable_detailed_browse=1
 
 function! REPLSendHaskell()
@@ -44,18 +20,9 @@ function! CabalRepl()
     wincmd p
 endfunction
 
-augroup haskellgroup
-    au BufNewFile,BufRead *.hs map <buffer> <F2>   : Hoogle<CR>
-augroup END
-
 nnoremap <silent> <C-x><C-x> :REPLSendHaskell<CR>
 
 map <leader>ti :GhcModTypeInsert<CR>
-
-augroup hdevtools
-    autocmd FileType haskell nnoremap <buffer> <F5> :HdevtoolsType<CR>
-    autocmd FileType haskell nnoremap <buffer> <F6> :HdevtoolsClear<CR>
-augroup END
 
 let g:tagbar_type_haskell = {
     \ 'ctagsbin'  : 'hasktags',
