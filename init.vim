@@ -267,8 +267,8 @@ map  <Leader>f  <Plug>(easymotion-bd-f)
 nmap <Leader>f  <Plug>(easymotion-overwin-f)
 map  <Leader>li <Plug>(easymotion-bd-jk)
 nmap <Leader>li <Plug>(easymotion-overwin-line)
-map  <Leader>W <Plug>(easymotion-bd-w)
-nmap <Leader>W <Plug>(easymotion-overwin-w)
+map  <Leader>W  <Plug>(easymotion-bd-w)
+nmap <Leader>W  <Plug>(easymotion-overwin-w)
 
 "" incsearch
 map /  <Plug>(incsearch-forward)
@@ -357,8 +357,9 @@ let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
 
 "" tabular
-vmap a= :Tabularize /=<CR>
-vmap a> :Tabularize /-><CR>
+vmap a= :Tabularize/=<CR>
+vmap a> :Tabularize/-><CR>
+vmap a{ :Tabularize/{<CR>
 
 "" gitgutter
 let g:gitgutter_async=0
