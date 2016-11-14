@@ -1,5 +1,7 @@
 let g:necoghc_enable_detailed_browse=1
 
+let g:hscoptions='w'
+
 function! REPLSendHaskell()
     save! %
     let l:line = [join([':load', expand('%.t')], ' ')]
@@ -9,7 +11,7 @@ endfunction
 function! HaskellRepl()
     silent! 20 split
     e ghci.hs
-    call termopen('ghci') 
+    call termopen('intero') 
     wincmd p
 endfunction
 

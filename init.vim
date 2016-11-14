@@ -55,27 +55,28 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 
 "" C (and C++)
-Plug 'zchee/deoplete-clang',      { 'for' : ['c', 'cpp'] }
-Plug 'Shougo/neoinclude.vim',     { 'for' : ['c', 'cpp'] }
+Plug 'zchee/deoplete-clang',  { 'for' : ['c', 'cpp'] }
+Plug 'Shougo/neoinclude.vim', { 'for' : ['c', 'cpp'] }
 
 "" Haskell
-Plug 'eagletmt/neco-ghc',           { 'for' : 'haskell' }
-Plug 'Twinside/vim-haskellFold',    { 'for' : 'haskell' }
-Plug 'Twinside/vim-hoogle',         { 'for' : 'haskell' }
-Plug 'Twinside/vim-haskellConceal', { 'for' : 'haskell' }
-Plug 'itchyny/vim-haskell-indent',  { 'for' : 'haskell' }
+Plug 'eagletmt/ghcmod-vim',           { 'for' : 'haskell' }
+Plug 'eagletmt/neco-ghc',             { 'for' : 'haskell' }
+Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
+Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
+Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
+Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
 "" Agda, Coq, OCaml
-Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
+Plug 'derekelkins/agda-vim',       { 'for' : 'agda' }
 Plug 'the-lambda-church/coquille', { 'for' : 'coq' }
-Plug 'let-def/ocp-indent-vim', { 'for' : 'ocaml' }
+Plug 'let-def/ocp-indent-vim',     { 'for' : 'ocaml' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
 
 "" Python
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
-Plug 'mitsuhiko/vim-python-combined', { 'for' : 'python' }
+Plug 'klen/python-mode',    { 'for' : 'python' }
 
 "" LaTeX
 Plug 'lervag/vimtex', { 'for' : 'tex' }
@@ -101,13 +102,10 @@ Plug 'vim-erlang/vim-erlang-tags',         { 'for' : 'erlang' }
 Plug 'carlitux/deoplete-ternjs', { 'for' : 'javascript' }
 
 "" typescript
-Plug 'HerringtonDarkholme/yats.vim', { 'for' : 'typescript' }
+Plug 'HerringtonDarkholme/yats.vim',     { 'for' : 'typescript' }
 Plug 'clausreinke/typescript-tools.vim', { 'do' : 'npm install', 'for' : 'typescript' }
-Plug 'Quramy/tsuquyomi', { 'for' : 'typescript' }
-Plug 'mhartington/deoplete-typescript', { 'for' : 'typescript' }
-
-"" mml
-Plug '~/Programming/Haskell/microML/utils/microML.vim', { 'for' : 'microML' }
+Plug 'Quramy/tsuquyomi',                 { 'for' : 'typescript' }
+Plug 'mhartington/deoplete-typescript',  { 'for' : 'typescript' }
 
 "" wordnet wip
 Plug 'kellino/wordnet.nvim' 
@@ -158,9 +156,8 @@ nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
-" don't allow vim to resize splits
-set noequalalways
 
+set noequalalways  " don't allow vim to resize splits
 set cmdheight=2
 set nowrap
 set relativenumber
@@ -270,8 +267,6 @@ map  <Leader>f  <Plug>(easymotion-bd-f)
 nmap <Leader>f  <Plug>(easymotion-overwin-f)
 map  <Leader>li <Plug>(easymotion-bd-jk)
 nmap <Leader>li <Plug>(easymotion-overwin-line)
-
-" Move to word
 map  <Leader>W <Plug>(easymotion-bd-w)
 nmap <Leader>W <Plug>(easymotion-overwin-w)
 
@@ -289,9 +284,6 @@ let g:deoplete#enable_smart_case = 1
 let g:deoplete#omni_patterns = {}
 let g:deoplete#omni#input_patterns = {}
 
-" rust
-let g:deoplete#omni_patterns.rust = '[(\.)(::)]'
-
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
@@ -299,23 +291,30 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 imap <s-tab> <Plug>(neosnippet_expand_or_jump)
 smap <s-tab> <Plug>(neosnippet_expand_or_jump)
 xmap <s-tab> <Plug>(neosnippet_expand_target)
-
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+let g:neosnippet#enable_snipmate_compatibility=1
+let g:neosnippet#snippets_directory='~/.config/nvim/after/snippets'
 
+" java
+augroup java
+    autocmd FileType java setlocal omnifunc=javacomplete#Complete
+augroup END
+
+" rust
+let g:deoplete#omni_patterns.rust = '[(\.)(::)]'
+
+"" deoplete clang
 let g:deoplete#sources#clang#libclang_path='/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/include/clang/'
 let g:deoplete#sources#clang#std#cpp = 'c++11'
 let g:deoplete#sources#clang#sort_algo = 'priority'
 
-let g:neosnippet#enable_snipmate_compatibility=1
-let g:neosnippet#snippets_directory='~/.config/nvim/after/snippets'
-
 "" tern
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = 0
 
-" latex settings
+"" latex
 let g:deoplete#omni#input_patterns.tex = 
         \   '\\(?:'
         \  .   '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
@@ -324,7 +323,6 @@ let g:deoplete#omni#input_patterns.tex =
         \  .  '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
         \  .  '|(?:include(?:only)?|input)\s*\{[^}]*'
         \  .')'
-
 let g:tex_flavor = 'latex'
 let g:tex_stylish = 1
 let g:vimtex_view_method = 'zathura'
@@ -333,7 +331,6 @@ let g:vimtex_fold_enabled=1
 
 "" typescript
 let g:deoplete#sources#tss#javascript_support=1
-
 let g:tagbar_type_typescript = {
   \ 'ctagstype': 'typescript',
   \ 'kinds': [
@@ -370,9 +367,7 @@ let g:gitgutter_async=0
 au BufNewFile,BufRead *.agda setfiletype agda
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute 'set rtp+=' . g:opamshare . '/merlin/vim'
-
 let g:deoplete#omni_patterns.ocaml = '[^ ,;\t\[()\]]'
-
 
 "" idris
 let g:idris_indent_if = 3
@@ -382,6 +377,9 @@ let g:idris_indent_where = 6
 let g:idris_indent_do = 3
 let g:idris_indent_rewrite = 8
 let g:idris_conceal = 1
+
+"" python
+let g:pymode_rope=0
 
 "" other stuff
 try
