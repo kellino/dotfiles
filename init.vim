@@ -57,6 +57,8 @@ Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 "" C (and C++)
 Plug 'zchee/deoplete-clang',  { 'for' : ['c', 'cpp'] }
 Plug 'Shougo/neoinclude.vim', { 'for' : ['c', 'cpp'] }
+Plug 'arakashic/chromatica.nvim'
+
 
 "" Haskell
 Plug 'eagletmt/ghcmod-vim',           { 'for' : 'haskell' }
@@ -66,13 +68,16 @@ Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
-"" Agda, Coq, OCaml
-Plug 'derekelkins/agda-vim',       { 'for' : 'agda' }
+"" Coq, OCaml
 Plug 'the-lambda-church/coquille', { 'for' : 'coq' }
 Plug 'let-def/ocp-indent-vim',     { 'for' : 'ocaml' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
+
+"" Prolog
+Plug 'adimit/prolog.vim', { 'for' : 'prolog' }
+
 
 "" Python
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
@@ -105,7 +110,7 @@ Plug 'carlitux/deoplete-ternjs', { 'for' : 'javascript' }
 Plug 'HerringtonDarkholme/yats.vim',     { 'for' : 'typescript' }
 Plug 'clausreinke/typescript-tools.vim', { 'do' : 'npm install', 'for' : 'typescript' }
 Plug 'Quramy/tsuquyomi',                 { 'for' : 'typescript' }
-Plug 'mhartington/deoplete-typescript',  { 'for' : 'typescript' }
+Plug 'mhartington/deoplete-typescript' ",  { 'for' : 'typescript' }
 
 "" wordnet wip
 Plug 'kellino/wordnet.nvim' 
@@ -254,7 +259,7 @@ nnoremap <silent> <c-k> : TmuxNavigateUp<cr>
 nnoremap <silent> <BS>  : TmuxNavigateRight<cr>
 nnoremap <silent> <c-p> : TmuxNavigatePrevious<cr>
 
-" Neomake
+"" Neomake
 augroup Neomake
     autocmd! BufWritePost *.py Neomake mypy
     autocmd! BufWritePost *.py Neomake vulture
@@ -296,11 +301,6 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 let g:neosnippet#enable_snipmate_compatibility=1
 let g:neosnippet#snippets_directory='~/.config/nvim/after/snippets'
 
-" java
-augroup java
-    autocmd FileType java setlocal omnifunc=javacomplete#Complete
-augroup END
-
 " rust
 let g:deoplete#omni_patterns.rust = '[(\.)(::)]'
 
@@ -310,7 +310,7 @@ let g:deoplete#sources#clang#clang_header = '/usr/include/clang/'
 let g:deoplete#sources#clang#std#cpp = 'c++11'
 let g:deoplete#sources#clang#sort_algo = 'priority'
 
-"" tern
+"" javascript (tern)
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = 0
 
@@ -364,8 +364,11 @@ vmap a{ :Tabularize/{<CR>
 "" gitgutter
 let g:gitgutter_async=0
 
-"" agda, coq, ocaml
-au BufNewFile,BufRead *.agda setfiletype agda
+"" Prolog
+" use .plg as file extension to avoid problems with perl
+au BufNewFile,BufRead *.plg setfiletype prolog
+
+""coq, ocaml
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 let g:deoplete#omni_patterns.ocaml = '[^ ,;\t\[()\]]'
@@ -381,6 +384,9 @@ let g:idris_conceal = 1
 
 "" python
 let g:pymode_rope=0
+
+"" chromatica
+let g:chromatica#enable_at_startup=1
 
 "" other stuff
 try
