@@ -75,20 +75,15 @@ export ARCHFLAGS="-arch x86_64"
 ## custom aliases
 # system aliases
 alias down='shutdown -P now'
+alias restart='shutdown -r now'
 alias usb='sudo mount /dev/sdb1 /mnt'
 alias umusb='sudo umount /mnt'
 alias modstat="stat --format '%a'" # returns the octal number of a file / directory
 alias k9="kill -9"
-alias mmv='noglob zmv -W'
-alias sus='sudo pm-suspend'
 
 # monitor
 alias mon='xrandr --output HDMI1 --auto --left-of eDP1'
 alias ut='transset-df -a 1'
-
-# aliases for java
-alias javacp='java -cp src/'
-alias jj="java -jar"
 
 # openvpn
 alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
@@ -99,6 +94,11 @@ alias pyrepl='ptipython'
 # directories
 alias pf='cd $HOME/Programming/Haskell'
 alias pp='cd $HOME/Programming/Python'
+alias pi='cd $HOME/Programming/Idris'
+alias ppl='cd $HOME/Programming/Prolog'
+
+# intero
+alias intero='stack exec intero'
 
 # alsi
 alias alsi='alsi -t -u'
@@ -109,7 +109,7 @@ alias ccat='pygmentize -g'
 # i3lock-fancy
 alias lock='i3lock-fancy && echo disk > /sys/power/state'
 
-alias tmux="env TERM=xterm-256color tmux"
+# alias tmux="env TERM=xterm-256color tmux"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f $HOME/dotfiles/zsh_funcs ] && source $HOME/dotfiles/zsh_funcs
