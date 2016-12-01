@@ -14,6 +14,7 @@ call plug#begin('~/.config/nvim/bundle/')
 "" general
 Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'itchyny/lightline.vim'
+Plug 'critiqjo/vim-bufferline'
 Plug 'itchyny/calendar.vim'
 
 Plug 'mhinz/vim-startify'
@@ -57,7 +58,7 @@ Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 "" C (and C++)
 Plug 'zchee/deoplete-clang',  { 'for' : ['c', 'cpp'] }
 Plug 'Shougo/neoinclude.vim', { 'for' : ['c', 'cpp'] }
-Plug 'arakashic/chromatica.nvim'
+Plug 'arakashic/chromatica.nvim', { 'do': function('DoRemote'), 'for' : ['c', 'cpp'] }
 
 
 "" Haskell
@@ -67,9 +68,11 @@ Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
+Plug 'ElmCast/elm-vim'
 
 "" Coq, OCaml
-Plug 'the-lambda-church/coquille', { 'for' : 'coq' }
+"Plug 'the-lambda-church/coquille', { 'for' : 'coq' }
+Plug 'epdtry/neovim-coq', { 'for' : 'coq' }
 Plug 'let-def/ocp-indent-vim',     { 'for' : 'ocaml' }
 
 "" Idris
@@ -77,7 +80,6 @@ Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
 
 "" Prolog
 Plug 'adimit/prolog.vim', { 'for' : 'prolog' }
-
 
 "" Python
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
@@ -97,8 +99,6 @@ Plug 'rhysd/rust-doc.vim',   { 'for' : 'rust' }
 Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
 
 "" elixir / erlang
-Plug 'elixir-lang/vim-elixir',             { 'for' : 'elixir' }
-Plug 'slashmili/alchemist.vim',            { 'for' : 'elixir' }
 Plug 'vim-erlang/vim-erlang-omnicomplete', { 'for' : 'erlang' }
 Plug 'vim-erlang/vim-erlang-runtime',      { 'for' : 'erlang' }
 Plug 'vim-erlang/vim-erlang-tags',         { 'for' : 'erlang' }
@@ -232,8 +232,10 @@ set omnifunc=syntaxcomplete#Complete
 set conceallevel=2
 set concealcursor=c
 
-"" Recursively search for tagfiles
+"" ctags / hasktags
 set tags=./tags;
+nnoremap <C-\> :tab split<CR> :exec("tag " . expand("<cword>"))<CR>
+
 
 "" formatting
 set formatprg=par\ -w120
@@ -365,8 +367,8 @@ vmap a{ :Tabularize/{<CR>
 let g:gitgutter_async=0
 
 "" Prolog
-" use .plg as file extension to avoid problems with perl
-au BufNewFile,BufRead *.plg setfiletype prolog
+" use .pro as file extension to avoid problems with perl
+au BufNewFile,BufRead *.pro setfiletype prolog
 
 ""coq, ocaml
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
@@ -385,6 +387,10 @@ let g:idris_conceal = 1
 "" python
 let g:pymode_rope=0
 
+"" elm
+let g:deoplete#omni_patterns.elm = '\.'
+let g:elm_detailed_complete=1
+
 "" chromatica
 let g:chromatica#enable_at_startup=1
 
@@ -395,6 +401,5 @@ try
     source ~/.config/nvim/config/terminal.vim
     source ~/.config/nvim/config/startify.vim
     source ~/.config/nvim/config/rust.vim
-    source ~/.config/nvim/config/elixir.vim
 catch
 endtry
