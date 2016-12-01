@@ -2,6 +2,14 @@ scriptencoding utf-8
 
 set laststatus=2
 
+"" bufferline
+let g:bufferline_active_buffer_left = ''
+let g:bufferline_active_buffer_right = ''
+let g:bufferline_show_bufnr = 0
+let g:bufferline_fname_mod = ':~:.'
+let g:bufferline_pathshorten = 1
+
+
 let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ 'active': {
@@ -13,6 +21,12 @@ let g:lightline = {
       \         ['trailing', 'indentation', 'lineinfo'], 
       \         ['percent'], 
       \         [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \   'tabline': {
+      \     'left': [ ['bufferline'] ],
+      \   },
+      \   'component': {
+      \     'bufferline': '%{MyBufferlineRefresh()}' . bufferline#get_status_string('TabLineSel', 'LightLineLeft_tabline_tabsel_1'),
       \ },
       \ 'component_function': {
       \   'readonly'     : 'MyReadonly',
@@ -145,6 +159,13 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
   return lightline#statusline(0)
 endfunction
 
+function! MyBufferlineRefresh()
+  call bufferline#refresh_status()
+  let rlen = 4*tabpagenr('$') + len(&fenc) + 8
+  call bufferline#trim_status_info(&columns - rlen)
+  return ''
+endfunction
+
 function! s:fzf_statusline()
   " Override statusline as you like
   highlight fzf1 ctermfg=161 ctermbg=251
@@ -152,6 +173,7 @@ function! s:fzf_statusline()
   highlight fzf3 ctermfg=237 ctermbg=251
   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
+
 
 augroup fzf
     autocmd! User FzfStatusLine call <SID>fzf_statusline()

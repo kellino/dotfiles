@@ -15,13 +15,6 @@ function! HaskellRepl()
     wincmd p
 endfunction
 
-function! CabalRepl()
-    silent! 20 split
-    e ghci.hs
-    call termopen('cabal repl')
-    wincmd p
-endfunction
-
 nnoremap <silent> <C-x><C-x> :REPLSendHaskell<CR>
 
 map <leader>ti :GhcModTypeInsert<CR>
