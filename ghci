@@ -3,7 +3,9 @@
 :m - Prelude
 :m + GOA
 :set +m
-setLambdabotHome "/home/david/.cabal/bin"
+:load "/home/david/dotfiles/less.hs"
+:def browseLess browseLess
+setLambdabotHome "/home/david/.local/bin"
 :def bs        lambdabot "botsnack"
 :def pl        lambdabot "pl"
 :def unpl      lambdabot "unpl"
