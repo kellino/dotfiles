@@ -60,19 +60,16 @@ Plug 'zchee/deoplete-clang',  { 'for' : ['c', 'cpp'] }
 Plug 'Shougo/neoinclude.vim', { 'for' : ['c', 'cpp'] }
 Plug 'arakashic/chromatica.nvim', { 'do': function('DoRemote'), 'for' : ['c', 'cpp'] }
 
-
 "" Haskell
-Plug 'eagletmt/ghcmod-vim',           { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc',             { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
-Plug 'ElmCast/elm-vim'
 
 "" Coq, OCaml
-"Plug 'the-lambda-church/coquille', { 'for' : 'coq' }
-Plug 'epdtry/neovim-coq', { 'for' : 'coq' }
+Plug 'let-def/vimbufsync', { 'for' : 'coq' }
+Plug 'the-lambda-church/coquille', { 'branch' : 'pathogen-bundle', 'for' : 'coq' }
 Plug 'let-def/ocp-indent-vim',     { 'for' : 'ocaml' }
 
 "" Idris
@@ -98,11 +95,6 @@ Plug 'rust-lang/rust.vim',   { 'for' : 'rust' }
 Plug 'rhysd/rust-doc.vim',   { 'for' : 'rust' }
 Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
 
-"" elixir / erlang
-Plug 'vim-erlang/vim-erlang-omnicomplete', { 'for' : 'erlang' }
-Plug 'vim-erlang/vim-erlang-runtime',      { 'for' : 'erlang' }
-Plug 'vim-erlang/vim-erlang-tags',         { 'for' : 'erlang' }
-
 "" JavaScript
 Plug 'carlitux/deoplete-ternjs', { 'for' : 'javascript' }
 
@@ -110,7 +102,7 @@ Plug 'carlitux/deoplete-ternjs', { 'for' : 'javascript' }
 Plug 'HerringtonDarkholme/yats.vim',     { 'for' : 'typescript' }
 Plug 'clausreinke/typescript-tools.vim', { 'do' : 'npm install', 'for' : 'typescript' }
 Plug 'Quramy/tsuquyomi',                 { 'for' : 'typescript' }
-Plug 'mhartington/deoplete-typescript' ",  { 'for' : 'typescript' }
+Plug 'mhartington/deoplete-typescript',  { 'for' : 'typescript' }
 
 "" wordnet wip
 Plug 'kellino/wordnet.nvim' 
@@ -210,6 +202,9 @@ noremap <Leader>tt :tabclose<CR>
 map yy "*y
 map pp "*p
 
+"" select all
+map <leader>A <esc>ggVG<CR>
+
 ""
 let g:maplocalleader = ','
 
@@ -234,12 +229,14 @@ set concealcursor=c
 
 "" ctags / hasktags
 set tags=./tags;
-nnoremap <C-\> :tab split<CR> :exec("tag " . expand("<cword>"))<CR>
 
-
-"" formatting
-set formatprg=par\ -w120
-set equalprg=par\ -w120
+augroup formatting
+    au BufEnter,BufRead *.md setlocal formatprg=par\ -w120
+    au BufEnter,BufRead *.md setlocal equalprg=par\ -w120
+    au BufEnter,BufRead *.txt setlocal formatprg=par\ -w120
+    au BufEnter,BufRead *.txt setlocal equalprg=par\ -w120
+    au BufEnter,BufRead *.hs setlocal formatprg=hindent
+augroup END
 
 "" spelling
 augroup spelling
@@ -386,10 +383,6 @@ let g:idris_conceal = 1
 
 "" python
 let g:pymode_rope=0
-
-"" elm
-let g:deoplete#omni_patterns.elm = '\.'
-let g:elm_detailed_complete=1
 
 "" chromatica
 let g:chromatica#enable_at_startup=1
