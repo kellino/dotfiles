@@ -68,7 +68,7 @@ Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
 "" Coq, OCaml
-Plug 'let-def/vimbufsync', { 'for' : 'coq' }
+Plug 'let-def/vimbufsync',         { 'for' : 'coq' }
 Plug 'the-lambda-church/coquille', { 'branch' : 'pathogen-bundle', 'for' : 'coq' }
 Plug 'let-def/ocp-indent-vim',     { 'for' : 'ocaml' }
 
@@ -102,7 +102,7 @@ Plug 'carlitux/deoplete-ternjs', { 'for' : 'javascript' }
 Plug 'HerringtonDarkholme/yats.vim',     { 'for' : 'typescript' }
 Plug 'clausreinke/typescript-tools.vim', { 'do' : 'npm install', 'for' : 'typescript' }
 Plug 'Quramy/tsuquyomi',                 { 'for' : 'typescript' }
-Plug 'mhartington/deoplete-typescript',  { 'for' : 'typescript' }
+Plug 'mhartington/deoplete-typescript',  { 'do' : function('DoRemote'), 'for' : 'typescript' }
 
 "" wordnet wip
 Plug 'kellino/wordnet.nvim' 
