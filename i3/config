@@ -8,7 +8,7 @@ font pango:Sauce Code Powerline Regular 9
 floating_modifier $mod
 
 ## start a terminal
-bindsym $mod+Return exec termite 
+bindsym $mod+Return exec tilda
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -162,6 +162,6 @@ bindsym $mod+r mode "resize"
 bar {
         font pango:DejaVa Sans Mono 9
         position top
-	status_command i3blocks -c ~/.i3/i3blocks.conf
-	workspace_buttons yes
+        status_command i3blocks -c ~/.i3/i3blocks.conf
+        workspace_buttons yes
 }
