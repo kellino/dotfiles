@@ -35,6 +35,7 @@ Plug 'iCyMind/NeoSolarized'
 Plug 'jiangmiao/auto-pairs'
 Plug 'chrisbra/unicode.vim'
 Plug 'godlygeek/tabular'
+Plug 'beloglazov/vim-online-thesaurus', { 'for' : ['text', 'markdown'] }
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
 "" Git
