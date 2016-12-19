@@ -47,6 +47,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake' 
 Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
 Plug 'Konfekt/FastFold'
+Plug 'brooth/far.vim'
 
 "" deoplete 
 function! DoRemote(arg)
@@ -68,10 +69,11 @@ Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
-"" Coq, OCaml
+"" Coq, OCaml, Agda
 Plug 'let-def/vimbufsync',         { 'for' : 'coq' }
 Plug 'the-lambda-church/coquille', { 'branch' : 'pathogen-bundle', 'for' : 'coq' }
 Plug 'let-def/ocp-indent-vim',     { 'for' : 'ocaml' }
+Plug 'derekelkins/agda-vim',       { 'for' : 'agda' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
@@ -123,7 +125,6 @@ let g:neosolarized_termtrans=1
 colorscheme NeoSolarized
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 hi SpellBad ctermfg=1
 hi SpellCap ctermfg=9
@@ -367,6 +368,10 @@ let g:gitgutter_async=0
 "" Prolog
 " use .pro as file extension to avoid problems with perl
 au BufNewFile,BufRead *.pro setfiletype prolog
+
+"" Agda
+"au BufNewFile,BufRead *.agda setfiletype agda
+let g:agda_extraincpaths = ["/usr/share/agda/lib/prim"]
 
 ""coq, ocaml
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
