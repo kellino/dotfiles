@@ -87,3 +87,6 @@ function extract() {
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
 alias ml='microML'
+
+# list all installed binaries
+alias allBinaries="compgen -c | sed '/^_/d' | sort"
