@@ -7,7 +7,7 @@ export LANG=en_GB.UTF-8
 export EDITOR='nvim'
 export BROWSER='chromium'
 # export TERM='xterm-256color'
-export TERM='xterm-256color-italic'
+export TERM='screen-256color-italic'
 
 bindkey ' ' magic-space
 
