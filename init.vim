@@ -360,7 +360,9 @@ let g:calendar_google_task = 1
 "" tabular
 vmap a= :Tabularize/=<CR>
 vmap a> :Tabularize/-><CR>
+vmap a< :Tabularize/<-<CR>
 vmap a{ :Tabularize/{<CR>
+vmap a: :Tabularize/:<CR> 
 
 "" gitgutter
 let g:gitgutter_async=0
