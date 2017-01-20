@@ -23,10 +23,10 @@ Plug 'tpope/vim-eunuch' " unix commands
 Plug 'justinmk/vim-dirvish' " file browser
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim' 
+Plug 'jamessan/vim-gnupg'
 
 "" fzf
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } 
-Plug 'junegunn/fzf.vim' 
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim' 
 
 "" Colourscheme(s)
 Plug 'iCyMind/NeoSolarized'
@@ -47,7 +47,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake' 
 Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
 Plug 'Konfekt/FastFold'
-Plug 'brooth/far.vim'
+Plug 'brooth/far.vim', { 'on' : ['Far', 'Fardo', 'Farundo', 'Refar'] }
 
 "" deoplete 
 function! DoRemote(arg)
@@ -60,7 +60,7 @@ Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 "" C (and C++)
 Plug 'zchee/deoplete-clang',  { 'for' : ['c', 'cpp'] }
 Plug 'Shougo/neoinclude.vim', { 'for' : ['c', 'cpp'] }
-Plug 'arakashic/chromatica.nvim', { 'do': function('DoRemote'), 'for' : ['c', 'cpp'] }
+Plug 'arakashic/chromatica.nvim', { 'for' : ['c', 'cpp'] }
 
 "" Haskell
 Plug 'eagletmt/neco-ghc',             { 'for' : 'haskell' }
@@ -70,10 +70,10 @@ Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
 "" Coq, OCaml, Agda
-Plug 'let-def/vimbufsync',         { 'for' : 'coq' }
-Plug 'the-lambda-church/coquille', { 'branch' : 'pathogen-bundle', 'for' : 'coq' }
 Plug 'let-def/ocp-indent-vim',     { 'for' : 'ocaml' }
 Plug 'derekelkins/agda-vim',       { 'for' : 'agda' }
+Plug 'let-def/vimbufsync',         { 'for' : 'coq' }
+Plug 'the-lambda-church/coquille', { 'branch' : 'pathogen-bundle',  'for' : 'coq' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
@@ -105,7 +105,7 @@ Plug 'carlitux/deoplete-ternjs', { 'for' : 'javascript' }
 Plug 'HerringtonDarkholme/yats.vim',     { 'for' : 'typescript' }
 Plug 'clausreinke/typescript-tools.vim', { 'do' : 'npm install', 'for' : 'typescript' }
 Plug 'Quramy/tsuquyomi',                 { 'for' : 'typescript' }
-Plug 'mhartington/deoplete-typescript',  { 'do' : function('DoRemote'), 'for' : 'typescript' }
+Plug 'mhartington/deoplete-typescript',  { 'for' : 'typescript' }
 
 "" wordnet wip
 Plug 'kellino/wordnet.nvim' 
@@ -113,7 +113,6 @@ Plug 'kellino/wordnet.nvim'
 call plug#end()
 
 filetype plugin indent on
-
 
  "======================="
  "      Appearance       "
@@ -372,13 +371,13 @@ let g:gitgutter_async=0
 au BufNewFile,BufRead *.pro setfiletype prolog
 
 "" Agda
-"au BufNewFile,BufRead *.agda setfiletype agda
-let g:agda_extraincpaths = ["/usr/share/agda/lib/prim"]
+let g:agda_extraincpaths = ['/usr/share/agda/lib/prim']
 
-""coq, ocaml
+""ocaml
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 let g:deoplete#omni_patterns.ocaml = '[^ ,;\t\[()\]]'
+let g:deoplete#omni#input_patterns.coq = '[^ \t]'
 
 "" idris
 let g:idris_indent_if = 3
@@ -394,6 +393,9 @@ let g:pymode_rope=0
 
 "" chromatica
 let g:chromatica#enable_at_startup=1
+
+" coq keybindings
+
 
 "" other stuff
 try
