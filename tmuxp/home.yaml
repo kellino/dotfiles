@@ -1,0 +1,15 @@
+shell_command_before: "transset-df -a 0.9"
+session_name: home
+windows:
+    - window_name: terminal
+      panes:
+        - shell_command: 
+            - sudo -b openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn 
+    - window_name: ranger
+      panes:
+        - shell_command:
+            - ranger
+    - window_name: email
+      panes:
+        - shell_command: 
+            - mutt
