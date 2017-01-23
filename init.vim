@@ -23,7 +23,7 @@ Plug 'tpope/vim-eunuch' " unix commands
 Plug 'justinmk/vim-dirvish' " file browser
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim' 
-Plug 'jamessan/vim-gnupg'
+Plug 'jamessan/vim-gnupg', { 'for' : ['pgp', 'gpg'] }
 
 "" fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim' 
@@ -49,7 +49,6 @@ Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
 Plug 'Konfekt/FastFold'
 Plug 'brooth/far.vim', { 'on' : ['Far', 'Fardo', 'Farundo', 'Refar'] }
 
-"" deoplete 
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
@@ -57,10 +56,10 @@ endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 
-"" C (and C++)
+"" C 
 Plug 'zchee/deoplete-clang',  { 'for' : ['c', 'cpp'] }
 Plug 'Shougo/neoinclude.vim', { 'for' : ['c', 'cpp'] }
-Plug 'arakashic/chromatica.nvim', { 'for' : ['c', 'cpp'] }
+Plug 'arakashic/chromatica.nvim', { 'do' : function('DoRemote'), 'for' : ['c', 'cpp'] }
 
 "" Haskell
 Plug 'eagletmt/neco-ghc',             { 'for' : 'haskell' }
@@ -108,7 +107,8 @@ Plug 'Quramy/tsuquyomi',                 { 'for' : 'typescript' }
 Plug 'mhartington/deoplete-typescript',  { 'for' : 'typescript' }
 
 "" wordnet wip
-Plug 'kellino/wordnet.nvim' 
+Plug 'kellino/wordnet.nvim', { 'do' : function('DoRemote') }
+Plug '~/Programming/Python/neoCoqIde'
 
 call plug#end()
 
@@ -132,13 +132,8 @@ hi SpellLocal cterm=undercurl
 hi FoldColumn ctermbg=235
 hi LineNr ctermfg=200
 hi Comment cterm=italic
-
-"" italics
-set t_ZH=3m
-set t_ZR=23m
-set t_8f=[38;2;%lu;%lu;%lum
-set t_8b=[48;2;%lu;%lu;%lum
-
+hi CheckedByCoq ctermbg=1
+hi SentToCoq ctermfg=9
 
  "======================="
  "      Navigation       "
@@ -357,18 +352,15 @@ let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
 
 "" tabular
-vmap a= :Tabularize/=<CR>
-vmap a> :Tabularize/-><CR>
-vmap a< :Tabularize/<-<CR>
-vmap a{ :Tabularize/{<CR>
-vmap a: :Tabularize/:<CR> 
+vmap a=  :Tabularize/=<CR>
+vmap a>  :Tabularize/-><CR>
+vmap a<  :Tabularize/<-<CR>
+vmap a{  :Tabularize/{<CR>
+vmap a:  :Tabularize/:<CR> 
+vmap a=> :Tabularize/=><CR>
 
 "" gitgutter
 let g:gitgutter_async=0
-
-"" Prolog
-" use .pro as file extension to avoid problems with perl
-au BufNewFile,BufRead *.pro setfiletype prolog
 
 "" Agda
 let g:agda_extraincpaths = ['/usr/share/agda/lib/prim']
@@ -395,7 +387,14 @@ let g:pymode_rope=0
 let g:chromatica#enable_at_startup=1
 
 " coq keybindings
-
+let g:tagbar_type_coq = {
+  \ 'ctagstype': 'Coq',
+  \ 'kinds': [
+    \ 'd:datatypes',
+    \ 'f:functions',
+    \ 't:theorems',
+  \ ]
+\ }
 
 "" other stuff
 try
@@ -406,3 +405,4 @@ try
     source ~/.config/nvim/config/rust.vim
 catch
 endtry
+
