@@ -106,4 +106,4 @@ macro index A \
     "mark all new as read"
 
 ## new mail command, sends to dunst
-set new_mail_command="notify-send 'New Email in %f' '%n new messages, %u unread.' &"
+set new_mail_command="notify-send ' New Email in %f' '%n new messages, %u unread.' &"
