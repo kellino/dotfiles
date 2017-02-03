@@ -34,8 +34,8 @@ Plug 'iCyMind/NeoSolarized'
 "" Text Editing
 Plug 'jiangmiao/auto-pairs'
 Plug 'chrisbra/unicode.vim'
-Plug 'godlygeek/tabular'
-Plug 'beloglazov/vim-online-thesaurus', { 'for' : ['text', 'markdown'] }
+Plug 'junegunn/vim-easy-align'
+Plug 'beloglazov/vim-online-thesaurus', { 'for' : ['text', 'markdown', 'tex', 'latex'] }
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
 "" Git
@@ -68,9 +68,8 @@ Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
-"" Coq, OCaml, Agda
-Plug 'let-def/ocp-indent-vim',     { 'for' : 'ocaml' }
-Plug 'derekelkins/agda-vim',       { 'for' : 'agda' }
+"" Coq, OCaml
+Plug 'let-def/ocp-indent-vim',     { 'for' : ['ocaml', 'coq'] }
 Plug 'let-def/vimbufsync',         { 'for' : 'coq' }
 Plug 'the-lambda-church/coquille', { 'branch' : 'pathogen-bundle',  'for' : 'coq' }
 
@@ -121,7 +120,10 @@ filetype plugin indent on
 set termguicolors
 set background=dark
 let g:neosolarized_termtrans=1
+let g:neosolarized_contrast='high'
+let g:neosolarized_italic = 1
 colorscheme NeoSolarized
+
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
@@ -132,6 +134,7 @@ hi SpellLocal cterm=undercurl
 hi FoldColumn ctermbg=235
 hi LineNr ctermfg=200
 hi Comment cterm=italic
+" remove horrible highlighting from coquille
 hi CheckedByCoq ctermbg=1
 hi SentToCoq ctermfg=9
 
@@ -231,7 +234,10 @@ augroup formatting
     au BufEnter,BufRead *.md setlocal equalprg=par\ -w120
     au BufEnter,BufRead *.txt setlocal formatprg=par\ -w120
     au BufEnter,BufRead *.txt setlocal equalprg=par\ -w120
-    au BufEnter,BufRead *.hs setlocal formatprg=hindent
+    au BufEnter,BufRead *.tex setlocal formatprg=par\ -w120
+    au BufEnter,BufRead *.tex setlocal equalprg=par\ -w120
+    au BufEnter,BufRead *.latex setlocal formatprg=par\ -w120
+    au BufEnter,BufRead *.latex setlocal equalprg=par\ -w120
 augroup END
 
 "" spelling
@@ -344,6 +350,11 @@ let g:tagbar_type_typescript = {
 map md <Plug>(MakeDigraph)
 nmap ga <Plug>(UnicodeGA)
 
+"" Vimtex
+augroup vimtex
+    autocmd FileType *.latex nmap <Leader>vc :VimtexCompile
+augroup END
+
 "" Tagbar
 map <F8> :TagbarToggle<CR>
 
@@ -351,19 +362,12 @@ map <F8> :TagbarToggle<CR>
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
 
-"" tabular
-vmap a=  :Tabularize/=<CR>
-vmap a>  :Tabularize/-><CR>
-vmap a<  :Tabularize/<-<CR>
-vmap a{  :Tabularize/{<CR>
-vmap a:  :Tabularize/:<CR> 
-vmap a=> :Tabularize/=><CR>
+"" easy-align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 "" gitgutter
 let g:gitgutter_async=0
-
-"" Agda
-let g:agda_extraincpaths = ['/usr/share/agda/lib/prim']
 
 ""ocaml
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
