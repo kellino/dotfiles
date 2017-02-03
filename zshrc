@@ -86,7 +86,7 @@ alias mon='xrandr --output HDMI1 --auto --left-of eDP1'
 alias ut='transset-df -a 1'
 
 # openvpn
-alias vpn='sudo openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn'
+alias vpn='sudo openvpn --config /etc/openvpn/AirVPN_Europe_UDP-443.ovpn --daemon'
 
 # python
 alias pyrepl='ptipython'
@@ -112,6 +112,7 @@ alias lock='i3lock-fancy && echo disk > /sys/power/state'
 # tmux sessions
 alias home='tmuxp load ~/.tmuxp/home.yaml'
 alias ucl='tmuxp load ~/.tmuxp/ucl.yaml'
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f $HOME/dotfiles/zsh_funcs ] && source $HOME/dotfiles/zsh_funcs
