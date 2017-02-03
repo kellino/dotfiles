@@ -4,12 +4,11 @@ windows:
     - window_name: terminal
       panes:
         - shell_command: 
-            - sudo -b openvpn /etc/openvpn/AirVPN_Europe_UDP-443.ovpn 
+            - vpnThenMutt
     - window_name: ranger
       panes:
         - shell_command:
             - ranger
     - window_name: email
       panes:
-        - shell_command: 
-            - mutt
+          ''
