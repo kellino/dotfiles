@@ -44,7 +44,7 @@ Plug 'airblade/vim-gitgutter'
 
 "" General coding
 Plug 'scrooloose/nerdcommenter'
-Plug 'neomake/neomake' 
+Plug 'neomake/neomake' | Plug 'dojoteef/neomake-autolint'
 Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
 Plug 'Konfekt/FastFold'
 Plug 'brooth/far.vim', { 'on' : ['Far', 'Fardo', 'Farundo', 'Refar'] }
@@ -69,9 +69,10 @@ Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
 "" Coq, OCaml
-Plug 'let-def/ocp-indent-vim',     { 'for' : ['ocaml', 'coq'] }
-Plug 'let-def/vimbufsync',         { 'for' : 'coq' }
-Plug 'the-lambda-church/coquille', { 'branch' : 'pathogen-bundle',  'for' : 'coq' }
+Plug 'let-def/ocp-indent-vim',          { 'for' : ['ocaml', 'coq'] }
+Plug 'the-lambda-church/coquille',      { 'branch' : 'pathogen-bundle',  'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
+Plug '~/.config/nvim/bundle/coqExtras', { 'for' : 'coq' }
+Plug 'psosera/ott-vim',                 { 'for' : 'ott' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
@@ -88,6 +89,7 @@ Plug 'lervag/vimtex', { 'for' : 'tex' }
 
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla'
+Plug 'junegunn/vader.vim', { 'for' : 'vim' }
 Plug 'Shougo/neco-vim',    { 'for' : 'vim' }
 Plug 'Shougo/neco-syntax', { 'for' : 'vim' }
 
@@ -107,7 +109,6 @@ Plug 'mhartington/deoplete-typescript',  { 'for' : 'typescript' }
 
 "" wordnet wip
 Plug 'kellino/wordnet.nvim', { 'do' : function('DoRemote') }
-Plug '~/Programming/Python/neoCoqIde'
 
 call plug#end()
 
@@ -350,11 +351,6 @@ let g:tagbar_type_typescript = {
 map md <Plug>(MakeDigraph)
 nmap ga <Plug>(UnicodeGA)
 
-"" Vimtex
-augroup vimtex
-    autocmd FileType *.latex nmap <Leader>vc :VimtexCompile
-augroup END
-
 "" Tagbar
 map <F8> :TagbarToggle<CR>
 
@@ -369,10 +365,15 @@ nmap ga <Plug>(EasyAlign)
 "" gitgutter
 let g:gitgutter_async=0
 
-""ocaml
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute 'set rtp+=' . g:opamshare . '/merlin/vim'
-let g:deoplete#omni_patterns.ocaml = '[^ ,;\t\[()\]]'
+"" ocaml
+augroup ocaml
+    au BufRead,BufNewFile *.ml,*.mli compiler ocaml
+    let g:deoplete#omni_patterns.ocaml = '[^ ,;\t\[()\]]'
+    let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+    execute 'set rtp+=' . g:opamshare . '/merlin/vim'
+augroup END
+
+"" coq
 let g:deoplete#omni#input_patterns.coq = '[^ \t]'
 
 "" idris
@@ -390,7 +391,7 @@ let g:pymode_rope=0
 "" chromatica
 let g:chromatica#enable_at_startup=1
 
-" coq keybindings
+" coq tagbar
 let g:tagbar_type_coq = {
   \ 'ctagstype': 'Coq',
   \ 'kinds': [
