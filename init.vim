@@ -23,7 +23,7 @@ Plug 'tpope/vim-eunuch' " unix commands
 Plug 'justinmk/vim-dirvish' " file browser
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim' 
-Plug 'jamessan/vim-gnupg', { 'for' : ['pgp', 'gpg'] }
+Plug 'jamessan/vim-gnupg'
 
 "" fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim' 
@@ -67,12 +67,12 @@ Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
+Plug 'parsonsmatt/intero-neovim',     { 'for' : 'haskell' }
 
 "" Coq, OCaml
-Plug 'let-def/ocp-indent-vim',          { 'for' : ['ocaml', 'coq'] }
-Plug 'the-lambda-church/coquille',      { 'branch' : 'pathogen-bundle',  'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
-Plug '~/.config/nvim/bundle/coqExtras', { 'for' : 'coq' }
-Plug 'psosera/ott-vim',                 { 'for' : 'ott' }
+Plug 'let-def/ocp-indent-vim',       { 'for' : ['ocaml', 'coq'] }
+Plug '~/.config/nvim/bundle/coqIDE', { 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
+Plug 'psosera/ott-vim',              { 'for' : 'ott' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
@@ -368,10 +368,11 @@ let g:gitgutter_async=0
 "" ocaml
 augroup ocaml
     au BufRead,BufNewFile *.ml,*.mli compiler ocaml
-    let g:deoplete#omni_patterns.ocaml = '[^ ,;\t\[()\]]'
-    let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-    execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 augroup END
+
+let g:deoplete#omni_patterns.ocaml = '[^ ,;\t\[()\]]'
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 
 "" coq
 let g:deoplete#omni#input_patterns.coq = '[^ \t]'
