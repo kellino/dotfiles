@@ -8,6 +8,9 @@ export EDITOR='nvim'
 export BROWSER='chromium'
 export TERM='screen-256color-italic'
 
+GPG_TTY=`tty` 
+export GPG_TTY 
+
 bindkey ' ' magic-space
 
 ## ls colours
