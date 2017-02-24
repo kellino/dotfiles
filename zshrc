@@ -84,6 +84,10 @@ alias umusb='sudo umount /mnt'
 alias modstat="stat --format '%a'" # returns the octal number of a file / directory
 alias k9="kill -9"
 
+# colours output in less
+alias tree="tree -C"
+alias less="less -R"
+
 # monitor
 alias mon='xrandr --output HDMI1 --auto --left-of eDP1'
 alias ut='transset-df -a 1'
@@ -110,7 +114,7 @@ alias alsi='alsi -t -u'
 alias ccat='pygmentize -g'
 
 # i3lock-fancy
-alias lock='i3lock-fancy && echo disk > /sys/power/state'
+alias lock='i3lock-fancy'
 
 # tmux sessions
 alias home='tmuxp load ~/.tmuxp/home.yaml'
