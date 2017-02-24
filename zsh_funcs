@@ -1,6 +1,6 @@
-alias less='less -m -N -g -i -J --line-numbers --underline-special'
-export LESSOPEN="lessopen %s"
-export LESCLOSE="lessclose %s %s"
+# alias less='less -m -N -g -i -J --line-numbers --underline-special'
+# export LESSOPEN="lessopen %s"
+# export LESCLOSE="lessclose %s %s"
 alias more='less'
 
 # unregister broken GHC packages. Run this a few times to resolve dependency rot in installed packages.
@@ -36,7 +36,6 @@ function cdl {
 }
 
 function runHaskTagsVim {
-  # use --etags instead of --ctags for emacs
   hasktags --ignore-close-implementation --ctags .; sort tags
 }
 
