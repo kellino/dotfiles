@@ -37,7 +37,7 @@ nnoremap <Leader>hid :InteroGoToDef<CR>
 nnoremap <Leader>hiu :InteroUses<CR>
 
 " Reload the file in Intero after saving
-autocmd! BufWritePost *.hs InteroReload
+" autocmd! BufWritePost *.hs InteroReload
 
 "" tagbar
 let g:tagbar_type_haskell = {
