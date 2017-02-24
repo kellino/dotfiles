@@ -39,8 +39,7 @@ Plug 'beloglazov/vim-online-thesaurus', { 'for' : ['text', 'markdown', 'tex', 'l
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
 "" Git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
 
 "" General coding
 Plug 'scrooloose/nerdcommenter'
@@ -67,7 +66,7 @@ Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
-Plug 'parsonsmatt/intero-neovim',     { 'for' : 'haskell' }
+"Plug 'parsonsmatt/intero-neovim',     { 'for' : 'haskell' }
 
 "" Coq, OCaml
 Plug 'let-def/ocp-indent-vim',       { 'for' : ['ocaml', 'coq'] }
@@ -114,6 +113,7 @@ call plug#end()
 
 filetype plugin indent on
 
+
  "======================="
  "      Appearance       "
  "======================="
@@ -125,7 +125,6 @@ let g:neosolarized_contrast='high'
 let g:neosolarized_italic = 1
 colorscheme NeoSolarized
 
-
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 hi SpellBad ctermfg=1
@@ -135,9 +134,7 @@ hi SpellLocal cterm=undercurl
 hi FoldColumn ctermbg=235
 hi LineNr ctermfg=200
 hi Comment cterm=italic
-" remove horrible highlighting from coquille
-hi CheckedByCoq ctermbg=1
-hi SentToCoq ctermfg=9
+
 
  "======================="
  "      Navigation       "
@@ -147,8 +144,8 @@ hi SentToCoq ctermfg=9
 inoremap fj <Esc>
 
 "" Switch between splits
-set splitbelow
-set splitright
+set  splitbelow
+set  splitright
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
@@ -193,6 +190,7 @@ set wildmenu
 set wildmode=longest,list:longest,full
 set wildignore=*.o,*~,*.pyc,.git/*
 set shortmess=aoOtT
+set inccommand=split
 
 "" Tab
 noremap <Leader>to :tabnew<CR>
@@ -392,15 +390,8 @@ let g:pymode_rope=0
 "" chromatica
 let g:chromatica#enable_at_startup=1
 
-" coq tagbar
-let g:tagbar_type_coq = {
-  \ 'ctagstype': 'Coq',
-  \ 'kinds': [
-    \ 'd:datatypes',
-    \ 'f:functions',
-    \ 't:theorems',
-  \ ]
-\ }
+"" while language
+au BufRead,BufNewFile *.while set filetype=while
 
 "" other stuff
 try
@@ -411,4 +402,3 @@ try
     source ~/.config/nvim/config/rust.vim
 catch
 endtry
-
