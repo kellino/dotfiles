@@ -9,6 +9,7 @@ source ~/.mutt/aliases
 source "~/.mutt/gmail"
 folder-hook $folder 'source ~/.mutt/gmail'
 
+set folder = /home/david/
 
 set imap_pass=$my_imap_pass
 
@@ -34,10 +35,6 @@ set pager_stop             # don't go to next message automatically
 set menu_scroll            # scroll in menus
 set tilde                  # show tildes like in vim
 unset markers 
-
-## UCL account
-#source "~/.mutt/ucl"
-#folder-hook $folder 'source ~/.mutt/ucl'
 
 ## show newest messages first
 set sort = reverse-date-received
