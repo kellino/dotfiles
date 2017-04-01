@@ -15,7 +15,6 @@ call plug#begin('~/.config/nvim/bundle/')
 Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'itchyny/lightline.vim'
 Plug 'critiqjo/vim-bufferline'
-Plug 'itchyny/calendar.vim'
 
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
@@ -46,7 +45,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake' | Plug 'dojoteef/neomake-autolint'
 Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
 Plug 'Konfekt/FastFold'
-Plug 'brooth/far.vim', { 'on' : ['Far', 'Fardo', 'Farundo', 'Refar'] }
+Plug 'eugen0329/vim-esearch'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -66,15 +65,20 @@ Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
-"Plug 'parsonsmatt/intero-neovim',     { 'for' : 'haskell' }
 
 "" Coq, OCaml
-Plug 'let-def/ocp-indent-vim',       { 'for' : ['ocaml', 'coq'] }
-Plug '~/.config/nvim/bundle/coqIDE', { 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
+Plug 'let-def/ocp-indent-vim',       { 'for' : 'ocaml' }
+Plug 'the-lambda-church/coquille',   { 'for' : ['coq'] } | Plug '~/.config/nvim/bundle/coqIDE', { 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
 Plug 'psosera/ott-vim',              { 'for' : 'ott' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
+
+"" Lean
+Plug 'mk12/vim-lean', { 'for' : 'lean' }
+
+"" Agda
+Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
 
 "" Prolog
 Plug 'adimit/prolog.vim', { 'for' : 'prolog' }
@@ -88,23 +92,8 @@ Plug 'lervag/vimtex', { 'for' : 'tex' }
 
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla'
-Plug 'junegunn/vader.vim', { 'for' : 'vim' }
 Plug 'Shougo/neco-vim',    { 'for' : 'vim' }
 Plug 'Shougo/neco-syntax', { 'for' : 'vim' }
-
-"" Rust
-Plug 'rust-lang/rust.vim',   { 'for' : 'rust' }
-Plug 'rhysd/rust-doc.vim',   { 'for' : 'rust' }
-Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
-
-"" JavaScript
-Plug 'carlitux/deoplete-ternjs', { 'for' : 'javascript' }
-
-"" typescript
-Plug 'HerringtonDarkholme/yats.vim',     { 'for' : 'typescript' }
-Plug 'clausreinke/typescript-tools.vim', { 'do' : 'npm install', 'for' : 'typescript' }
-Plug 'Quramy/tsuquyomi',                 { 'for' : 'typescript' }
-Plug 'mhartington/deoplete-typescript',  { 'for' : 'typescript' }
 
 "" wordnet wip
 Plug 'kellino/wordnet.nvim', { 'do' : function('DoRemote') }
@@ -197,11 +186,21 @@ noremap <Leader>to :tabnew<CR>
 noremap <Leader>tt :tabclose<CR>
 
 "" Copy / Paste
-map yy "*y
-map pp "*p
+set clipboard+=unnamedplus
+" " Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy  "+yy
 
-"" select all
-map <leader>A <esc>ggVG<CR>
+" " Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+
+nnoremap yy "*y
+nnoremap pp "*p
 
 ""
 let g:maplocalleader = ','
@@ -278,7 +277,6 @@ nmap <Leader>W  <Plug>(easymotion-overwin-w)
 "" incsearch
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
 
 "----------------"
 ""   Deoplete    "
@@ -301,18 +299,11 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 let g:neosnippet#enable_snipmate_compatibility=1
 let g:neosnippet#snippets_directory='~/.config/nvim/after/snippets'
 
-" rust
-let g:deoplete#omni_patterns.rust = '[(\.)(::)]'
-
 "" deoplete clang
 let g:deoplete#sources#clang#libclang_path='/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/include/clang/'
 let g:deoplete#sources#clang#std#cpp = 'c++11'
 let g:deoplete#sources#clang#sort_algo = 'priority'
-
-"" javascript (tern)
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = 0
 
 "" latex
 let g:deoplete#omni#input_patterns.tex = 
@@ -329,32 +320,11 @@ let g:vimtex_view_method = 'zathura'
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
 
-"" typescript
-let g:deoplete#sources#tss#javascript_support=1
-let g:tagbar_type_typescript = {
-  \ 'ctagstype': 'typescript',
-  \ 'kinds': [
-    \ 'c:classes',
-    \ 'n:modules',
-    \ 'f:functions',
-    \ 'v:variables',
-    \ 'v:varlambdas',
-    \ 'm:members',
-    \ 'i:interfaces',
-    \ 'e:enums',
-  \ ]
-\ }
-
 "" Unicode
 map md <Plug>(MakeDigraph)
-nmap ga <Plug>(UnicodeGA)
 
 "" Tagbar
 map <F8> :TagbarToggle<CR>
-
-"" vim calendar
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
 
 "" easy-align
 xmap ga <Plug>(EasyAlign)
@@ -390,6 +360,15 @@ let g:pymode_rope=0
 "" chromatica
 let g:chromatica#enable_at_startup=1
 
+"" esearch
+let g:esearch = {
+    \ 'adapter' : 'ag',
+    \ 'backend' : 'nvim',
+    \ 'out' : 'win',
+    \ 'batch_size' : 1000,
+    \ 'use' : ['visual', 'hlsearch', 'word_under_cursor', 'last'],
+    \ }
+
 "" while language
 au BufRead,BufNewFile *.while set filetype=while
 
@@ -399,6 +378,5 @@ try
     source ~/.config/nvim/config/haskell.vim
     source ~/.config/nvim/config/terminal.vim
     source ~/.config/nvim/config/startify.vim
-    source ~/.config/nvim/config/rust.vim
 catch
 endtry
