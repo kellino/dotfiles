@@ -63,7 +63,7 @@ plugins=(git archlinux history vi-mode ag ghc stack zsh-syntax-highlighting)
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 # User configuration
-export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.local/bin:"
+export PATH="/home/david/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.local/bin:/home/david/.cabal/bin:"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -83,6 +83,7 @@ alias usb='sudo mount /dev/sdb1 /mnt'
 alias umusb='sudo umount /mnt'
 alias modstat="stat --format '%a'" # returns the octal number of a file / directory
 alias k9="kill -9"
+alias owner="pacman -Qo"
 
 # colours output in less
 alias tree="tree -C"
@@ -112,6 +113,9 @@ alias alsi='alsi -t -u'
 
 # coloured cat
 alias ccat='pygmentize -g'
+
+# vim as pager
+alias vless='/usr/share/nvim/runtime/macros/less.sh'
 
 # i3lock-fancy
 alias lock='i3lock-fancy'
