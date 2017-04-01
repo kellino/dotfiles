@@ -17,28 +17,6 @@ endfunction
 
 nnoremap <silent> <C-x><C-x> :REPLSendHaskell<CR>
 
-" Process management:
-nnoremap <Leader>hio :InteroOpen<CR>
-nnoremap <Leader>hik :InteroKill<CR>
-nnoremap <Leader>hic :InteroHide<CR>
-nnoremap <Leader>hil :InteroLoadCurrentModule<CR>
-
-" REPL commands
-nnoremap <Leader>hie :InteroEval<CR>
-nnoremap <Leader>hit :InteroGenericType<CR>
-nnoremap <Leader>hiT :InteroType<CR>
-nnoremap <Leader>hii :InteroInfo<CR>
-nnoremap <Leader>hiI :InteroTypeInsert<CR>
-
-" Go to definition:
-nnoremap <Leader>hid :InteroGoToDef<CR>
-
-" Highlight uses of identifier:
-nnoremap <Leader>hiu :InteroUses<CR>
-
-" Reload the file in Intero after saving
-" autocmd! BufWritePost *.hs InteroReload
-
 "" tagbar
 let g:tagbar_type_haskell = {
     \ 'ctagsbin'  : 'hasktags',
@@ -71,6 +49,30 @@ let g:tagbar_type_haskell = {
         \ 'type'   : 't'
     \ }
 \ }
+
+"" intero-neovim
+" Process management:
+"nnoremap <Leader>hio :InteroOpen<CR>
+"nnoremap <Leader>hik :InteroKill<CR>
+"nnoremap <Leader>hic :InteroHide<CR>
+"nnoremap <Leader>hil :InteroLoadCurrentModule<CR>
+
+"" REPL commands
+"nnoremap <Leader>hie :InteroEval<CR>
+"nnoremap <Leader>hit :InteroGenericType<CR>
+"nnoremap <Leader>hiT :InteroType<CR>
+"nnoremap <Leader>hii :InteroInfo<CR>
+"nnoremap <Leader>hiI :InteroTypeInsert<CR>
+
+"" Go to definition:
+"nnoremap <Leader>hid :InteroGoToDef<CR>
+
+"" Highlight uses of identifier:
+"nnoremap <Leader>hiu :InteroUses<CR>
+
+"" Reload the file in Intero after saving
+"autocmd! BufWritePost *.hs InteroReload
+
 
 command! REPLSendHaskell call REPLSendHaskell()
 command! Haskell call HaskellRepl()
