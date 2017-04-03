@@ -23,6 +23,7 @@ Plug 'justinmk/vim-dirvish' " file browser
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim' 
 Plug 'jamessan/vim-gnupg'
+Plug 'bfredl/nvim-miniyank'
 
 "" fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim' 
@@ -192,15 +193,12 @@ vnoremap  <leader>y  "+y
 nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 nnoremap  <leader>yy  "+yy
-
-" " Paste from clipboard
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
-
-nnoremap yy "*y
-nnoremap pp "*p
+map <leader>p <Plug>(miniyank-startput)
+map <leader>P <Plug>(miniyank-startPut)
+map <leader>n <Plug>(miniyank-cycle)
+map <Leader>c <Plug>(miniyank-tochar)
+map <Leader>l <Plug>(miniyank-toline)
+map <Leader>b <Plug>(miniyank-toblock)
 
 ""
 let g:maplocalleader = ','
