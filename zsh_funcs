@@ -145,3 +145,65 @@ elif type compctl &>/dev/null; then
   compctl -K _npm_completion npm
 fi
 ###-end-npm-completion-###
+
+function _ott_commands() {
+    local ret=1 state
+    _arguments ':subcommand:->subcommand' && ret=0
+
+    case $state in
+      subcommand)
+        subcommands=(
+        "-i <filename>:Input file (can be used multiple times)"
+        "-o <filename>:Output file (can be used multiple times)"
+        "-writesys <filename>:Output system definition"
+        "-readsys <filename>:Input system definition"
+        "-tex_filter <src><dst>:Files to TeX filter"
+        "-coq_filter <src><dst>:Files to Coq filter"
+        "-hol_filter <src><dst>:Files to HOL filter"
+        "-lem_filter <src><dst>:Files to HOL filter"
+        "-isa_filter <src><dst>:Files to Isabelle filter"
+        "-ocaml_filter <src><dst>:Files to OCaml filter"
+        "-merge <false>:merge grammar and definition rules"
+        "-parse <string>:Test parse symterm,eg ":nontermroot: term""
+        "-fast_parse <false>:do not parse :rulename: pseudoterminals"
+        "-signal_parse_errors <false>:return >0 if there are bad defns"
+        "-picky_multiple_parses <false>:Picky about multiple parses"
+        "-generate_aux_rules <true>:Generate auxiliary rules from {{ aux ... }} homs"
+        "-output_source_locations <0>:Include source location info in output (0=none, 1=drules, 2=grammar+drules)"
+        "-colour <true>:Use (vt220) colour for ASCII pretty print"
+        "-show_sort <false>:Show ASCII pretty print of syntax"
+        "-show_defns <false>:Show ASCII pretty print defns"
+        "-tex_show_meta <true>:Include meta prods and rules in TeX output"
+        "-tex_show_categories <false>:Signal production flags in TeX output"
+        "-tex_colour <true>:Colour parse errors in TeX output"
+        "-tex_wrap <true>:Wrap TeX output in document pre/postamble"
+        "-tex_name_prefix <string>:Prefix for tex commands (default "ott")"
+        "-isabelle_primrec <true>:Use \"primrec\" instead of \"fun\" for functions"
+        "-isabelle_inductive <true>:Use \"inductive\" instead of \"inductive_set for relations\""
+        "-isa_syntax <false>:Use fancy syntax in Isabelle output"
+        "-isa_generate_lemmas <false>:Lemmas for collapsed functions in Isabelle"
+        "-coq_avoid <1>:coq type-name avoidance (0=nothing, 1=avoid, 2=secondaryify)"
+        "-coq_expand_list_types <true>:Expand list types in Coq output"
+        "-coq_lngen <false>:lngen compatibility"
+        "-coq_names_in_rules <true>:Copy user names in rule definitions"
+        "-coq_use_filter_fn <false>:Use list_filter instead of list_minus2 in substitutions"
+        "-ocaml_include_terminals <false>:Include terminals in OCaml output (experimental!)"
+        "-pp_grammar:(debug) print term grammar"
+        "-dot <filename>:(debug) dot graph of syntax dependencies"
+        "-alltt <filename>:(debug) alltt output of single source file"
+        "-sort <true>:(debug) do topological sort"
+        "-process_defns <true>:(debug) process inductive reln definitions"
+        "-showraw <false>:(debug) show raw grammar"
+        "-ugly <false>:(debug) use ugly ASCII output"
+        "-no_rbcatn <true>:(debug) remove relevant bind clauses"
+        "-lem_debug:(debug) print lem debug locations"
+        "-help:Display this list of options"
+        "--help:Display this list of options"
+        )
+        _describe -t subcommands 'ott subcommands' subcommands && ret=0
+    esac
+
+    return ret
+}
+
+compdef _ott_commands ott
