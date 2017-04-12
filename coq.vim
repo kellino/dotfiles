@@ -3,7 +3,6 @@ function! neomake#makers#ft#coq#EnabledMakers() abort
 endfunction
 
 function! neomake#makers#ft#coq#coqtop() abort
-    " cwd: luacheck looks for .luacheckrc upwards from there.
     return {
         \ 'args': ['-noglob', '-batch', '-load-vernac-source'],
         \ 'cwd': '%:p:h',
