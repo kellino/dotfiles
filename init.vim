@@ -36,6 +36,14 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'chrisbra/unicode.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'beloglazov/vim-online-thesaurus', { 'for' : ['text', 'markdown', 'tex', 'latex'] }
+
+"" markdown
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    !cargo build --release
+  endif
+endfunction
+Plug 'euclio/vim-markdown-composer', { 'for' : 'markdown', 'do': function('BuildComposer') }
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
 "" Git
@@ -69,17 +77,11 @@ Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
 "" Coq, OCaml
 Plug 'let-def/ocp-indent-vim',       { 'for' : 'ocaml' }
-Plug 'the-lambda-church/coquille',   { 'for' : ['coq'] } | Plug '~/.config/nvim/bundle/coqIDE', { 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
+Plug '~/Programming/Coq/SF/coqvim', { 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
 Plug 'psosera/ott-vim',              { 'for' : 'ott' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
-
-"" Lean
-Plug 'mk12/vim-lean', { 'for' : 'lean' }
-
-"" Agda
-Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
 
 "" Prolog
 Plug 'adimit/prolog.vim', { 'for' : 'prolog' }
@@ -342,6 +344,7 @@ execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 
 "" coq
 let g:deoplete#omni#input_patterns.coq = '[^ \t]'
+let g:highlight_coq_checked=1
 
 "" idris
 let g:idris_indent_if = 3
@@ -360,7 +363,7 @@ let g:chromatica#enable_at_startup=1
 
 "" esearch
 let g:esearch = {
-    \ 'adapter' : 'ag',
+    \ 'adapter' : 'rg',
     \ 'backend' : 'nvim',
     \ 'out' : 'win',
     \ 'batch_size' : 1000,
@@ -369,6 +372,9 @@ let g:esearch = {
 
 "" while language
 au BufRead,BufNewFile *.while set filetype=while
+
+"" markdown composer
+let g:markdown_composer_autostart=0
 
 "" other stuff
 try
