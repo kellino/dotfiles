@@ -92,6 +92,8 @@ alias less="less -R"
 # monitor
 alias mon='xrandr --output HDMI1 --auto --left-of eDP1'
 alias ut='transset-df -a 1'
+alias normal='transset-df -a 0.8'
+alias forpdf='transset-df -a 0.7'
 
 # openvpn
 alias vpn='sudo openvpn --config /etc/openvpn/AirVPN_Europe_UDP-443.ovpn --daemon'
