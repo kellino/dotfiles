@@ -20,7 +20,7 @@ Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-eunuch' " unix commands
 Plug 'justinmk/vim-dirvish' " file browser
-Plug 'easymotion/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 Plug 'haya14busa/incsearch.vim' 
 Plug 'jamessan/vim-gnupg'
 Plug 'bfredl/nvim-miniyank'
@@ -36,10 +36,11 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'chrisbra/unicode.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'beloglazov/vim-online-thesaurus', { 'for' : ['text', 'markdown', 'tex', 'latex'] }
+Plug 'tpope/vim-surround'
 
 "" markdown
 function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
+  if a:info.status !=# 'unchanged' || a:info.force
     !cargo build --release
   endif
 endfunction
@@ -53,7 +54,6 @@ Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake' | Plug 'dojoteef/neomake-autolint'
 Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
-Plug 'Konfekt/FastFold'
 Plug 'eugen0329/vim-esearch'
 
 function! DoRemote(arg)
@@ -76,9 +76,9 @@ Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
 "" Coq, OCaml
-Plug 'let-def/ocp-indent-vim',       { 'for' : 'ocaml' }
+Plug 'let-def/ocp-indent-vim',      { 'for' : 'ocaml' }
 Plug '~/Programming/Coq/SF/coqvim', { 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
-Plug 'psosera/ott-vim',              { 'for' : 'ott' }
+Plug 'psosera/ott-vim',             { 'for' : 'ott' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
@@ -92,6 +92,10 @@ Plug 'klen/python-mode',    { 'for' : 'python' }
 
 "" LaTeX
 Plug 'lervag/vimtex', { 'for' : 'tex' }
+
+"" Rust
+Plug 'rust-lang/rust.vim',   { 'for' : 'rust' }
+Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
 
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla'
@@ -260,19 +264,11 @@ nnoremap <silent> <c-p> : TmuxNavigatePrevious<cr>
 
 "" Neomake
 augroup Neomake
-    autocmd! BufWritePost *.py Neomake mypy
-    autocmd! BufWritePost *.py Neomake vulture
     autocmd! BufWritePost * Neomake
 augroup END
 
-"" easymotion
-nmap <Leader>s  <Plug>(easymotion-s2)
-map  <Leader>f  <Plug>(easymotion-bd-f)
-nmap <Leader>f  <Plug>(easymotion-overwin-f)
-map  <Leader>li <Plug>(easymotion-bd-jk)
-nmap <Leader>li <Plug>(easymotion-overwin-line)
-map  <Leader>W  <Plug>(easymotion-bd-w)
-nmap <Leader>W  <Plug>(easymotion-overwin-w)
+"" vim-sneak
+let g:sneak#label = 1
 
 "" incsearch
 map /  <Plug>(incsearch-forward)
@@ -329,6 +325,7 @@ map <F8> :TagbarToggle<CR>
 "" easy-align
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
 
 "" gitgutter
 let g:gitgutter_async=0
