@@ -75,9 +75,10 @@ Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
-"" Coq, OCaml
+"" Coq, OCaml, Fstar
 Plug 'let-def/ocp-indent-vim',      { 'for' : 'ocaml' }
 Plug '~/Programming/Coq/SF/coqvim', { 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
+Plug 'FStarLang/VimFStar',          { 'for' : 'fstar' }
 Plug 'psosera/ott-vim',             { 'for' : 'ott' }
 
 "" Idris
@@ -107,7 +108,7 @@ Plug 'kellino/wordnet.nvim', { 'do' : function('DoRemote') }
 
 call plug#end()
 
-filetype plugin indent on
+"filetype plugin indent on
 
 
  "======================="
@@ -138,6 +139,9 @@ hi Comment cterm=italic
 
 "" unbind ESC
 inoremap fj <Esc>
+
+"" redo
+inoremap U <c-r>
 
 "" Switch between splits
 set  splitbelow
@@ -247,7 +251,6 @@ augroup spelling
     au BufRead *.md    setlocal spell spelllang=en_gb
     au BufRead *.tex   setlocal spell spelllang=en_gb
     au BufRead *.latex setlocal spell spelllang=en_gb
-    au BufRead  mail   setlocal spell spelllang=en_gb
 augroup END
 
 "============================="

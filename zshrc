@@ -7,6 +7,7 @@ export LANG=en_GB.UTF-8
 export EDITOR='nvim'
 export BROWSER='chromium'
 export TERM='screen-256color-italic'
+export TERMINAL='tilda'
 
 GPG_TTY=`tty` 
 export GPG_TTY 
