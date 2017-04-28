@@ -91,7 +91,6 @@ alias tree="tree -C"
 alias less="less -R"
 
 # monitor
-alias mon='xrandr --output HDMI1 --auto --left-of eDP1'
 alias ut='transset-df -a 1'
 alias normal='transset-df -a 0.8'
 alias forpdf='transset-df -a 0.7'
@@ -128,7 +127,8 @@ alias home='tmuxp load ~/.tmuxp/home.yaml'
 alias ucl='tmuxp load ~/.tmuxp/ucl.yaml'
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
 [ -f $HOME/dotfiles/zsh_funcs ] && source $HOME/dotfiles/zsh_funcs
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
