@@ -25,9 +25,6 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'bfredl/nvim-miniyank'
 
-"" fzf
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim' 
-
 "" Colourscheme(s)
 Plug 'iCyMind/NeoSolarized'
 
@@ -75,11 +72,13 @@ Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
-"" Coq, OCaml, Fstar
+"" Coq, OCaml
 Plug 'let-def/ocp-indent-vim',      { 'for' : 'ocaml' }
 Plug '~/Programming/Coq/SF/coqvim', { 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
-Plug 'FStarLang/VimFStar',          { 'for' : 'fstar' }
 Plug 'psosera/ott-vim',             { 'for' : 'ott' }
+
+"" Lean
+Plug 'mk12/vim-lean', { 'for': 'lean' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
@@ -141,7 +140,7 @@ hi Comment cterm=italic
 inoremap fj <Esc>
 
 "" redo
-inoremap U <c-r>
+inoremap \U <c-r>
 
 "" Switch between splits
 set  splitbelow
