@@ -9,7 +9,7 @@ font pango:CodeNewRoman Nerd Font 9
 floating_modifier $mod
 
 ## start a terminal
-bindsym $mod+Return exec tilda
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -33,6 +33,7 @@ for_window [class="Thunar"] floating enable, border normal
 for_window [class="feh"] floating enable, border normal
 for_window [class="Gsimplecal"] floating enable move left 100px
 for_window [class="Firefox"] border pixel 0
+for_window [class="Alacritty"] border pixel 1
 
 
 # change focus
