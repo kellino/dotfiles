@@ -1,5 +1,5 @@
 scriptencoding=utf-8
-
+ 
 
 "    d888888b d8b   db d888888b d888888b    db    db d888888b .88b  d88. 
 "      `88'   888o  88   `88'      88       88    88   `88'   88'YbdP`88 
@@ -72,13 +72,10 @@ Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
-"" Coq, OCaml
+"" Coq, OCaml, Ott
 Plug 'let-def/ocp-indent-vim',      { 'for' : 'ocaml' }
 Plug '~/Programming/Coq/SF/coqvim', { 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
 Plug 'psosera/ott-vim',             { 'for' : 'ott' }
-
-"" Lean
-Plug 'mk12/vim-lean', { 'for': 'lean' }
 
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
@@ -106,9 +103,6 @@ Plug 'Shougo/neco-syntax', { 'for' : 'vim' }
 Plug 'kellino/wordnet.nvim', { 'do' : function('DoRemote') }
 
 call plug#end()
-
-"filetype plugin indent on
-
 
  "======================="
  "      Appearance       "
@@ -139,7 +133,7 @@ hi Comment cterm=italic
 "" unbind ESC
 inoremap fj <Esc>
 
-"" redo
+"" undo undo (redo)
 inoremap \U <c-r>
 
 "" Switch between splits
@@ -235,12 +229,12 @@ set concealcursor=c
 set tags=./tags;
 
 augroup formatting
-    au BufEnter,BufRead *.md setlocal formatprg=par\ -w120
-    au BufEnter,BufRead *.md setlocal equalprg=par\ -w120
-    au BufEnter,BufRead *.txt setlocal formatprg=par\ -w120
-    au BufEnter,BufRead *.txt setlocal equalprg=par\ -w120
-    au BufEnter,BufRead *.tex setlocal formatprg=par\ -w120
-    au BufEnter,BufRead *.tex setlocal equalprg=par\ -w120
+    au BufEnter,BufRead *.md    setlocal formatprg=par\ -w120
+    au BufEnter,BufRead *.md    setlocal equalprg=par\ -w120
+    au BufEnter,BufRead *.txt   setlocal formatprg=par\ -w120
+    au BufEnter,BufRead *.txt   setlocal equalprg=par\ -w120
+    au BufEnter,BufRead *.tex   setlocal formatprg=par\ -w120
+    au BufEnter,BufRead *.tex   setlocal equalprg=par\ -w120
     au BufEnter,BufRead *.latex setlocal formatprg=par\ -w120
     au BufEnter,BufRead *.latex setlocal equalprg=par\ -w120
 augroup END
@@ -248,6 +242,7 @@ augroup END
 "" spelling
 augroup spelling
     au BufRead *.md    setlocal spell spelllang=en_gb
+    au BufRead *.txt   setlocal spell spelllang=en_gb
     au BufRead *.tex   setlocal spell spelllang=en_gb
     au BufRead *.latex setlocal spell spelllang=en_gb
 augroup END
@@ -340,6 +335,7 @@ augroup END
 let g:deoplete#omni_patterns.ocaml = '[^ ,;\t\[()\]]'
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute 'set rtp+=' . g:opamshare . '/merlin/vim'
+set runtimepath^="/home/david/.opam/system/share/ocp-indent/vim"
 
 "" coq
 let g:deoplete#omni#input_patterns.coq = '[^ \t]'
