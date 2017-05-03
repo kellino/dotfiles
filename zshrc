@@ -5,9 +5,9 @@ export ZSH=/usr/share/oh-my-zsh
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 export LANG=en_GB.UTF-8
 export EDITOR='nvim'
-export BROWSER='chromium'
+export BROWSER='firefox'
 export TERM='screen-256color-italic'
-export TERMINAL='tilda'
+export TERMINAL='alacritty'
 
 GPG_TTY=`tty` 
 export GPG_TTY 
@@ -59,7 +59,7 @@ ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 ## plugins
-plugins=(git archlinux history vi-mode ag ghc stack zsh-syntax-highlighting)
+plugins=(git archlinux history vi-mode ghc stack zsh-syntax-highlighting)
 ## syntax highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
@@ -109,6 +109,9 @@ alias ppl='cd $HOME/Programming/Prolog'
 
 # intero
 alias intero='stack exec intero'
+
+# images
+alias metadata='identify -verbose' 
 
 # alsi
 alias alsi='alsi -t -u'
