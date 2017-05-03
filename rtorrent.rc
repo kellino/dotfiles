@@ -18,15 +18,14 @@ download_rate = 0
 upload_rate = 30
 
 # Default directory to save the downloaded torrents.
-directory = ~/Downloads
+directory = ~/.torrents
 
 # Default session directory. Make sure you don't run multiple instance
 # of rtorrent using the same session directory. Perhaps using a
 # relative path?
 session = ~/.local/rtorrent.session
 
-# encryption = allow_incoming,enable_retry,prefer_plaintext
-encryption = require,require_RC4,allow_incoming,try_outgoing
+encryption = allow_incoming,enable_retry,prefer_plaintext
 
 dht = auto
 dht_port = 6881
@@ -54,3 +53,12 @@ import = ~/.pyroscope/rtorrent-pyro.rc.default
 # Must be activated by touching the "~/.pyroscope/run/pyrotorque" file!
 # Set the second argument to "-v" or "-q" to change log verbosity.
 schedule = pyro_watchdog,30,300,"pyro.watchdog=~/.pyroscope,"
+
+system.method.set_key = event.download.finished,time_stamp,"d.set_custom=tm_completed,$cat=$system.time= ;d.save_session="
+
+# Show traffic of the last hour
+network.history.depth.set = 112
+schedule = network_history_sampling,1,32, network.history.sample=
+method.insert = network.history.auto_scale.toggle, simple|private, "branch=network.history.auto_scale=,\"network.history.auto_scale.set=0\",\"network.history.auto_scale.set=1\""
+method.insert = network.history.auto_scale.ui_toggle, simple|private, "network.history.auto_scale.toggle= ;network.history.refresh="
+branch=pyro.extended=,"schedule = bind_auto_scale,0,0,\"ui.bind_key=download_list,=,network.history.auto_scale.ui_toggle=\""
