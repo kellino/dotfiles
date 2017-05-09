@@ -14,8 +14,8 @@ bindsym $mod+Return exec alacritty
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -z -fn 'DejaVu-10:sans' -nb '#002b36' -nf '#93a1a1' -sb '#073642' -sf '#b58900'
+# start rofi as dmenu (a program launcher)
+bindsym $mod+d exec rofi -show run
 
 # launch file manager
 bindsym $mod+t exec thunar
