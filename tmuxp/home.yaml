@@ -1,4 +1,3 @@
-shell_command_before: "transset-df -a 0.9"
 session_name: home
 windows:
     - window_name: terminal
