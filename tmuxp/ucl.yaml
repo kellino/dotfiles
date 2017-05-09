@@ -1,5 +1,5 @@
 shell_command_before: 'onThisDay'
-session_name: home
+session_name: ucl
 windows:
     - window_name: terminal
       panes: ''
