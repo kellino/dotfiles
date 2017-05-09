@@ -12,7 +12,6 @@ scriptencoding=utf-8
 call plug#begin('~/.config/nvim/bundle/')
 
 "" general
-Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'itchyny/lightline.vim'
 Plug 'critiqjo/vim-bufferline'
 
@@ -33,7 +32,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'chrisbra/unicode.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'beloglazov/vim-online-thesaurus', { 'for' : ['text', 'markdown', 'tex', 'latex'] }
-Plug 'tpope/vim-surround'
+Plug 'ledger/vim-ledger'
 
 "" markdown
 function! BuildComposer(info)
@@ -61,8 +60,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 
 "" C 
-Plug 'zchee/deoplete-clang',  { 'for' : ['c', 'cpp'] }
-Plug 'Shougo/neoinclude.vim', { 'for' : ['c', 'cpp'] }
+Plug 'zchee/deoplete-clang',      { 'for' : ['c', 'cpp'] }
+Plug 'Shougo/neoinclude.vim',     { 'for' : ['c', 'cpp'] }
 Plug 'arakashic/chromatica.nvim', { 'do' : function('DoRemote'), 'for' : ['c', 'cpp'] }
 
 "" Haskell
@@ -77,6 +76,9 @@ Plug 'let-def/ocp-indent-vim',      { 'for' : 'ocaml' }
 Plug '~/Programming/Coq/SF/coqvim', { 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
 Plug 'psosera/ott-vim',             { 'for' : 'ott' }
 
+"" Agda
+Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
+
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
 
@@ -88,14 +90,15 @@ Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
 Plug 'klen/python-mode',    { 'for' : 'python' }
 
 "" LaTeX
-Plug 'lervag/vimtex', { 'for' : 'tex' }
+Plug 'lervag/vimtex',     { 'for' : ['tex', 'latex'] }
+Plug 'donRaphaco/neotex', { 'for' : ['tex', 'latex'] }
 
 "" Rust
 Plug 'rust-lang/rust.vim',   { 'for' : 'rust' }
 Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
 
 "" Shell Scripting & Vim
-Plug 'vim-scripts/sh.vim--Cla'
+Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
 Plug 'Shougo/neco-vim',    { 'for' : 'vim' }
 Plug 'Shougo/neco-syntax', { 'for' : 'vim' }
 
@@ -163,7 +166,6 @@ set expandtab
 "" search
 set ignorecase
 set smartcase
-set nohlsearch
 set wrapscan
 
 set scrolloff=10
@@ -179,7 +181,6 @@ set list
 set listchars=tab:▸\ ,nbsp:%,extends:,precedes:
 set linebreak
 set completeopt=longest,menuone
-set wildmenu
 set wildmode=longest,list:longest,full
 set wildignore=*.o,*~,*.pyc,.git/*
 set shortmess=aoOtT
@@ -228,6 +229,7 @@ set concealcursor=c
 "" ctags / hasktags
 set tags=./tags;
 
+"" formatting and spelling
 augroup formatting
     au BufEnter,BufRead *.md    setlocal formatprg=par\ -w120
     au BufEnter,BufRead *.md    setlocal equalprg=par\ -w120
@@ -239,13 +241,13 @@ augroup formatting
     au BufEnter,BufRead *.latex setlocal equalprg=par\ -w120
 augroup END
 
-"" spelling
 augroup spelling
     au BufRead *.md    setlocal spell spelllang=en_gb
     au BufRead *.txt   setlocal spell spelllang=en_gb
     au BufRead *.tex   setlocal spell spelllang=en_gb
     au BufRead *.latex setlocal spell spelllang=en_gb
 augroup END
+
 
 "============================="
 "      Plugin Options         "
@@ -272,7 +274,7 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 
 "----------------"
-""   Deoplete    "
+"    Deoplete    "
 "----------------"
 
 let g:deoplete#enable_at_startup = 1
@@ -323,7 +325,6 @@ map <F8> :TagbarToggle<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-
 "" gitgutter
 let g:gitgutter_async=0
 
@@ -335,7 +336,9 @@ augroup END
 let g:deoplete#omni_patterns.ocaml = '[^ ,;\t\[()\]]'
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute 'set rtp+=' . g:opamshare . '/merlin/vim'
-set runtimepath^="/home/david/.opam/system/share/ocp-indent/vim"
+
+"" agda
+let g:agda_extraincpaths = ['/usr/share/agda/lib/prim/']
 
 "" coq
 let g:deoplete#omni#input_patterns.coq = '[^ \t]'
