@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 if ! ifconfig tun0 2>/dev/null | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"; then
-    echo "down"
+    echo "off"
 else 
-    echo "up"
+    echo "on"
 fi
