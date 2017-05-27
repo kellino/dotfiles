@@ -31,7 +31,6 @@ new_window normal
 hide_edge_borders vertical
 for_window [class="Thunar"] floating enable, border normal
 for_window [class="feh"] floating enable, border normal
-for_window [class="Gsimplecal"] floating enable move left 100px
 for_window [class="Firefox"] border pixel 0
 for_window [class="Alacritty"] border pixel 1
 
