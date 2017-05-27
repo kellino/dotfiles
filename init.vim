@@ -1,5 +1,4 @@
 scriptencoding=utf-8
- 
 
 "    d888888b d8b   db d888888b d888888b    db    db d888888b .88b  d88. 
 "      `88'   888o  88   `88'      88       88    88   `88'   88'YbdP`88 
@@ -8,6 +7,7 @@ scriptencoding=utf-8
 "      .88.   88  V888   .88.      88    db  `8bd8'    .88.   88  88  88 
 "    Y888888P VP   V8P Y888888P    YP    VP    YP    Y888888P YP  YP  YP 
                                                                     
+
 
 call plug#begin('~/.config/nvim/bundle/')
 
@@ -23,6 +23,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'haya14busa/incsearch.vim' 
 Plug 'jamessan/vim-gnupg'
 Plug 'bfredl/nvim-miniyank'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 
 "" Colourscheme(s)
 Plug 'iCyMind/NeoSolarized'
@@ -32,7 +33,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'chrisbra/unicode.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'beloglazov/vim-online-thesaurus', { 'for' : ['text', 'markdown', 'tex', 'latex'] }
-Plug 'ledger/vim-ledger'
 
 "" markdown
 function! BuildComposer(info)
@@ -50,7 +50,6 @@ Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake' | Plug 'dojoteef/neomake-autolint'
 Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
-Plug 'eugen0329/vim-esearch'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -60,9 +59,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 
 "" C 
-Plug 'zchee/deoplete-clang',      { 'for' : ['c', 'cpp'] }
-Plug 'Shougo/neoinclude.vim',     { 'for' : ['c', 'cpp'] }
-Plug 'arakashic/chromatica.nvim', { 'do' : function('DoRemote'), 'for' : ['c', 'cpp'] }
+Plug 'tweekmonster/deoplete-clang2', { 'for' : ['c', 'cpp'] }
+Plug 'Shougo/neoinclude.vim',        { 'for' : ['c', 'cpp'] }
+Plug 'arakashic/chromatica.nvim',    { 'for' : ['c', 'cpp', 'vim'] }
 
 "" Haskell
 Plug 'eagletmt/neco-ghc',             { 'for' : 'haskell' }
@@ -72,7 +71,6 @@ Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
 "" Coq, OCaml, Ott
-Plug 'let-def/ocp-indent-vim',      { 'for' : 'ocaml' }
 Plug '~/Programming/Coq/SF/coqvim', { 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
 Plug 'psosera/ott-vim',             { 'for' : 'ott' }
 
@@ -82,16 +80,12 @@ Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
 
-"" Prolog
-Plug 'adimit/prolog.vim', { 'for' : 'prolog' }
-
 "" Python
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
 Plug 'klen/python-mode',    { 'for' : 'python' }
 
 "" LaTeX
 Plug 'lervag/vimtex',     { 'for' : ['tex', 'latex'] }
-Plug 'donRaphaco/neotex', { 'for' : ['tex', 'latex'] }
 
 "" Rust
 Plug 'rust-lang/rust.vim',   { 'for' : 'rust' }
@@ -99,8 +93,8 @@ Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
 
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
-Plug 'Shougo/neco-vim',    { 'for' : 'vim' }
-Plug 'Shougo/neco-syntax', { 'for' : 'vim' }
+Plug 'Shougo/neco-vim',         { 'for' : 'vim' }
+Plug 'Shougo/neco-syntax',      { 'for' : 'vim' }
 
 "" wordnet wip
 Plug 'kellino/wordnet.nvim', { 'do' : function('DoRemote') }
@@ -167,6 +161,7 @@ set expandtab
 set ignorecase
 set smartcase
 set wrapscan
+set nohlsearch
 
 set scrolloff=10
 
@@ -242,10 +237,11 @@ augroup formatting
 augroup END
 
 augroup spelling
-    au BufRead *.md    setlocal spell spelllang=en_gb
-    au BufRead *.txt   setlocal spell spelllang=en_gb
-    au BufRead *.tex   setlocal spell spelllang=en_gb
-    au BufRead *.latex setlocal spell spelllang=en_gb
+    au BufRead *.md       setlocal spell spelllang=en_gb
+    au BufRead *.txt      setlocal spell spelllang=en_gb
+    au BufRead *.tex      setlocal spell spelllang=en_gb
+    au BufRead *.latex    setlocal spell spelllang=en_gb
+    au BufRead /tmp/mutt* setlocal spell spelllang=en_gb
 augroup END
 
 
@@ -294,12 +290,6 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 let g:neosnippet#enable_snipmate_compatibility=1
 let g:neosnippet#snippets_directory='~/.config/nvim/after/snippets'
 
-"" deoplete clang
-let g:deoplete#sources#clang#libclang_path='/usr/lib/libclang.so'
-let g:deoplete#sources#clang#clang_header = '/usr/include/clang/'
-let g:deoplete#sources#clang#std#cpp = 'c++11'
-let g:deoplete#sources#clang#sort_algo = 'priority'
-
 "" latex
 let g:deoplete#omni#input_patterns.tex = 
         \   '\\(?:'
@@ -333,12 +323,9 @@ augroup ocaml
     au BufRead,BufNewFile *.ml,*.mli compiler ocaml
 augroup END
 
-let g:deoplete#omni_patterns.ocaml = '[^ ,;\t\[()\]]'
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute 'set rtp+=' . g:opamshare . '/merlin/vim'
-
 "" agda
-let g:agda_extraincpaths = ['/usr/share/agda/lib/prim/']
+let g:agda_extraincpaths = ['/usr/share/agda/lib/prim/', '/home/david/.agda/1.3/']
+let g:NERDCustomDelimiters = { 'agda': { 'left': '{-', 'right': '-}', 'nested': 1, 'leftAlt': '--', 'nestedAlt': 1 } }
 
 "" coq
 let g:deoplete#omni#input_patterns.coq = '[^ \t]'
@@ -359,17 +346,11 @@ let g:pymode_rope=0
 "" chromatica
 let g:chromatica#enable_at_startup=1
 
-"" esearch
-let g:esearch = {
-    \ 'adapter' : 'rg',
-    \ 'backend' : 'nvim',
-    \ 'out' : 'win',
-    \ 'batch_size' : 1000,
-    \ 'use' : ['visual', 'hlsearch', 'word_under_cursor', 'last'],
-    \ }
-
 "" while language
 au BufRead,BufNewFile *.while set filetype=while
+
+"" gratr
+au BufRead,BufNewFile *.gr set filetype=gratr
 
 "" markdown composer
 let g:markdown_composer_autostart=0
@@ -380,5 +361,6 @@ try
     source ~/.config/nvim/config/haskell.vim
     source ~/.config/nvim/config/terminal.vim
     source ~/.config/nvim/config/startify.vim
+    source ~/.config/nvim/config/fzf.vim
 catch
 endtry
