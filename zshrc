@@ -9,6 +9,8 @@ export BROWSER='firefox'
 export TERM='screen-256color-italic'
 export TERMINAL='alacritty'
 
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+
 GPG_TTY=`tty` 
 export GPG_TTY 
 
@@ -85,21 +87,20 @@ alias umusb='sudo umount /mnt'
 alias modstat="stat --format '%a'" # returns the octal number of a file / directory
 alias k9="kill -9"
 alias owner="pacman -Qo"
+alias yalst="yaourt -Qe --color | sed '/[^haskel-]core/d'"
 
 # colours output in less
 alias tree="tree -C"
 alias less="less -R"
 
-# monitor
-alias ut='transset-df -a 1'
+# terminal transparency
+alias black='transset-df -a 1'
 alias normal='transset-df -a 0.8'
 alias forpdf='transset-df -a 0.7'
 
 # openvpn
-alias vpn='sudo openvpn --config /etc/openvpn/AirVPN_Europe_UDP-443.ovpn --daemon'
-
-# python
-alias pyrepl='ptipython'
+alias vpn='openvpn --dev-type tun --dev tun0-unrooted --user openvpn --group network'
+# alias vpn='sudo openvpn --config /etc/openvpn/AirVPN_Europe_UDP-443.ovpn --daemon'
 
 # directories
 alias pf='cd $HOME/Programming/Haskell'
@@ -116,9 +117,6 @@ alias metadata='identify -verbose'
 # alsi
 alias alsi='alsi -t -u'
 
-# coloured cat
-alias ccat='pygmentize -g'
-
 # vim as pager
 alias vless='/usr/share/nvim/runtime/macros/less.sh'
 
@@ -129,11 +127,10 @@ alias lock='i3lock-fancy'
 alias home='tmuxp load ~/.tmuxp/home.yaml'
 alias ucl='tmuxp load ~/.tmuxp/ucl.yaml'
 
-
-source /usr/share/fzf/completion.zsh
-source /usr/share/fzf/key-bindings.zsh
 [ -f $HOME/dotfiles/zsh_funcs ] && source $HOME/dotfiles/zsh_funcs
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # OPAM configuration
 . /home/david/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
