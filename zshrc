@@ -14,6 +14,7 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 GPG_TTY=`tty` 
 export GPG_TTY 
 
+zstyle ':completion:*' rehash true
 bindkey ' ' magic-space
 
 ## ls colours
