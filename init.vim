@@ -27,6 +27,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegu
 
 "" Colourscheme(s)
 Plug 'iCyMind/NeoSolarized'
+Plug 'junegunn/rainbow_parentheses.vim'
 
 "" Text Editing
 Plug 'jiangmiao/auto-pairs'
@@ -45,6 +46,7 @@ Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
 "" Git
 Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/vim-emoji'
 
 "" General coding
 Plug 'scrooloose/nerdcommenter'
@@ -57,6 +59,7 @@ endfunction
 
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
+Plug 'Shougo/neco-syntax'
 
 "" C 
 Plug 'tweekmonster/deoplete-clang2', { 'for' : ['c', 'cpp'] }
@@ -94,7 +97,6 @@ Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
 Plug 'Shougo/neco-vim',         { 'for' : 'vim' }
-Plug 'Shougo/neco-syntax',      { 'for' : 'vim' }
 
 "" wordnet wip
 Plug 'kellino/wordnet.nvim', { 'do' : function('DoRemote') }
@@ -317,6 +319,12 @@ nmap ga <Plug>(EasyAlign)
 
 "" gitgutter
 let g:gitgutter_async=0
+let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
+let g:gitgutter_sign_modified = emoji#for('small_orange_diamond')
+let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
+let g:gitgutter_sign_modified_removed = emoji#for('collision')
+
+set completefunc=emoji#complete
 
 "" ocaml
 augroup ocaml
