@@ -14,8 +14,12 @@ syntax match gratrOperator "=>"
 
 syntax match gratrProduction "\."
 
+
+syn region  gratrBlockComment start="%"  end="\n"
+
 highlight link gratrKeyword Macro
 highlight link gratrOperator Operator
 highlight link gratrProduction Special
+highlight link gratrBlockComment Comment
 
 let b:current_syntax = 'gratr'
