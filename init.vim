@@ -46,7 +46,6 @@ Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
 "" Git
 Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/vim-emoji'
 
 "" General coding
 Plug 'scrooloose/nerdcommenter'
@@ -67,13 +66,14 @@ Plug 'Shougo/neoinclude.vim',        { 'for' : ['c', 'cpp'] }
 Plug 'arakashic/chromatica.nvim',    { 'for' : ['c', 'cpp', 'vim'] }
 
 "" Haskell
+Plug 'parsonsmatt/intero-neovim',     { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc',             { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
-"" Coq, OCaml, Ott
+"" Coq, Ott
 Plug '~/Programming/Coq/SF/coqvim', { 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
 Plug 'psosera/ott-vim',             { 'for' : 'ott' }
 
@@ -100,6 +100,10 @@ Plug 'Shougo/neco-vim',         { 'for' : 'vim' }
 
 "" wordnet wip
 Plug 'kellino/wordnet.nvim', { 'do' : function('DoRemote') }
+
+"" agda completer
+Plug '~/Programming/Python/neoagda'  ", { 'for' : 'agda' }
+
 
 call plug#end()
 
@@ -292,20 +296,29 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 let g:neosnippet#enable_snipmate_compatibility=1
 let g:neosnippet#snippets_directory='~/.config/nvim/after/snippets'
 
-"" latex
-let g:deoplete#omni#input_patterns.tex = 
-        \   '\\(?:'
-        \  .   '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-        \  .  '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
-        \  .  '|hyperref\s*\[[^]]*'
-        \  .  '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-        \  .  '|(?:include(?:only)?|input)\s*\{[^}]*'
-        \  .')'
+" latex
+if !exists('g:deoplete#omni#input_patterns')
+    let g:deoplete#omni#input_patterns = {}
+endif
+let g:deoplete#omni#input_patterns.tex = '\\(?:'
+      \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+      \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+      \ . '|hyperref\s*\[[^]]*'
+      \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
+      \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|\w*'
+\ .')'
 let g:tex_flavor = 'latex'
 let g:tex_stylish = 1
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
+
 
 "" Unicode
 map md <Plug>(MakeDigraph)
@@ -319,17 +332,6 @@ nmap ga <Plug>(EasyAlign)
 
 "" gitgutter
 let g:gitgutter_async=0
-let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
-let g:gitgutter_sign_modified = emoji#for('small_orange_diamond')
-let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
-let g:gitgutter_sign_modified_removed = emoji#for('collision')
-
-set completefunc=emoji#complete
-
-"" ocaml
-augroup ocaml
-    au BufRead,BufNewFile *.ml,*.mli compiler ocaml
-augroup END
 
 "" agda
 let g:agda_extraincpaths = ['/usr/share/agda/lib/prim/', '/home/david/.agda/1.3/']
@@ -340,19 +342,16 @@ let g:deoplete#omni#input_patterns.coq = '[^ \t]'
 let g:highlight_coq_checked=1
 
 "" idris
-let g:idris_indent_if = 3
-let g:idris_indent_case = 5
-let g:idris_indent_let = 4
-let g:idris_indent_where = 6
-let g:idris_indent_do = 3
-let g:idris_indent_rewrite = 8
-let g:idris_conceal = 1
+let g:idris_indent_if=3
+let g:idris_indent_case=5
+let g:idris_indent_let=4
+let g:idris_indent_where=6
+let g:idris_indent_do=3
+let g:idris_indent_rewrite=8
+let g:idris_conceal=1
 
 "" python
 let g:pymode_rope=0
-
-"" chromatica
-let g:chromatica#enable_at_startup=1
 
 "" while language
 au BufRead,BufNewFile *.while set filetype=while
