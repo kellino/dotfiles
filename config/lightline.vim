@@ -92,7 +92,6 @@ function! MyFileformat()
     return winwidth(0) > 70 ? &fileformat : ''
 endfunction
 
-
 function! MyFiletype()
     if &filetype ==# 'startify' | return '' | endif
     return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
