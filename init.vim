@@ -66,7 +66,6 @@ Plug 'Shougo/neoinclude.vim',        { 'for' : ['c', 'cpp'] }
 Plug 'arakashic/chromatica.nvim',    { 'for' : ['c', 'cpp', 'vim'] }
 
 "" Haskell
-Plug 'parsonsmatt/intero-neovim',     { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc',             { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
@@ -100,10 +99,6 @@ Plug 'Shougo/neco-vim',         { 'for' : 'vim' }
 
 "" wordnet wip
 Plug 'kellino/wordnet.nvim', { 'do' : function('DoRemote') }
-
-"" agda completer
-Plug '~/Programming/Python/neoagda'  ", { 'for' : 'agda' }
-
 
 call plug#end()
 
