@@ -3,11 +3,15 @@ session_name: ucl
 windows:
     - window_name: terminal
       panes: ''
-    - window_name: ranger
+    - window_name: vifm
       panes:
         - shell_command:
-            - ranger
+            - vifm
     - window_name: email
       panes:
         - shell_command: 
-            - mutt
+            - set -xg MAIL "~/.mutt/mail"; and mutt
+    - window_name: irssi
+      panes:
+        - shell_command: 
+            - irssi

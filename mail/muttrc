@@ -1,32 +1,33 @@
-## config for neomutt
-
-source "gpg2 -dq $HOME/.mutt/passwords.gpg |"
-source ~/.mutt/bindings.mutt
-source ~/.mutt/colour.mutt
-source ~/.mutt/gpg.rc
-set alias_file=~/.mutt/aliases
+## SOURCE
+source ~/.mutt/vi-keys.rc
+source ~/.mutt/mutt_colours
 source ~/.mutt/aliases
-source "~/.mutt/gmail"
-folder-hook $folder 'source ~/.mutt/gmail'
+# source ~/dotfiles/notmuch_mutt.rc
 
-set folder = /home/david/
+## USER DETAILS
+set hidden_host
+set realname = "David Kelly"
+set from = "dkellino@gmail.com"
+set use_from = yes
+set envelope_from = "yes"
+set shell = "/run/current-system/sw/bin/fish"
+set sendmail="/run/current-system/sw/bin/msmtp"
+set editor="nvim"
+set forward_format="Fwd: %s"
+set postpone=ask-yes
 
-set imap_pass=$my_imap_pass
-
-set shell="/usr/bin/zsh"
-set header_cache="~/.mutt/cache/headers"
+## DIRECTORY STRUCTURE
+set folder="$HOME/.mutt/mail"
+set mbox_type=Maildir
+set spoolfile= "+inbox"
+set mbox="+mbox"
+set record= "+sent"
+set postponed= "+[Gmail]/Drafts"
+set nomove
 set mailcap_path="~/.mutt/mailcap"
 set mailcap_sanitize=yes
-set imap_check_subscribed
-set imap_keepalive=300
-set mail_check=60
-set mbox_type=Maildir
-set ssl_starttls=yes
-set ssl_force_tls=yes
-set ssl_use_sslv3=yes
-unset imap_passive
 
-
+## PAGER
 set pager=builtin
 set pager_stop             # don't show the next msg after current
 set pager_index_lines=10   # number of index lines to show
@@ -35,11 +36,27 @@ set pager_stop             # don't go to next message automatically
 set menu_scroll            # scroll in menus
 set tilde                  # show tildes like in vim
 unset markers 
+set charset="UTF-8"
 
-## show newest messages first
+set sort_browser=alpha
 set sort = reverse-date-received
+set copy
+set include
 
-## sidebar
+set edit_headers=yes
+
+set alias_file = $HOME/.mutt/mail/mutt_aliases
+set sort_alias=alias
+
+set smart_wrap
+set pager_context=5
+set status_on_top
+
+
+## -----------##
+##  sidebar   ##
+## -----------##
+
 set sidebar_visible = yes
 set sidebar_width = 30
 set sidebar_short_path = no
@@ -51,26 +68,27 @@ sidebar_whitelist '~/.mutt/mail'
 set sidebar_next_new_wrap = no
 set sidebar_divider_char = '|'
 set sidebar_format = '%B%?F? [%F]?%* %?N?%N/?%S'
+## Colour of the highlighted, but not open, mailbox.
+color sidebar_highlight black color8
+## Colour of the divider separating the Sidebar from Mutt panels
+color sidebar_divider color8 black
+## Colour to give mailboxes containing flagged mail
+color sidebar_flagged red black
+## Colour to give mailboxes containing new mail
+color sidebar_new green black
 
-## status bar format
+
+## -----------##
+## status bar ##
+## -----------##
+
 set status_format='-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---'
  
  
-## Color of the highlighted, but not open, mailbox.
-color sidebar_highlight black color8
- 
-## Color of the divider separating the Sidebar from Mutt panels
-color sidebar_divider color8 black
- 
-## Color to give mailboxes containing flagged mail
-color sidebar_flagged red black
- 
-## Color to give mailboxes containing new mail
-color sidebar_new green black
- 
-## --------------------------------------------------------------------------
+## -------------##
+## progress bar ##
+## -------------##
 
-## progress bar
 color indicator cyan black
 
 ## From field gets 30% of remaining space, Subject gets 70%.
@@ -81,26 +99,10 @@ set my_index_format_post=' (%-4.4c) %?M?<%M> ?%-$my_col_subject.${my_col_subject
 folder-hook .*[sS]ent.* "$my_index_format_pre"t"$my_index_format_post"
 folder-hook ! .*[sS]ent.* "$my_index_format_pre"F"$my_index_format_post"
 
-### vim-style navigation
-#bind pager k previous-line #scroll inside the message rather than the index
-#bind pager j next-line
-
 auto_view text/html
-alternative_order text/plain text/enriched text/html 
+alternative_order text/enriched text/plain text/html 
 
-## view links in w3m
+## macros
 macro index \cB |w3m\n "call w3m to extract URLs out of a message"
 macro pager \cB |w3m\n "call w3m to extract URLs out of a message"
-
-set smart_wrap
-
-## progress bar
-color progress white red
-
-## mark all messages as read
-macro index A \
-    "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
-    "mark all new as read"
-
-## new mail command, sends to dunst
 set new_mail_command="notify-send ' New Email in %f' '%n new messages, %u unread.' &"

@@ -1,3 +1,0 @@
-text/html; w3m -I %{charset} -T text/html; copiousoutput;
-application/pdf; pdftohtml -q -stdout %s | w3m -T text/html; copiousoutput
-application/gpg; /usr/bin/gpg --decrypt %s; copiousoutput;

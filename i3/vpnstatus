@@ -1,7 +1,0 @@
-#!/usr/bin/bash
-
-if ! ifconfig tun0 3>/dev/null | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"; then
-    echo "off"
-else 
-    echo "on"
-fi

@@ -1,0 +1,6 @@
+PATH=/home/david/bin 
+VERBOSE=off
+DEFAULT=~/.mutt/mail
+MAILDIR=$HOME/.mutt/mail
+LOGFILE=$HOME/.mutt/procmaillog
+SHELL=/run/current-system/sw/bin/bash

@@ -6,8 +6,6 @@ scriptencoding=utf-8
 "       88    88 V8o88    88       88       `8b  d8'    88    88  88  88 
 "      .88.   88  V888   .88.      88    db  `8bd8'    .88.   88  88  88 
 "    Y888888P VP   V8P Y888888P    YP    VP    YP    Y888888P YP  YP  YP 
-                                                                    
-
 
 call plug#begin('~/.config/nvim/bundle/')
 
@@ -18,12 +16,12 @@ Plug 'critiqjo/vim-bufferline'
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-eunuch' " unix commands
-Plug 'justinmk/vim-dirvish' " file browser
+Plug 'vifm/neovim-vifm'
 Plug 'justinmk/vim-sneak'
 Plug 'haya14busa/incsearch.vim' 
 Plug 'jamessan/vim-gnupg'
-Plug 'bfredl/nvim-miniyank'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+Plug 'cyansprite/Extract'
+Plug 'eugen0329/vim-esearch'
 
 "" Colourscheme(s)
 Plug 'iCyMind/NeoSolarized'
@@ -34,14 +32,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'chrisbra/unicode.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'beloglazov/vim-online-thesaurus', { 'for' : ['text', 'markdown', 'tex', 'latex'] }
+Plug 'rhysd/vim-grammarous', { 'for' : ['text' , 'markdown', 'tex'] }
 
-"" markdown
-function! BuildComposer(info)
-  if a:info.status !=# 'unchanged' || a:info.force
-    !cargo build --release
-  endif
-endfunction
-Plug 'euclio/vim-markdown-composer', { 'for' : 'markdown', 'do': function('BuildComposer') }
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
 "" Git
@@ -49,7 +41,7 @@ Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
 
 "" General coding
 Plug 'scrooloose/nerdcommenter'
-Plug 'neomake/neomake' | Plug 'dojoteef/neomake-autolint'
+Plug 'neomake/neomake'   " | Plug 'dojoteef/neomake-autolint'
 Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
 
 function! DoRemote(arg)
@@ -60,12 +52,11 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 Plug 'Shougo/neco-syntax'
 
-"" C 
-Plug 'tweekmonster/deoplete-clang2', { 'for' : ['c', 'cpp'] }
-Plug 'Shougo/neoinclude.vim',        { 'for' : ['c', 'cpp'] }
-Plug 'arakashic/chromatica.nvim',    { 'for' : ['c', 'cpp', 'vim'] }
+"" nix
+Plug 'LnL7/vim-nix', { 'for' : 'nix' }
 
 "" Haskell
+Plug 'ndmitchell/ghcid',              { 'rtp': 'plugins/nvim', 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc',             { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
@@ -73,8 +64,8 @@ Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
 "" Coq, Ott
-Plug '~/Programming/Coq/SF/coqvim', { 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
-Plug 'psosera/ott-vim',             { 'for' : 'ott' }
+Plug 'the-lambda-church/coquille', { 'branch' : 'pathogen-bundle', 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
+Plug 'psosera/ott-vim',            { 'for' : 'ott' }
 
 "" Agda
 Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
@@ -84,21 +75,13 @@ Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
 
 "" Python
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
-Plug 'klen/python-mode',    { 'for' : 'python' }
 
 "" LaTeX
 Plug 'lervag/vimtex',     { 'for' : ['tex', 'latex'] }
 
-"" Rust
-Plug 'rust-lang/rust.vim',   { 'for' : 'rust' }
-Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
-
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
 Plug 'Shougo/neco-vim',         { 'for' : 'vim' }
-
-"" wordnet wip
-Plug 'kellino/wordnet.nvim', { 'do' : function('DoRemote') }
 
 call plug#end()
 
@@ -113,7 +96,7 @@ let g:neosolarized_contrast='high'
 let g:neosolarized_italic = 1
 colorscheme NeoSolarized
 
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
 hi SpellBad ctermfg=1
 hi SpellCap ctermfg=9
@@ -193,12 +176,13 @@ vnoremap  <leader>y  "+y
 nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 nnoremap  <leader>yy  "+yy
-map <leader>p <Plug>(miniyank-startput)
-map <leader>P <Plug>(miniyank-startPut)
-map <leader>n <Plug>(miniyank-cycle)
-map <Leader>c <Plug>(miniyank-tochar)
-map <Leader>l <Plug>(miniyank-toline)
-map <Leader>b <Plug>(miniyank-toblock)
+
+"map <leader>p <Plug>(miniyank-startput)
+"map <leader>P <Plug>(miniyank-startPut)
+"map <leader>n <Plug>(miniyank-cycle)
+"map <Leader>c <Plug>(miniyank-tochar)
+"map <Leader>l <Plug>(miniyank-toline)
+"map <Leader>b <Plug>(miniyank-toblock)
 
 ""
 let g:maplocalleader = ','
@@ -245,10 +229,18 @@ augroup spelling
     au BufRead /tmp/mutt* setlocal spell spelllang=en_gb
 augroup END
 
-
 "============================="
 "      Plugin Options         "
 "============================="
+
+"" rainbow parentheses
+augroup rainbow
+  autocmd!
+  autocmd FileType python,vim,coq RainbowParentheses
+augroup END
+
+map <F7> :RainbowParentheses<CR>
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 "" tmux
 let g:tmux_navigator_no_mappings = 1
@@ -259,9 +251,9 @@ nnoremap <silent> <BS>  : TmuxNavigateRight<cr>
 nnoremap <silent> <c-p> : TmuxNavigatePrevious<cr>
 
 "" Neomake
-augroup Neomake
-    autocmd! BufWritePost * Neomake
-augroup END
+"augroup Neomake
+    "autocmd! BufWritePost * Neomake
+"augroup END
 
 "" vim-sneak
 let g:sneak#label = 1
@@ -314,6 +306,14 @@ let g:vimtex_view_method = 'zathura'
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
 
+"" esearch
+let g:esearch = {
+  \ 'adapter':    'rg',
+  \ 'backend':    'nvim',
+  \ 'out':        'win',
+  \ 'batch_size': 1000,
+  \ 'use':        ['visual', 'hlsearch', 'last'],
+  \}
 
 "" Unicode
 map md <Plug>(MakeDigraph)
@@ -329,7 +329,7 @@ nmap ga <Plug>(EasyAlign)
 let g:gitgutter_async=0
 
 "" agda
-let g:agda_extraincpaths = ['/usr/share/agda/lib/prim/', '/home/david/.agda/1.3/']
+let g:agda_extraincpaths = ['/home/david/.nix-profile/share/agda']
 let g:NERDCustomDelimiters = { 'agda': { 'left': '{-', 'right': '-}', 'nested': 1, 'leftAlt': '--', 'nestedAlt': 1 } }
 
 "" coq
@@ -345,24 +345,12 @@ let g:idris_indent_do=3
 let g:idris_indent_rewrite=8
 let g:idris_conceal=1
 
-"" python
-let g:pymode_rope=0
-
-"" while language
-au BufRead,BufNewFile *.while set filetype=while
-
-"" gratr
-au BufRead,BufNewFile *.gr set filetype=gratr
-
-"" markdown composer
-let g:markdown_composer_autostart=0
-
 "" other stuff
 try
     source ~/.config/nvim/config/lightline.vim
     source ~/.config/nvim/config/haskell.vim
     source ~/.config/nvim/config/terminal.vim
     source ~/.config/nvim/config/startify.vim
-    source ~/.config/nvim/config/fzf.vim
+    "source ~/.config/nvim/config/fzf.vim
 catch
 endtry

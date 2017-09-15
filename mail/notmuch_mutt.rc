@@ -1,0 +1,23 @@
+set nm_db_limit = 0
+set nm_default_uri = "notmuch:///home/david/.mutt/mail"
+set nm_query_type = messages
+
+set vfolder_format = "%6n(%6N) %f"
+
+set virtual_spoolfile = no
+set nm_query_window_duration=2
+set nm_query_window_timebase="week"
+
+bind index,pager X change-vfolder
+# read entire thread of the current message
+bind index,pager + entire-thread
+# modify (notmuch) tags
+bind index,pager \` modify-labels
+# generate virtual folder from query
+bind index,pager \eX vfolder-from-query
+# generate virtual folder from query with time window
+
+color index_tag red white "inbox"
+# the transformed message tags, %g
+# this symbol does not use a pattern
+color index_tags green default

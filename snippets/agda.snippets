@@ -1,0 +1,32 @@
+snippet oi
+abbr    open import
+  open import ${1}
+
+snippet oieq
+abbr open import PropEq ...
+  open import Relation.Binary.PropositionalEquality
+
+snippet oidec
+abbr open import Dec ...
+  open import Relation.Nullary
+
+snippet prelude
+abbr open import Prelude
+  open import Prelude
+
+snippet builtin
+abbr {-# BUILTIN ... #-}
+  {-# BUILTIN ${1} ${2} #-}
+
+snippet terminating
+abbr {-# TERMINATING #-}
+  {-# TERMINATING #-}
+
+snippet bar
+        ------------------------------------
+        -- ${1}
+        ------------------------------------
+
+snippet let
+        let ${1} = ${2}
+        in ${3}
