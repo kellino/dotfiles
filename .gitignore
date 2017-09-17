@@ -2,3 +2,4 @@ msmtprc
 AirVPN_Europe_UDP-443.conf
 passwords.txt
 mail/.notmuch/
+*.log
