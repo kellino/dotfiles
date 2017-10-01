@@ -20,8 +20,8 @@ Plug 'vifm/neovim-vifm'
 Plug 'justinmk/vim-sneak'
 Plug 'haya14busa/incsearch.vim' 
 Plug 'jamessan/vim-gnupg'
-Plug 'cyansprite/Extract'
 Plug 'eugen0329/vim-esearch'
+Plug 'junegunn/fzf.vim'
 
 "" Colourscheme(s)
 Plug 'iCyMind/NeoSolarized'
@@ -40,9 +40,9 @@ Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
 
 "" General coding
+Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
-Plug 'neomake/neomake'   " | Plug 'dojoteef/neomake-autolint'
-Plug 'majutsushi/tagbar',   { 'on' : 'TagbarToggle' }
+Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -82,6 +82,7 @@ Plug 'lervag/vimtex',     { 'for' : ['tex', 'latex'] }
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
 Plug 'Shougo/neco-vim',         { 'for' : 'vim' }
+Plug 'dag/vim-fish',            { 'for' : 'fish' }
 
 call plug#end()
 
@@ -250,11 +251,6 @@ nnoremap <silent> <c-k> : TmuxNavigateUp<cr>
 nnoremap <silent> <BS>  : TmuxNavigateRight<cr>
 nnoremap <silent> <c-p> : TmuxNavigatePrevious<cr>
 
-"" Neomake
-"augroup Neomake
-    "autocmd! BufWritePost * Neomake
-"augroup END
-
 "" vim-sneak
 let g:sneak#label = 1
 
@@ -306,6 +302,9 @@ let g:vimtex_view_method = 'zathura'
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
 
+"" FZF
+command! -bang -nargs=* Find call fzf#vim#grep ('rg --column --line-number --no-heading --fixed-strings \ --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
 "" esearch
 let g:esearch = {
   \ 'adapter':    'rg',
@@ -351,6 +350,5 @@ try
     source ~/.config/nvim/config/haskell.vim
     source ~/.config/nvim/config/terminal.vim
     source ~/.config/nvim/config/startify.vim
-    "source ~/.config/nvim/config/fzf.vim
 catch
 endtry
