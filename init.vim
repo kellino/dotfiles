@@ -25,11 +25,9 @@ Plug 'junegunn/fzf.vim'
 
 "" Colourscheme(s)
 Plug 'iCyMind/NeoSolarized'
-Plug 'junegunn/rainbow_parentheses.vim'
 
 "" Text Editing
 Plug 'jiangmiao/auto-pairs'
-Plug 'chrisbra/unicode.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'beloglazov/vim-online-thesaurus', { 'for' : ['text', 'markdown', 'tex', 'latex'] }
 Plug 'rhysd/vim-grammarous', { 'for' : ['text' , 'markdown', 'tex'] }
@@ -178,13 +176,6 @@ nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 nnoremap  <leader>yy  "+yy
 
-"map <leader>p <Plug>(miniyank-startput)
-"map <leader>P <Plug>(miniyank-startPut)
-"map <leader>n <Plug>(miniyank-cycle)
-"map <Leader>c <Plug>(miniyank-tochar)
-"map <Leader>l <Plug>(miniyank-toline)
-"map <Leader>b <Plug>(miniyank-toblock)
-
 ""
 let g:maplocalleader = ','
 
@@ -212,14 +203,14 @@ set tags=./tags;
 
 "" formatting and spelling
 augroup formatting
-    au BufEnter,BufRead *.md    setlocal formatprg=par\ -w120
-    au BufEnter,BufRead *.md    setlocal equalprg=par\ -w120
-    au BufEnter,BufRead *.txt   setlocal formatprg=par\ -w120
-    au BufEnter,BufRead *.txt   setlocal equalprg=par\ -w120
-    au BufEnter,BufRead *.tex   setlocal formatprg=par\ -w120
-    au BufEnter,BufRead *.tex   setlocal equalprg=par\ -w120
-    au BufEnter,BufRead *.latex setlocal formatprg=par\ -w120
-    au BufEnter,BufRead *.latex setlocal equalprg=par\ -w120
+    au BufEnter,BufRead *.md    setlocal formatprg = par\ -w120
+    au BufEnter,BufRead *.md    setlocal equalprg  = par\ -w120
+    au BufEnter,BufRead *.txt   setlocal formatprg = par\ -w120
+    au BufEnter,BufRead *.txt   setlocal equalprg  = par\ -w120
+    au BufEnter,BufRead *.tex   setlocal formatprg = par\ -w120
+    au BufEnter,BufRead *.tex   setlocal equalprg  = par\ -w120
+    au BufEnter,BufRead *.latex setlocal formatprg = par\ -w120
+    au BufEnter,BufRead *.latex setlocal equalprg  = par\ -w120
 augroup END
 
 augroup spelling
@@ -233,15 +224,6 @@ augroup END
 "============================="
 "      Plugin Options         "
 "============================="
-
-"" rainbow parentheses
-augroup rainbow
-  autocmd!
-  autocmd FileType python,vim,coq RainbowParentheses
-augroup END
-
-map <F7> :RainbowParentheses<CR>
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 "" tmux
 let g:tmux_navigator_no_mappings = 1
@@ -302,9 +284,6 @@ let g:vimtex_view_method = 'zathura'
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
 
-"" FZF
-command! -bang -nargs=* Find call fzf#vim#grep ('rg --column --line-number --no-heading --fixed-strings \ --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-
 "" esearch
 let g:esearch = {
   \ 'adapter':    'rg',
@@ -313,9 +292,6 @@ let g:esearch = {
   \ 'batch_size': 1000,
   \ 'use':        ['visual', 'hlsearch', 'last'],
   \}
-
-"" Unicode
-map md <Plug>(MakeDigraph)
 
 "" Tagbar
 map <F8> :TagbarToggle<CR>
