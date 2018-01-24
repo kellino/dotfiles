@@ -18,6 +18,14 @@ snippet builtin
 abbr {-# BUILTIN ... #-}
   {-# BUILTIN ${1} ${2} #-}
 
+snippet builtinnat
+abbr {-# BUILTIN NATURAL ... #-}
+  {-# BUILTIN NATURAL ${1} #-}
+
+snippet builtineq
+abbr {-# BUILTIN EQUALITY ... #-}
+  {-# BUILTIN EQUALITY ${1} #-}
+
 snippet terminating
 abbr {-# TERMINATING #-}
   {-# TERMINATING #-}
@@ -29,4 +37,4 @@ snippet bar
 
 snippet let
         let ${1} = ${2}
-        in ${3}
+         in ${3}

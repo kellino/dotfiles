@@ -7,7 +7,7 @@ scriptencoding=utf-8
 "      .88.   88  V888   .88.      88    db  `8bd8'    .88.   88  88  88 
 "    Y888888P VP   V8P Y888888P    YP    VP    YP    Y888888P YP  YP  YP 
 
-call plug#begin('~/.config/nvim/bundle/')
+call plug#begin('~/.local/share/nvim/plugged')
 
 "" general
 Plug 'itchyny/lightline.vim'
@@ -22,6 +22,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'eugen0329/vim-esearch'
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-obsession'
 
 "" Colourscheme(s)
 Plug 'iCyMind/NeoSolarized'
@@ -38,7 +39,7 @@ Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
 
 "" General coding
-Plug 'w0rp/ale'
+Plug 'w0rp/ale', { 'for' : ['python', 'latex'] }
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 
@@ -46,6 +47,12 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+"" Code Completion
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 Plug 'Shougo/neco-syntax'
@@ -54,8 +61,6 @@ Plug 'Shougo/neco-syntax'
 Plug 'LnL7/vim-nix', { 'for' : 'nix' }
 
 "" Haskell
-Plug 'ndmitchell/ghcid',              { 'rtp': 'plugins/nvim', 'for' : 'haskell' }
-Plug 'eagletmt/neco-ghc',             { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
@@ -77,6 +82,9 @@ Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
 "" LaTeX
 Plug 'lervag/vimtex',     { 'for' : ['tex', 'latex'] }
 
+"" C
+Plug 'tweekmonster/deoplete-clang2', { 'for' : ['c'] }
+
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
 Plug 'Shougo/neco-vim',         { 'for' : 'vim' }
@@ -92,7 +100,7 @@ set termguicolors
 set background=dark
 let g:neosolarized_termtrans=1
 let g:neosolarized_contrast='high'
-let g:neosolarized_italic = 1
+"let g:neosolarized_italic = 1
 colorscheme NeoSolarized
 
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
@@ -193,6 +201,7 @@ map lc :lclose<CR>
 
 "" Omnifunc completions
 set omnifunc=syntaxcomplete#Complete
+set completefunc=LanguageClient#complete
 
 " conceal level
 set conceallevel=2
@@ -203,22 +212,22 @@ set tags=./tags;
 
 "" formatting and spelling
 augroup formatting
-    au BufEnter,BufRead *.md    setlocal formatprg = par\ -w120
-    au BufEnter,BufRead *.md    setlocal equalprg  = par\ -w120
-    au BufEnter,BufRead *.txt   setlocal formatprg = par\ -w120
-    au BufEnter,BufRead *.txt   setlocal equalprg  = par\ -w120
-    au BufEnter,BufRead *.tex   setlocal formatprg = par\ -w120
-    au BufEnter,BufRead *.tex   setlocal equalprg  = par\ -w120
-    au BufEnter,BufRead *.latex setlocal formatprg = par\ -w120
-    au BufEnter,BufRead *.latex setlocal equalprg  = par\ -w120
+    au BufEnter,BufRead *.md    setlocal formatprg = "par\ -w120"
+    au BufEnter,BufRead *.md    setlocal equalprg  = "par\ -w120"
+    au BufEnter,BufRead *.txt   setlocal formatprg = "par\ -w120"
+    au BufEnter,BufRead *.txt   setlocal equalprg  = "par\ -w120"
+    au BufEnter,BufRead *.tex   setlocal formatprg = "par\ -w120"
+    au BufEnter,BufRead *.tex   setlocal equalprg  = "par\ -w120"
+    au BufEnter,BufRead *.latex setlocal formatprg = "par\ -w120"
+    au BufEnter,BufRead *.latex setlocal equalprg  = "par\ -w120"
 augroup END
 
 augroup spelling
-    au BufRead *.md       setlocal spell spelllang=en_gb
-    au BufRead *.txt      setlocal spell spelllang=en_gb
-    au BufRead *.tex      setlocal spell spelllang=en_gb
-    au BufRead *.latex    setlocal spell spelllang=en_gb
-    au BufRead /tmp/mutt* setlocal spell spelllang=en_gb
+    au BufRead *.md       setlocal spell spelllang="en_gb"
+    au BufRead *.txt      setlocal spell spelllang="en_gb"
+    au BufRead *.tex      setlocal spell spelllang="en_gb"
+    au BufRead *.latex    setlocal spell spelllang="en_gb"
+    au BufRead /tmp/mutt* setlocal spell spelllang="en_gb"
 augroup END
 
 "============================="
@@ -259,7 +268,7 @@ xmap <s-tab> <Plug>(neosnippet_expand_target)
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 let g:neosnippet#enable_snipmate_compatibility=1
-let g:neosnippet#snippets_directory='~/.config/nvim/after/snippets'
+let g:neosnippet#snippets_directory='~/.local/share/nvim/snippets/'
 
 " latex
 if !exists('g:deoplete#omni#input_patterns')
@@ -280,7 +289,7 @@ let g:deoplete#omni#input_patterns.tex = '\\(?:'
 \ .')'
 let g:tex_flavor = 'latex'
 let g:tex_stylish = 1
-let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_method = 'skim'
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
 
@@ -304,7 +313,7 @@ nmap ga <Plug>(EasyAlign)
 let g:gitgutter_async=0
 
 "" agda
-let g:agda_extraincpaths = ['/home/david/.nix-profile/share/agda']
+let g:agda_extraincpaths = [ '/Users/david/.nix-profile/share/agda' ]
 let g:NERDCustomDelimiters = { 'agda': { 'left': '{-', 'right': '-}', 'nested': 1, 'leftAlt': '--', 'nestedAlt': 1 } }
 
 "" coq
@@ -320,11 +329,17 @@ let g:idris_indent_do=3
 let g:idris_indent_rewrite=8
 let g:idris_conceal=1
 
+"" LanguageClient
+let g:LanguageClient_autoStart = 1
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
 "" other stuff
 try
-    source ~/.config/nvim/config/lightline.vim
-    source ~/.config/nvim/config/haskell.vim
-    source ~/.config/nvim/config/terminal.vim
-    source ~/.config/nvim/config/startify.vim
+    source ~/.local/share/nvim/config/lightline.vim
+    source ~/.local/share/nvim/config/haskell.vim
+    source ~/.local/share/nvim/config/terminal.vim
+    source ~/.local/share/nvim/config/startify.vim
 catch
 endtry

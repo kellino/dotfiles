@@ -1,21 +1,8 @@
-let g:necoghc_enable_detailed_browse=1
+let g:LanguageClient_serverCommands = {
+    \ 'haskell': ['hie', '--lsp'],
+    \ }
 
 let g:hscoptions='w'
-
-function! REPLSendHaskell()
-    save! %
-    let l:line = [join([':load', expand('%.t')], ' ')]
-    call jobsend(g:last_terminal_job_id, add(l:line, ''))
-endfunction
-
-function! HaskellRepl()
-    silent! 20 split
-    e ghci.hs
-    call termopen('intero') 
-    wincmd p
-endfunction
-
-nnoremap <silent> <C-x><C-x> :REPLSendHaskell<CR>
 
 "" tagbar
 let g:tagbar_type_haskell = {
@@ -49,6 +36,3 @@ let g:tagbar_type_haskell = {
         \ 'type'   : 't'
     \ }
 \ }
-
-command! REPLSendHaskell call REPLSendHaskell()
-command! Haskell call HaskellRepl()
