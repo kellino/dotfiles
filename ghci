@@ -1,5 +1,4 @@
 :set prompt "\ESC[1;34m%s\n\ESC[0;34mDavid λ> \ESC[m"
-:set prompt2 "continued > "
 :m - Prelude
 :def hoogle \s -> return $ ":! hoogle search --count=15 \"" ++ s ++ "\""
 :def doc \s -> return $ ":! hoogle search --info \"" ++ s ++ "\""

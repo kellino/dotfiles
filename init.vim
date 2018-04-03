@@ -16,6 +16,7 @@ Plug 'critiqjo/vim-bufferline'
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-eunuch' " unix commands
+Plug 'tpope/vim-obsession' " save vim sessions
 Plug 'vifm/neovim-vifm'
 Plug 'justinmk/vim-sneak'
 Plug 'haya14busa/incsearch.vim' 
@@ -38,7 +39,7 @@ Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
 
 "" General coding
-Plug 'w0rp/ale'
+Plug 'w0rp/ale', { 'for' : [ 'python', 'c', 'latex' ] }
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 
@@ -50,12 +51,17 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 Plug 'Shougo/neco-syntax'
 
+"" assembly
+Plug 'Shirk/vim-gas', { 'for' : 'asm' }
+Plug 'fidian/hexmode'
+
 "" nix
 Plug 'LnL7/vim-nix', { 'for' : 'nix' }
 
+"" tmux syntax
+Plug 'tmux-plugins/vim-tmux', { 'for' : 'tmux' }
+
 "" Haskell
-Plug 'ndmitchell/ghcid',              { 'rtp': 'plugins/nvim', 'for' : 'haskell' }
-Plug 'eagletmt/neco-ghc',             { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
@@ -76,6 +82,11 @@ Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
 
 "" LaTeX
 Plug 'lervag/vimtex',     { 'for' : ['tex', 'latex'] }
+
+"" C
+Plug 'arakashic/chromatica.nvim', { 'for' : 'c' }
+Plug 'zchee/deoplete-clang', { 'for' : 'c' }
+Plug 'Shougo/neoinclude.vim', { 'for' : 'c' }
 
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
@@ -203,27 +214,20 @@ set tags=./tags;
 
 "" formatting and spelling
 augroup formatting
-    au BufEnter,BufRead *.md    setlocal formatprg = par\ -w120
-    au BufEnter,BufRead *.md    setlocal equalprg  = par\ -w120
-    au BufEnter,BufRead *.txt   setlocal formatprg = par\ -w120
-    au BufEnter,BufRead *.txt   setlocal equalprg  = par\ -w120
-    au BufEnter,BufRead *.tex   setlocal formatprg = par\ -w120
-    au BufEnter,BufRead *.tex   setlocal equalprg  = par\ -w120
-    au BufEnter,BufRead *.latex setlocal formatprg = par\ -w120
-    au BufEnter,BufRead *.latex setlocal equalprg  = par\ -w120
+    au BufEnter,BufRead *.md    setlocal formatprg = "par -w120"
+    au BufEnter,BufRead *.md    setlocal equalprg  = "par -w120"
+    au BufEnter,BufRead *.tex   setlocal formatprg = "par -w120"
+    au BufEnter,BufRead *.tex   setlocal equalprg  = "par -w120"
 augroup END
 
-augroup spelling
-    au BufRead *.md       setlocal spell spelllang=en_gb
-    au BufRead *.txt      setlocal spell spelllang=en_gb
-    au BufRead *.tex      setlocal spell spelllang=en_gb
-    au BufRead *.latex    setlocal spell spelllang=en_gb
-    au BufRead /tmp/mutt* setlocal spell spelllang=en_gb
-augroup END
 
 "============================="
 "      Plugin Options         "
 "============================="
+
+
+"" Python location
+let g:python3_host_prog='/home/david/.nix-profile/bin/python'
 
 "" tmux
 let g:tmux_navigator_no_mappings = 1
@@ -296,6 +300,9 @@ let g:esearch = {
 "" Tagbar
 map <F8> :TagbarToggle<CR>
 
+"" hexmode
+let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
+
 "" easy-align
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
@@ -319,6 +326,15 @@ let g:idris_indent_where=6
 let g:idris_indent_do=3
 let g:idris_indent_rewrite=8
 let g:idris_conceal=1
+
+"" C
+let g:neoinclude#paths = {}
+let g:neoinclude#paths.c = '/nix/store/fn2x7v3bs305xl55ynj698mjc0yfn1lh-glibc-2.26-131-dev/include/'
+let g:chromatica#libclang_path='/nix/store/6gkylaxm6s553jh60al5mm1ykj3nf6g0-clang-6.0.0-lib/lib/libclang.so'
+let g:chromatica#enable_at_startup=1
+let g:deoplete#sources#clang#libclang_path='/nix/store/6gkylaxm6s553jh60al5mm1ykj3nf6g0-clang-6.0.0-lib/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header='/nix/store/lhkaxa2lfpa56icqbahxbxa3dfrman3j-clang-6.0.0/lib/clang/6.0.0/include/'
+
 
 "" other stuff
 try
