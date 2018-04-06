@@ -9,18 +9,19 @@ let g:bufferline_show_bufnr = 0
 let g:bufferline_fname_mod = ':~:.'
 let g:bufferline_pathshorten = 1
 
+"let g:lightline.active = { 'right': [[ 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
 
 let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ 'active': {
       \   'left'  : [ 
       \         [ 'mode', 'paste' ], 
-      \         [ 'fugitive', 'readonly', 'filename' ], 
-      \         ['neomake'] ],
+      \         [ 'fugitive', 'readonly', 'filename' ], ],
       \   'right' : [ 
       \         ['trailing', 'indentation', 'lineinfo'], 
       \         ['percent'], 
-      \         [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \         [ 'fileformat', 'fileencoding', 'filetype' ],
+      \         [ 'linter_errors', 'linter_warnings', 'linter_ok' ] ]
       \ },
       \   'tabline': {
       \     'left': [ ['bufferline'] ],
@@ -40,12 +41,10 @@ let g:lightline = {
       \ },
       \ 'component_expand': {
           \ 'indentation': 'MixedIndentSpaceWarning',
-          \ 'neomake':     'MyNeomake',
       \ },
       \ 'component_type': {
           \ 'trailing': 'warning',
           \ 'indendation': 'warning',
-          \ 'neomake': 'error',
       \ },
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': ''}
@@ -134,24 +133,6 @@ function! s:flags()
       endif
 endfunction
 
-function! MyNeomake()
-    if !exists('*neomake#statusline#LoclistCounts')
-        return ''
-    endif
-    " Count all the errors, warnings
-    let l:total = 0
-    for l:v in values(neomake#statusline#LoclistCounts())
-        let l:total += l:v
-    endfor
-    for l:v in items(neomake#statusline#QflistCounts())
-        let l:total += l:v
-    endfor
-    if l:total == 0
-        return ''
-    endif
-    return 'line '.getloclist(0)[0].lnum. ', 1 of '.l:total
-endfunction
-
 let g:tagbar_status_func = 'TagbarStatusFunc'
 function! TagbarStatusFunc(current, sort, fname, ...) abort
     let g:lightline.fname = a:fname
@@ -176,3 +157,15 @@ endfunction
 augroup fzf
     autocmd! User FzfStatusLine call <SID>fzf_statusline()
 augroup END
+
+let g:lightline.component_expand = {
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+let g:lightline.component_type = {
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }

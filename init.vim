@@ -11,6 +11,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 "" general
 Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 Plug 'critiqjo/vim-bufferline'
 
 Plug 'mhinz/vim-startify'
@@ -32,14 +33,13 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'beloglazov/vim-online-thesaurus', { 'for' : ['text', 'markdown', 'tex', 'latex'] }
 Plug 'rhysd/vim-grammarous', { 'for' : ['text' , 'markdown', 'tex'] }
-
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
 "" Git
 Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
 
 "" General coding
-Plug 'w0rp/ale', { 'for' : ['python', 'latex'] }
+Plug 'w0rp/ale', { 'for' : ['python', 'latex', 'c', 'haskell'] }
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
 
@@ -47,15 +47,15 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 
 "" Code Completion
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 Plug 'Shougo/neco-syntax'
+
+"" hex
+Plug 'fidian/hexmode'
 
 "" nix
 Plug 'LnL7/vim-nix', { 'for' : 'nix' }
@@ -66,24 +66,15 @@ Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
-"" Coq, Ott
-Plug 'the-lambda-church/coquille', { 'branch' : 'pathogen-bundle', 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
-Plug 'psosera/ott-vim',            { 'for' : 'ott' }
-
 "" Agda
 Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
-
-"" Idris
-Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
-
-"" Python
-Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
 
 "" LaTeX
 Plug 'lervag/vimtex',     { 'for' : ['tex', 'latex'] }
 
 "" C
-Plug 'tweekmonster/deoplete-clang2', { 'for' : ['c'] }
+Plug 'arakashic/chromatica.nvim', { 'for' : 'c' }
+Plug 'zchee/deoplete-clang', { 'for' : 'c' }
 
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
@@ -234,6 +225,10 @@ augroup END
 "      Plugin Options         "
 "============================="
 
+"" Python Path
+let g:python_host_prog='/Users/david/.nix-profile/bin/python'
+
+
 "" tmux
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <c-h> : TmuxNavigateLeft<cr>
@@ -270,7 +265,11 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 let g:neosnippet#enable_snipmate_compatibility=1
 let g:neosnippet#snippets_directory='~/.local/share/nvim/snippets/'
 
-" latex
+
+"========== 
+"  latex 
+"==========
+"
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
 endif
@@ -302,6 +301,9 @@ let g:esearch = {
   \ 'use':        ['visual', 'hlsearch', 'last'],
   \}
 
+"" hexmode patterns
+let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
+
 "" Tagbar
 map <F8> :TagbarToggle<CR>
 
@@ -316,24 +318,23 @@ let g:gitgutter_async=0
 let g:agda_extraincpaths = [ '/Users/david/.nix-profile/share/agda' ]
 let g:NERDCustomDelimiters = { 'agda': { 'left': '{-', 'right': '-}', 'nested': 1, 'leftAlt': '--', 'nestedAlt': 1 } }
 
-"" coq
-let g:deoplete#omni#input_patterns.coq = '[^ \t]'
-let g:highlight_coq_checked=1
-
-"" idris
-let g:idris_indent_if=3
-let g:idris_indent_case=5
-let g:idris_indent_let=4
-let g:idris_indent_where=6
-let g:idris_indent_do=3
-let g:idris_indent_rewrite=8
-let g:idris_conceal=1
-
 "" LanguageClient
 let g:LanguageClient_autoStart = 1
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+" rust language client
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ 'haskell' : ['hie', '--lsp'], 
+    \ }
+
+"" libclang path
+let g:chromatica#libclang_path='/nix/store/i1a19lrjq4lrvsl481dg9zz67szlrsq4-clang-6.0.0-lib/lib/libclang.dylib'
+let g:chromatica#enable_at_startup=1
+let g:deoplete#sources#clang#libclang_path='/nix/store/i1a19lrjq4lrvsl481dg9zz67szlrsq4-clang-6.0.0-lib/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header='/nix/store/g4d5ig6rlb17w6ry77lxl5mxc8av15fg-clang-6.0.0/lib/clang/'
 
 "" other stuff
 try

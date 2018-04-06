@@ -1,7 +1,3 @@
-let g:LanguageClient_serverCommands = {
-    \ 'haskell': ['hie', '--lsp'],
-    \ }
-
 let g:hscoptions='w'
 
 "" tagbar
