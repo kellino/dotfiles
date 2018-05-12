@@ -24,9 +24,11 @@ Plug 'jamessan/vim-gnupg'
 Plug 'eugen0329/vim-esearch'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-obsession'
+Plug 'skywind3000/asyncrun.vim'
 
 "" Colourscheme(s)
 Plug 'iCyMind/NeoSolarized'
+Plug 'junegunn/limelight.vim'
 
 "" Text Editing
 Plug 'jiangmiao/auto-pairs'
@@ -39,18 +41,17 @@ Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
 
 "" General coding
-Plug 'w0rp/ale', { 'for' : ['python', 'latex', 'c', 'haskell'] }
+Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
-Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
+Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
 
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 "" Code Completion
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
 Plug 'Shougo/neco-syntax'
 
@@ -61,10 +62,10 @@ Plug 'fidian/hexmode'
 Plug 'LnL7/vim-nix', { 'for' : 'nix' }
 
 "" Haskell
-Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
+Plug 'neovimhaskell/haskell-vim', { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
+Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
-Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
 
 "" Agda
 Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
@@ -91,7 +92,6 @@ set termguicolors
 set background=dark
 let g:neosolarized_termtrans=1
 let g:neosolarized_contrast='high'
-"let g:neosolarized_italic = 1
 colorscheme NeoSolarized
 
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
@@ -201,33 +201,13 @@ set concealcursor=c
 "" ctags / hasktags
 set tags=./tags;
 
-"" formatting and spelling
-augroup formatting
-    au BufEnter,BufRead *.md    setlocal formatprg = "par\ -w120"
-    au BufEnter,BufRead *.md    setlocal equalprg  = "par\ -w120"
-    au BufEnter,BufRead *.txt   setlocal formatprg = "par\ -w120"
-    au BufEnter,BufRead *.txt   setlocal equalprg  = "par\ -w120"
-    au BufEnter,BufRead *.tex   setlocal formatprg = "par\ -w120"
-    au BufEnter,BufRead *.tex   setlocal equalprg  = "par\ -w120"
-    au BufEnter,BufRead *.latex setlocal formatprg = "par\ -w120"
-    au BufEnter,BufRead *.latex setlocal equalprg  = "par\ -w120"
-augroup END
-
-augroup spelling
-    au BufRead *.md       setlocal spell spelllang="en_gb"
-    au BufRead *.txt      setlocal spell spelllang="en_gb"
-    au BufRead *.tex      setlocal spell spelllang="en_gb"
-    au BufRead *.latex    setlocal spell spelllang="en_gb"
-    au BufRead /tmp/mutt* setlocal spell spelllang="en_gb"
-augroup END
 
 "============================="
 "      Plugin Options         "
 "============================="
 
 "" Python Path
-let g:python_host_prog='/Users/david/.nix-profile/bin/python'
-
+let g:python3_host_prog='/Users/david/.nix-profile/bin/python'
 
 "" tmux
 let g:tmux_navigator_no_mappings = 1
@@ -270,6 +250,7 @@ let g:neosnippet#snippets_directory='~/.local/share/nvim/snippets/'
 "  latex 
 "==========
 "
+
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
 endif
@@ -315,20 +296,17 @@ nmap ga <Plug>(EasyAlign)
 let g:gitgutter_async=0
 
 "" agda
-let g:agda_extraincpaths = [ '/Users/david/.nix-profile/share/agda' ]
+let g:agda_extraincpaths = [ '~/.agda' ]
 let g:NERDCustomDelimiters = { 'agda': { 'left': '{-', 'right': '-}', 'nested': 1, 'leftAlt': '--', 'nestedAlt': 1 } }
 
 "" LanguageClient
 let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+    \ 'haskell': ['~/.local/bin/hie', '--lsp'], 
+    \ }
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-" rust language client
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'haskell' : ['hie', '--lsp'], 
-    \ }
 
 "" libclang path
 let g:chromatica#libclang_path='/nix/store/i1a19lrjq4lrvsl481dg9zz67szlrsq4-clang-6.0.0-lib/lib/libclang.dylib'
@@ -336,11 +314,13 @@ let g:chromatica#enable_at_startup=1
 let g:deoplete#sources#clang#libclang_path='/nix/store/i1a19lrjq4lrvsl481dg9zz67szlrsq4-clang-6.0.0-lib/lib/libclang.dylib'
 let g:deoplete#sources#clang#clang_header='/nix/store/g4d5ig6rlb17w6ry77lxl5mxc8av15fg-clang-6.0.0/lib/clang/'
 
+"" limelight
+let g:limelight_conceal_guifg = '#777777'
+let g:limelight_priority = -1
+
 "" other stuff
 try
     source ~/.local/share/nvim/config/lightline.vim
-    source ~/.local/share/nvim/config/haskell.vim
-    source ~/.local/share/nvim/config/terminal.vim
     source ~/.local/share/nvim/config/startify.vim
 catch
 endtry
