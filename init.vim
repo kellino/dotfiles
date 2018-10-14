@@ -17,24 +17,21 @@ Plug 'critiqjo/vim-bufferline'
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-eunuch' " unix commands
-Plug 'vifm/neovim-vifm'
 Plug 'justinmk/vim-sneak'
 Plug 'haya14busa/incsearch.vim' 
 Plug 'jamessan/vim-gnupg'
 Plug 'eugen0329/vim-esearch'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-obsession'
-Plug 'skywind3000/asyncrun.vim'
 
 "" Colourscheme(s)
+Plug 'morhetz/gruvbox'
 Plug 'iCyMind/NeoSolarized'
 Plug 'junegunn/limelight.vim'
 
 "" Text Editing
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
-Plug 'beloglazov/vim-online-thesaurus', { 'for' : ['text', 'markdown', 'tex', 'latex'] }
-Plug 'rhysd/vim-grammarous', { 'for' : ['text' , 'markdown', 'tex'] }
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
 "" Git
@@ -43,12 +40,6 @@ Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
 "" General coding
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
-Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
-
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
 
 "" Code Completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -58,20 +49,23 @@ Plug 'Shougo/neco-syntax'
 "" hex
 Plug 'fidian/hexmode'
 
-"" nix
-Plug 'LnL7/vim-nix', { 'for' : 'nix' }
-
 "" Haskell
-Plug 'neovimhaskell/haskell-vim', { 'for' : 'haskell' }
+Plug 'neovimhaskell/haskell-vim',     { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
+
+"" idris
+Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
 
 "" Agda
 Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
 
 "" LaTeX
 Plug 'lervag/vimtex',     { 'for' : ['tex', 'latex'] }
+
+""
+Plug 'https://framagit.org/tyreunom/coquille.git', { 'branch' : 'pathogen-bundle', 'for' : 'coq' }
 
 "" C
 Plug 'arakashic/chromatica.nvim', { 'for' : 'c' }
@@ -80,34 +74,26 @@ Plug 'zchee/deoplete-clang', { 'for' : 'c' }
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
 Plug 'Shougo/neco-vim',         { 'for' : 'vim' }
-Plug 'dag/vim-fish',            { 'for' : 'fish' }
 
 call plug#end()
 
- "======================="
- "      Appearance       "
- "======================="
+"======================="
+"      Appearance       "
+"======================="
 
 set termguicolors
 set background=dark
-let g:neosolarized_termtrans=1
-let g:neosolarized_contrast='high'
-colorscheme NeoSolarized
+let g:gruvbox_contrast_dark='none'
+colorscheme gruvbox
 
-set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
-
-hi SpellBad ctermfg=1
-hi SpellCap ctermfg=9
-hi SpellRare cterm=undercurl
-hi SpellLocal cterm=undercurl
-hi FoldColumn ctermbg=235
-hi LineNr ctermfg=200
-hi Comment cterm=italic
+"" coq colours
+hi default CheckedByCoq ctermbg=10 guibg=#282828
+hi default SentToCoq ctermbg=12 guibg=#383c36
 
 
- "======================="
- "      Navigation       "
- "======================="
+"======================="
+"      Navigation       "
+"======================="
 
 "" unbind ESC
 inoremap fj <Esc>
@@ -169,7 +155,7 @@ noremap <Leader>tt :tabclose<CR>
 
 "" Copy / Paste
 set clipboard+=unnamedplus
-" " Copy to clipboard
+" Copy to clipboard
 vnoremap  <leader>y  "+y
 nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
@@ -192,7 +178,6 @@ map lc :lclose<CR>
 
 "" Omnifunc completions
 set omnifunc=syntaxcomplete#Complete
-set completefunc=LanguageClient#complete
 
 " conceal level
 set conceallevel=2
@@ -205,9 +190,6 @@ set tags=./tags;
 "============================="
 "      Plugin Options         "
 "============================="
-
-"" Python Path
-let g:python3_host_prog='/Users/david/.nix-profile/bin/python'
 
 "" tmux
 let g:tmux_navigator_no_mappings = 1
@@ -236,12 +218,12 @@ let g:deoplete#omni#input_patterns = {}
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" neosnippet
+"" neosnippet
 imap <s-tab> <Plug>(neosnippet_expand_or_jump)
 smap <s-tab> <Plug>(neosnippet_expand_or_jump)
 xmap <s-tab> <Plug>(neosnippet_expand_target)
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+	\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 let g:neosnippet#enable_snipmate_compatibility=1
 let g:neosnippet#snippets_directory='~/.local/share/nvim/snippets/'
 
@@ -269,24 +251,21 @@ let g:deoplete#omni#input_patterns.tex = '\\(?:'
 \ .')'
 let g:tex_flavor = 'latex'
 let g:tex_stylish = 1
-let g:vimtex_view_method = 'skim'
+let g:vimtex_viewer_general = 'skim'
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
 
 "" esearch
 let g:esearch = {
-  \ 'adapter':    'rg',
-  \ 'backend':    'nvim',
-  \ 'out':        'win',
-  \ 'batch_size': 1000,
-  \ 'use':        ['visual', 'hlsearch', 'last'],
-  \}
+   \ 'adapter':    'rg',
+   \ 'backend':    'nvim',
+   \ 'out':        'win',
+   \ 'batch_size': 1000,
+   \ 'use':        ['visual', 'hlsearch', 'last'],
+   \}
 
 "" hexmode patterns
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
-
-"" Tagbar
-map <F8> :TagbarToggle<CR>
 
 "" easy-align
 xmap ga <Plug>(EasyAlign)
@@ -299,28 +278,73 @@ let g:gitgutter_async=0
 let g:agda_extraincpaths = [ '~/.agda' ]
 let g:NERDCustomDelimiters = { 'agda': { 'left': '{-', 'right': '-}', 'nested': 1, 'leftAlt': '--', 'nestedAlt': 1 } }
 
-"" LanguageClient
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {
-    \ 'haskell': ['~/.local/bin/hie', '--lsp'], 
-    \ }
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+"" idris
+let g:idris_indent_if = 3
+let g:idris_indent_case = 5
+let g:idris_indent_let = 4
+let g:idris_indent_where = 6
+let g:idris_indent_do = 3
+let g:idris_indent_rewrite = 8
+let g:idris_conceal = 1
 
 "" libclang path
-let g:chromatica#libclang_path='/nix/store/i1a19lrjq4lrvsl481dg9zz67szlrsq4-clang-6.0.0-lib/lib/libclang.dylib'
+let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/HEAD-5e8f334/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/HEAD-5e8f334/lib/clang'
+let g:chromatica#libclang_path='/usr/local/Cellar/llvm/HEAD-5e8f334/lib/libclang.dylib'
 let g:chromatica#enable_at_startup=1
-let g:deoplete#sources#clang#libclang_path='/nix/store/i1a19lrjq4lrvsl481dg9zz67szlrsq4-clang-6.0.0-lib/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header='/nix/store/g4d5ig6rlb17w6ry77lxl5mxc8av15fg-clang-6.0.0/lib/clang/'
 
 "" limelight
 let g:limelight_conceal_guifg = '#777777'
 let g:limelight_priority = -1
 
+"" stuff for coq
+function! CoqNormalise()
+   call inputsave()
+   let result = input('Enter expression: ')
+   call CoqQuery("Compute " . result . ".")
+   call inputrestore()
+endfunction
+
+function! CoqBindings()
+    nnoremap<buffer><localleader>L :call CoqLaunch()<CR>
+    nnoremap<buffer><localleader>N :call CoqNormalise()<CR>
+    nnoremap<buffer><localleader>r :call CoqToCursor()<CR>
+    nnoremap<buffer><localleader>K :call CoqStop()<CR>
+    nnoremap<buffer><localleader>n :call CoqNext()<CR>
+endfunction
+
+function! CoqUTF8()
+    imap <buffer> <LocalLeader>forall ∀
+    imap <buffer> <LocalLeader>all ∀
+    imap <buffer> <LocalLeader>exists ∃
+    imap <buffer> <LocalLeader>eq ≡
+    imap <buffer> <LocalLeader>leadsto ⇝
+    imap <buffer> <LocalLeader>~> ⇝
+    imap <buffer> <LocalLeader>lor ∨
+    imap <buffer> <LocalLeader>land ∧
+    imap <buffer> <LocalLeader>to →
+    imap <buffer> <LocalLeader>- →
+
+    cmap <buffer> <LocalLeader>forall ∀
+    cmap <buffer> <LocalLeader>all ∀
+    cmap <buffer> <LocalLeader>exists ∃
+    cmap <buffer> <LocalLeader>eq ≡
+    cmap <buffer> <LocalLeader>leadsto ⇝
+    cmap <buffer> <LocalLeader>~> ⇝
+    cmap <buffer> <LocalLeader>lor ∨
+    cmap <buffer> <LocalLeader>land ∧
+    cmap <buffer> <LocalLeader>to →
+    cmap <buffer> <LocalLeader>- →
+endfunction
+
+augroup CoqStuff 
+    au FileType coq call CoqBindings()
+    au FileType coq call CoqUTF8()
+augroup END
+
 "" other stuff
 try
-    source ~/.local/share/nvim/config/lightline.vim
-    source ~/.local/share/nvim/config/startify.vim
+   source ~/.local/share/nvim/config/lightline.vim
+   source ~/.local/share/nvim/config/startify.vim
 catch
 endtry
