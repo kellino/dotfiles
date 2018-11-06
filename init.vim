@@ -17,21 +17,21 @@ Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-eunuch' " unix commands
 Plug 'tpope/vim-obsession' " save vim sessions
-Plug 'vifm/neovim-vifm'
 Plug 'justinmk/vim-sneak'
 Plug 'haya14busa/incsearch.vim' 
 Plug 'jamessan/vim-gnupg'
 Plug 'eugen0329/vim-esearch'
+Plug 'brooth/far.vim'
 Plug 'junegunn/fzf.vim'
 
 "" Colourscheme(s)
-Plug 'iCyMind/NeoSolarized'
+Plug 'fenetikm/falcon'
+Plug 'dkasak/gruvbox'
+Plug 'junegunn/limelight.vim'
 
 "" Text Editing
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
-Plug 'beloglazov/vim-online-thesaurus', { 'for' : ['text', 'markdown', 'tex', 'latex'] }
-Plug 'rhysd/vim-grammarous', { 'for' : ['text' , 'markdown', 'tex'] }
 
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
@@ -39,20 +39,22 @@ Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
 
 "" General coding
-Plug 'w0rp/ale', { 'for' : [ 'python', 'c', 'latex' ] }
+Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
-Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' 
-Plug 'Shougo/neco-syntax'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
+Plug 'ncm2/ncm2-neoinclude' | Plug 'Shougo/neoinclude.vim'
+Plug 'ncm2/ncm2-match-highlight'
 
 "" assembly
-Plug 'Shirk/vim-gas', { 'for' : 'asm' }
 Plug 'fidian/hexmode'
 
 "" nix
@@ -61,15 +63,15 @@ Plug 'LnL7/vim-nix', { 'for' : 'nix' }
 "" tmux syntax
 Plug 'tmux-plugins/vim-tmux', { 'for' : 'tmux' }
 
+"" coq
+Plug 'https://framagit.org/tyreunom/coquille.git', { 'branch' : 'pathogen-bundle', 'for' : 'coq' }
+
 "" Haskell
+Plug 'neovimhaskell/haskell-vim',     { 'for' : [ 'haskell' , 'agda' ] }
 Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
-
-"" Coq, Ott
-Plug 'the-lambda-church/coquille', { 'branch' : 'pathogen-bundle', 'for' : 'coq' } | Plug 'let-def/vimbufsync', { 'for' : 'coq' }
-Plug 'psosera/ott-vim',            { 'for' : 'ott' }
 
 "" Agda
 Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
@@ -77,20 +79,14 @@ Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
 "" Idris
 Plug 'idris-hackers/idris-vim', { 'for' : 'idris' }
 
-"" Python
-Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
-
 "" LaTeX
 Plug 'lervag/vimtex',     { 'for' : ['tex', 'latex'] }
 
 "" C
 Plug 'arakashic/chromatica.nvim', { 'for' : 'c' }
-Plug 'zchee/deoplete-clang', { 'for' : 'c' }
-Plug 'Shougo/neoinclude.vim', { 'for' : 'c' }
 
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
-Plug 'Shougo/neco-vim',         { 'for' : 'vim' }
 Plug 'dag/vim-fish',            { 'for' : 'fish' }
 
 call plug#end()
@@ -101,21 +97,11 @@ call plug#end()
 
 set termguicolors
 set background=dark
-let g:neosolarized_termtrans=1
-let g:neosolarized_contrast='high'
-let g:neosolarized_italic = 1
-colorscheme NeoSolarized
+let g:gruvbox_contrast_dark='none'
+let g:gruvbox_italics=1
+colorscheme gruvbox
 
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
-
-hi SpellBad ctermfg=1
-hi SpellCap ctermfg=9
-hi SpellRare cterm=undercurl
-hi SpellLocal cterm=undercurl
-hi FoldColumn ctermbg=235
-hi LineNr ctermfg=200
-hi Comment cterm=italic
-
 
  "======================="
  "      Navigation       "
@@ -169,7 +155,7 @@ set noswapfile
 set list
 set listchars=tab:▸\ ,nbsp:%,extends:,precedes:
 set linebreak
-set completeopt=longest,menuone
+"set completeopt=longest,menuone
 set wildmode=longest,list:longest,full
 set wildignore=*.o,*~,*.pyc,.git/*
 set shortmess=aoOtT
@@ -187,7 +173,7 @@ nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 nnoremap  <leader>yy  "+yy
 
-""
+"" localleader
 let g:maplocalleader = ','
 
 "" quick save and quit
@@ -212,22 +198,18 @@ set concealcursor=c
 "" ctags / hasktags
 set tags=./tags;
 
-"" formatting and spelling
-augroup formatting
-    au BufEnter,BufRead *.md    setlocal formatprg = "par -w120"
-    au BufEnter,BufRead *.md    setlocal equalprg  = "par -w120"
-    au BufEnter,BufRead *.tex   setlocal formatprg = "par -w120"
-    au BufEnter,BufRead *.tex   setlocal equalprg  = "par -w120"
-augroup END
-
-
 "============================="
 "      Plugin Options         "
 "============================="
+"
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ 'haskell': ['hie-8.4', '--lsp'],
+    \ }
 
-
-"" Python location
-let g:python3_host_prog='/home/david/.nix-profile/bin/python'
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 "" tmux
 let g:tmux_navigator_no_mappings = 1
@@ -244,49 +226,82 @@ let g:sneak#label = 1
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 
-"----------------"
-"    Deoplete    "
-"----------------"
+"" ncm2
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+set shortmess+=c
+inoremap <c-c> <ESC>
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni#input_patterns = {}
-
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-" neosnippet
-imap <s-tab> <Plug>(neosnippet_expand_or_jump)
-smap <s-tab> <Plug>(neosnippet_expand_or_jump)
-xmap <s-tab> <Plug>(neosnippet_expand_target)
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-let g:neosnippet#enable_snipmate_compatibility=1
-let g:neosnippet#snippets_directory='~/.config/nvim/after/snippets'
-
-" latex
-if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-endif
-let g:deoplete#omni#input_patterns.tex = '\\(?:'
-      \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-      \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
-      \ . '|hyperref\s*\[[^]]*'
-      \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-      \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
-      \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-      \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
-      \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
-      \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
-      \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
-      \ . '|\w*'
-\ .')'
+"" latex
 let g:tex_flavor = 'latex'
 let g:tex_stylish = 1
+
+au Filetype tex call ncm2#register_source({
+       \ 'name' : 'vimtex-cmds',
+       \ 'priority': 8, 
+       \ 'complete_length': -1,
+       \ 'scope': ['tex'],
+       \ 'matcher': {'name': 'prefix', 'key': 'word'},
+       \ 'word_pattern': '\w+',
+       \ 'complete_pattern': g:vimtex#re#ncm2#cmds,
+       \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+       \ })
+au Filetype tex call ncm2#register_source({
+    \ 'name' : 'vimtex-labels',
+    \ 'priority': 8, 
+    \ 'complete_length': -1,
+    \ 'scope': ['tex'],
+    \ 'matcher': {'name': 'combine',
+    \             'matchers': [
+    \               {'name': 'substr', 'key': 'word'},
+    \               {'name': 'substr', 'key': 'menu'},
+    \             ]},
+    \ 'word_pattern': '\w+',
+    \ 'complete_pattern': g:vimtex#re#ncm2#labels,
+    \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+    \ })
+au Filetype tex call ncm2#register_source({
+    \ 'name' : 'vimtex-files',
+    \ 'priority': 8, 
+    \ 'complete_length': -1,
+    \ 'scope': ['tex'],
+    \ 'matcher': {'name': 'combine',
+    \             'matchers': [
+    \               {'name': 'abbrfuzzy', 'key': 'word'},
+    \               {'name': 'abbrfuzzy', 'key': 'abbr'},
+    \             ]},
+    \ 'word_pattern': '\w+',
+    \ 'complete_pattern': g:vimtex#re#ncm2#files,
+    \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+    \ })
+au Filetype tex call ncm2#register_source({
+    \ 'name' : 'bibtex',
+    \ 'priority': 8, 
+    \ 'complete_length': -1,
+    \ 'scope': ['tex'],
+    \ 'matcher': {'name': 'combine',
+    \             'matchers': [
+    \               {'name': 'prefix', 'key': 'word'},
+    \               {'name': 'abbrfuzzy', 'key': 'abbr'},
+    \               {'name': 'abbrfuzzy', 'key': 'menu'},
+    \             ]},
+    \ 'word_pattern': '\w+',
+    \ 'complete_pattern': g:vimtex#re#ncm2#bibtex,
+    \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+    \ })
+
+
+
+"" vimtex
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
+
+"" far
+let g:far#source='rgnvim'
 
 "" esearch
 let g:esearch = {
@@ -296,9 +311,6 @@ let g:esearch = {
   \ 'batch_size': 1000,
   \ 'use':        ['visual', 'hlsearch', 'last'],
   \}
-
-"" Tagbar
-map <F8> :TagbarToggle<CR>
 
 "" hexmode
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
@@ -311,12 +323,13 @@ nmap ga <Plug>(EasyAlign)
 let g:gitgutter_async=0
 
 "" agda
-let g:agda_extraincpaths = ['/home/david/.nix-profile/share/agda']
+let g:agda_extraincpaths = [ '/home/david/.agda/' ]
 let g:NERDCustomDelimiters = { 'agda': { 'left': '{-', 'right': '-}', 'nested': 1, 'leftAlt': '--', 'nestedAlt': 1 } }
 
-"" coq
-let g:deoplete#omni#input_patterns.coq = '[^ \t]'
-let g:highlight_coq_checked=1
+function! AgdaLoad()
+    map <buffer><silent><localleader>w :Load<CR>
+endfunction
+au FileType agda call AgdaLoad()
 
 "" idris
 let g:idris_indent_if=3
@@ -327,6 +340,39 @@ let g:idris_indent_do=3
 let g:idris_indent_rewrite=8
 let g:idris_conceal=1
 
+"" coq
+hi default CheckedByCoq ctermbg=10 guibg=#282828
+hi default SentToCoq ctermbg=12 guibg=#383c36
+
+function! CoqFunction(prompt, command)
+    call inputsave()
+    let l:arg = input(a:prompt)
+    call CoqQuery(a:command . " " . arg . ".")
+    call inputrestore()
+endfunction
+
+function! CoqMapping()
+    map <buffer><silent><localleader>L :call CoqLaunch()<CR>
+    map <buffer><silent><localleader>K :call CoqStop()<CR>
+    map <buffer><silent><localleader>u :call CoqUndo()<CR>
+    map <buffer><silent><localleader>r :call CoqNext()<CR>
+    map <buffer><silent><localleader>l :call CoqToCursor()<CR>
+    map <buffer><silent><localleader>n :call CoqFunction('Enter expression: ', 'Compute')<CR>
+    map <buffer><silent><localleader>t :call CoqFunction('Check: ', 'Check')<CR>
+    map <buffer><silent><localleader>p :call CoqFunction('Print: ', 'Print')<CR>
+    map <buffer><silent><localleader>s :call CoqFunction('Search: ', 'Search')<CR>
+endfunction
+
+" let's use the utf8 bindings from the agda plugin
+function! CoqUTF8()
+    runtime coq-utf8.vim
+endfunction
+
+augroup CoqStuff
+    au FileType coq call CoqMapping()
+    au FileType coq call CoqUTF8()
+augroup END
+
 "" C
 let g:neoinclude#paths = {}
 let g:neoinclude#paths.c = '/nix/store/fn2x7v3bs305xl55ynj698mjc0yfn1lh-glibc-2.26-131-dev/include/'
@@ -335,12 +381,16 @@ let g:chromatica#enable_at_startup=1
 let g:deoplete#sources#clang#libclang_path='/nix/store/6gkylaxm6s553jh60al5mm1ykj3nf6g0-clang-6.0.0-lib/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header='/nix/store/lhkaxa2lfpa56icqbahxbxa3dfrman3j-clang-6.0.0/lib/clang/6.0.0/include/'
 
+"" limelight
+let g:limelight_conceal_guifg = '#777777'
+let g:limelight_priority = -1
+
+"" scheme
+let b:is_chicken=1
 
 "" other stuff
 try
     source ~/.config/nvim/config/lightline.vim
-    source ~/.config/nvim/config/haskell.vim
-    source ~/.config/nvim/config/terminal.vim
     source ~/.config/nvim/config/startify.vim
 catch
 endtry
