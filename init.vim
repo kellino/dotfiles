@@ -46,6 +46,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
+"" Completions
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-bufword'
@@ -72,6 +73,7 @@ Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
 Plug 'enomsg/vim-haskellConcealPlus', { 'for' : 'haskell' }
 Plug 'itchyny/vim-haskell-indent',    { 'for' : 'haskell' }
+"Plug 'parsonsmatt/intero-neovim',     { 'for' : 'haskell' }
 
 "" Agda
 Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
@@ -204,7 +206,7 @@ set tags=./tags;
 "
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'haskell': ['hie-8.4', '--lsp'],
+    \ 'haskell': ['hie-wrapper'],
     \ }
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
@@ -292,7 +294,6 @@ au Filetype tex call ncm2#register_source({
     \ 'complete_pattern': g:vimtex#re#ncm2#bibtex,
     \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
     \ })
-
 
 
 "" vimtex
