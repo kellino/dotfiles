@@ -20,7 +20,9 @@ Plug 'justinmk/vim-sneak'
 Plug 'haya14busa/incsearch.vim' 
 Plug 'jamessan/vim-gnupg'
 Plug 'tpope/vim-obsession'
+Plug 'Lenovsky/nuake'
 
+"" fzf
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
@@ -41,8 +43,7 @@ Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ 'for' : [ 'haskell', 'rust' ] }
+    \ 'do': 'bash install.sh', }
 
 "" Completions
 Plug 'ncm2/ncm2'
@@ -52,13 +53,17 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
 Plug 'ncm2/ncm2-neoinclude' | Plug 'Shougo/neoinclude.vim'
 
+""
+Plug 'vim-scripts/cup.vim'
+
 "" hex
 Plug 'fidian/hexmode'
 
+"" typescript
+Plug 'HerringtonDarkholme/yats.vim'
+
 "" Haskell
 Plug 'neovimhaskell/haskell-vim',     { 'for' : 'haskell' }
-Plug 'Twinside/vim-hoogle',           { 'for' : 'haskell' }
-Plug 'Twinside/vim-haskellFold',      { 'for' : 'haskell' }
 
 "" Agda
 Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
@@ -66,15 +71,15 @@ Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
 "" LaTeX
 Plug 'lervag/vimtex',     { 'for' : ['tex', 'latex'] }
 
-""
+"" Coq
 Plug 'https://framagit.org/tyreunom/coquille.git', { 'branch' : 'pathogen-bundle', 'for' : 'coq'}
-
-"" C
-Plug 'arakashic/chromatica.nvim', { 'for' : 'c' }
 
 "" Shell Scripting & Vim
 Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
 Plug 'Shougo/neco-vim',         { 'for' : 'vim' }
+
+"" python
+Plug 'numirias/semshi'
 
 call plug#end()
 
@@ -114,8 +119,15 @@ nmap <silent> <c-l> :wincmd l<CR>
 set noequalalways  " don't allow vim to resize splits
 set cmdheight=2
 set nowrap
-set relativenumber
-set number
+
+"" change line numbering style
+set number relativenumber
+augroup numbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
 set sidescrolloff=0
 set autoindent
 set copyindent
@@ -162,6 +174,8 @@ nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 nnoremap  <leader>yy  "+yy
 
+noremap £ :norm i#<CR>
+
 ""
 let g:maplocalleader = ','
 
@@ -191,6 +205,21 @@ set tags=./tags;
 "============================="
 "      Plugin Options         "
 "============================="
+"
+
+"" nuake
+nnoremap <F5> :Nuake<CR>
+inoremap <F5> <C-\><C-n>:Nuake<CR>
+tnoremap <F5> <C-\><C-n>:Nuake<CR>
+tnoremap fj <C-\><C-n>
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 "" tmux
 let g:tmux_navigator_no_mappings = 1
@@ -213,11 +242,12 @@ map ?  <Plug>(incsearch-backward)
 "" Language Server
 let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'haskell': ['hie-wrapper', '--lsp'],
+    \ 'sh': ['bash-language-server', 'start'],
+    \ 'python': ['pyls'],
+    \ 'typescript' : ['typescript-language-server', '--stdio'],
     \ }
 
-augroup Filetype haskell 
+augroup Filetype typescript, sh, python
     nnoremap <localleader>lcm :call LanguageClient_contextMenu()<CR>
     map <localleader>lh :call LanguageClient#textDocument_hover()<CR>
     map <localleader>ld :call LanguageClient#textDocument_definition()<CR>
@@ -240,6 +270,10 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "" latex
 let g:tex_flavor = 'latex'
 let g:tex_stylish = 1
+let g:vimtex_compiler_progname='nvr'
+let g:vimtex_viewer_method='skim'
+let g:vimtex_index_split_pos = 'below'
+let g:vimtex_fold_enabled=1
 
 au Filetype tex call ncm2#register_source({
        \ 'name' : 'vimtex-cmds',
@@ -294,11 +328,6 @@ au Filetype tex call ncm2#register_source({
     \ 'complete_pattern': g:vimtex#re#ncm2#bibtex,
     \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
     \ })
-let g:tex_flavor = 'latex'
-let g:tex_stylish = 1
-let g:vimtex_viewer_method='skim'
-let g:vimtex_index_split_pos = 'below'
-let g:vimtex_fold_enabled=1
 
 "" hexmode patterns
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
@@ -314,18 +343,14 @@ let g:gitgutter_async=0
 let g:agda_extraincpaths = [ '~/.agda' ]
 let g:NERDCustomDelimiters = { 'agda': { 'left': '{-', 'right': '-}', 'nested': 1, 'leftAlt': '--', 'nestedAlt': 1 } }
 
-"" libclang path
-let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/HEAD-5e8f334/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/HEAD-5e8f334/lib/clang'
-let g:chromatica#libclang_path='/usr/local/Cellar/llvm/HEAD-5e8f334/lib/libclang.dylib'
-let g:chromatica#enable_at_startup=1
-
 "" limelight
 let g:limelight_conceal_guifg = '#777777'
 let g:limelight_priority = -1
 
 ""
-let g:ale_linters = { 'haskell' : ['hie'] }
+let g:ale_linters = { 
+            \ 'sh' : ['language_server'],
+\ }
 
 "" stuff for coq
 function! CoqFunction(prompt, command)
