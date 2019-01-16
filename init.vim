@@ -11,7 +11,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 "" general
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
@@ -33,7 +32,7 @@ Plug 'junegunn/limelight.vim'
 "" Text Editing
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
-Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
+"Plug 'SidOfc/mkdx', { 'for' : 'markdown' }
 
 "" Git
 Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
@@ -379,6 +378,11 @@ augroup END
 ""
 let g:airline_powerline_fonts=1
 
+"" markdown
+let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
+                        \ 'links': { 'external': { 'enable': 1 } },
+                        \ 'toc': { 'text': 'Table of Contents', 'update_on_write': 1 },
+                        \ 'fold': { 'enable': 1 } }
 "" other stuff
 try
    source ~/.local/share/nvim/config/startify.vim
