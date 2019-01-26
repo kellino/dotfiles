@@ -6,11 +6,10 @@ alt - x : chunkc tiling::window --close && chunkc tiling::window --focus prev
 
 fn + alt - c : open "/Applications/Google Chrome.app"
 fn + alt - C : open -n "/Applications/Google Chrome.app"
-fn + alt - t : open -n /Applications/TorBrowser.app
-fn + alt - m : open /Applications/Mail.app
+ctrl + cmd - m : open /Applications/Mail.app
 fn + alt - s : open /Applications/Slack.app
-fn + alt - w : open /Applications/WhatsApp.app
-fn + alt - y : open /Applications/Spotify.app
+ctrl + cmd - w : open /Applications/WhatsApp.app
+ctrl + cmd - y : open /Applications/Spotify.app
 
 # focus window
 alt - h : chunkc tiling::window --focus west

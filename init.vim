@@ -11,6 +11,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 "" general
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
@@ -26,7 +27,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 "" Colourscheme(s)
-Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'junegunn/limelight.vim'
 
 "" Text Editing
@@ -88,14 +89,30 @@ call plug#end()
 
 set termguicolors
 set background=dark
-let g:gruvbox_contrast_dark='none'
-let g:gruvbox_italics=1
-colorscheme gruvbox
+
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default.dark': {
+  \       'transparent_background': 1,
+  \       'allow_italic': 1,
+  \       'allow_bold': 1
+  \     }
+  \   }
+  \ }
+
+colorscheme PaperColor
 
 "" coq colours
 hi default CheckedByCoq ctermbg=10 guibg=#282828
 hi default SentToCoq ctermbg=12 guibg=#383c36
 
+
+"======================="
+"       Spelling        "
+"======================="
+
+set spelllang=en_gb
+set spellfile=$HOME/.local/share/nvim/spell/en.add
 
 "======================="
 "      Navigation       "
@@ -269,8 +286,8 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "" latex
 let g:tex_flavor = 'latex'
 let g:tex_stylish = 1
-let g:vimtex_compiler_progname='nvr'
-let g:vimtex_viewer_method='skim'
+"let g:vimtex_compiler_progname='nvr'
+let g:vimtex_view_method='skim'
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
 
@@ -377,6 +394,7 @@ augroup END
 
 ""
 let g:airline_powerline_fonts=1
+let g:airline_theme='papercolor'
 
 "" markdown
 let g:mkdx#settings     = { 'highlight': { 'enable': 1 },

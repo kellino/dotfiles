@@ -1,12 +1,8 @@
-source '/Users/davidkelly/.zplugin/bin/zplugin.zsh'
+source '/home/vagrant/.zplugin/bin/zplugin.zsh'
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 
-export PATH="/Users/davidkelly/bin:/usr/local/opt/fzf/bin:/usr/local/opt/coreutils/bin:/usr/local/miniconda3/bin:/Users/davidkelly/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:"
-
-export TERM=alacritty
-
-fpath=($HOME/.zsh-completions $fpath)
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
@@ -35,11 +31,8 @@ setopt HIST_REDUCE_BLANKS
 # ALIASES #
 #---------#
 
-alias vi="onThisDay && nvim"
-alias skim="open -a Skim"
-alias ls="gls --color -1"
-alias lsblk="diskutil list"
-alias remote="ssh -J dakelly@jet.cs.ucl.ac.uk david@128.16.11.133"
+alias vi="nvim"
+alias ls="ls --color -1"
 alias _="sudo"
 
 #---------#
@@ -53,11 +46,7 @@ zplugin snippet OMZ::plugins/vi-mode/vi-mode.plugin.zsh
 zplugin snippet OMZ::plugins/git/git.plugin.zsh
 zplugin snippet OMZ::lib/directories.zsh
 zplugin snippet OMZ::plugins/git/git.plugin.zsh
-zplugin snippet OMZ::plugins/gnu-utils/gnu-utils.plugin.zsh
 zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
-
-# weirdness going on sourcing over svn, so just copying osx plugin into local bin
-source $HOME/bin/osx.plugin.zsh
 
 #--------#
 # PROMPT # 
@@ -91,8 +80,8 @@ zplugin light zdharma/fast-syntax-highlighting
 #   FZF  #
 #--------#
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completions.zsh
 export FZF_DEFAULT_COMMAND='fd --type f . $HOME'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
@@ -102,6 +91,6 @@ export FZF_DEFAULT_OPTS='
   --color=marker:#719e07,fg+:#839496,prompt:#719e07,hl+:#719e07'
 
 # we need to rebind alt c on the mac as it doesn't work
-bindkey '^p' fzf-cd-widget
+bindkey '^z' fzf-cd-widget
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
