@@ -1,0 +1,122 @@
+# default shell is zsh
+set-option -g default-shell /usr/local/bin/zsh
+
+# set escape time
+set-option -sg escape-time 10
+
+# edit config and reload
+bind e new-window -n 'tmux.conf' "sh -c 'nvim ~/.tmux.conf && tmux source ~/.tmux.conf && tmux display \"Config reloaded...\"'"
+
+# reload config
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+
+# mouse on
+set -g mouse on
+
+# count from 1
+set -g base-index 1
+setw -g pane-base-index 1
+
+# true colour in the terminal
+set-option -ga terminal-overrides ",xterm-256color:Tc"
+
+# change tmux binder to ctrl-a
+unbind-key -n C-b
+set -g prefix C-A
+
+# rebind window splits
+unbind '"'
+unbind %
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+
+# renumber windows when one is closed
+set-option -g renumber-windows on
+
+# vim-style movement between windows
+is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+bind-key -n C-h if-shell "$is_vim" "send-keys C-h"  "select-pane -L"
+bind-key -n C-j if-shell "$is_vim" "send-keys C-j"  "select-pane -D"
+bind-key -n C-k if-shell "$is_vim" "send-keys C-k"  "select-pane -U"
+bind-key -n C-l if-shell "$is_vim" "send-keys C-l"  "select-pane -R"
+bind-key -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l" 
+# moving between panes with vim movement keys
+bind -n C-h select-pane -L
+bind -n C-j select-pane -D
+bind -n C-k select-pane -U
+bind -n C-l select-pane -R
+# resize panes with vim movement keys
+bind H resize-pane -L 10
+bind J resize-pane -D 10
+bind K resize-pane -U 10
+bind L resize-pane -R 10
+
+bind C clock-mode
+
+# detach from session
+bind d detach
+
+# status bar
+bind C-s if -F '#{s/off//:status}' 'set status off' 'set status on'
+
+set -g status-left '#[fg=colour235,bg=colour252] #S #[fg=colour252,bg=colour240] #(~/bin/tmux-cpu-info)#[fg=colour240,bg=colour236] #[fg=colour236,bg=colour234]'
+set -g window-status-format "#[fg=white,bg=colour234] #W "
+set -g window-status-current-format "#[fg=colour234,bg=brightcyan]#[fg=black,bg=brightcyan,noreverse] #W #[fg=brightcyan,bg=colour234]"
+set -g status-right ' #[fg=colour236,bg=colour234] #{ssh_status} #[fg=colour236,bg=colour234]#[fg=brightcyan,bg=colour236] #(~/bin/tmux-spotify-info)'
+set -g status-bg black
+
+# copy mode, scroll and clipboard
+setw -g mode-keys vi
+
+# Feel free to NOT use this variables at all (remove, rename)
+# this are named colors, just for convenience
+color_orange="colour166" # 208, 166
+color_purple="colour134" # 135, 134
+color_green="colour076" # 070
+color_blue="colour39"
+color_yellow="colour220"
+color_red="colour160"
+color_black="colour232"
+color_white="white" # 015
+
+# This is a theme CONTRACT, you are required to define variables below
+# Change values, but not remove/rename variables itself
+color_dark="$color_black"
+color_light="$color_white"
+color_session_text="$color_blue"
+color_status_text="colour245"
+color_main="$color_orange"
+color_secondary="$color_purple"
+color_level_ok="$color_green"
+color_level_warn="$color_yellow"
+color_level_stress="$color_red"
+color_window_off_indicator="colour088"
+color_window_off_status_bg="colour238"
+color_window_off_status_current_bg="colour254"
+
+#also, change some visual styles when window keys are off
+bind -T root § \
+    set prefix None \;\
+    set key-table off \;\
+    set status-style "fg=$color_status_text,bg=$color_window_off_status_bg" \;\
+    set window-status-current-format "#[fg=$color_window_off_status_bg,bg=$color_window_off_status_current_bg]$separator_powerline_right#[default] #I:#W# #[fg=$color_window_off_status_current_bg,bg=$color_window_off_status_bg]$separator_powerline_right#[default]" \;\
+    set window-status-current-style "fg=$color_dark,bold,bg=$color_window_off_status_current_bg" \;\
+    if -F '#{pane_in_mode}' 'send-keys -X cancel' \;\
+    refresh-client -S \;\
+
+bind -T off § \
+  set -u prefix \;\
+  set -u key-table \;\
+  set -u status-style \;\
+  set -u window-status-current-style \;\
+  set -u window-status-current-format \;\
+  refresh-client -S
+
+# plugins
+# decent copy/paste
+set -g @plugin 'tmux-plugins/tmux-yank'
+# ssh session info
+set -g @plugin 'obxhdx/tmux-ssh-status'
+set -g @plugin 'wfxr/tmux-fzf-url'
+
+run -b '~/.tmux/plugins/tpm/tpm'
