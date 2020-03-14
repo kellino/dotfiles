@@ -1,5 +1,3 @@
-scriptencoding=utf-8
-
 "    d888888b d8b   db d888888b d888888b    db    db d888888b .88b  d88. 
 "      `88'   888o  88   `88'      88       88    88   `88'   88'YbdP`88 
 "       88    88V8o 88    88       88       Y8    8P    88    88  88  88 
@@ -33,7 +31,6 @@ Plug 'junegunn/limelight.vim'
 "" Text Editing
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
-"Plug 'SidOfc/mkdx', { 'for' : 'markdown' }
 
 "" Git
 Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
@@ -41,9 +38,9 @@ Plug 'tpope/vim-fugitive' | Plug 'airblade/vim-gitgutter'
 "" General coding
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh', }
+
+Plug 'let-def/vimbufsync'
+Plug 'whonore/coqtail'
 
 "" Completions
 Plug 'ncm2/ncm2'
@@ -52,34 +49,6 @@ Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
 Plug 'ncm2/ncm2-neoinclude' | Plug 'Shougo/neoinclude.vim'
-
-""
-Plug 'vim-scripts/cup.vim'
-
-"" hex
-Plug 'fidian/hexmode'
-
-"" typescript
-Plug 'HerringtonDarkholme/yats.vim'
-
-"" Haskell
-Plug 'neovimhaskell/haskell-vim',     { 'for' : 'haskell' }
-
-"" Agda
-Plug 'derekelkins/agda-vim', { 'for' : 'agda' }
-
-"" LaTeX
-Plug 'lervag/vimtex',     { 'for' : ['tex', 'latex'] }
-
-"" Coq
-Plug 'https://framagit.org/tyreunom/coquille.git', { 'branch' : 'pathogen-bundle', 'for' : 'coq'}
-
-"" Shell Scripting & Vim
-Plug 'vim-scripts/sh.vim--Cla', { 'for' : 'sh' }
-Plug 'Shougo/neco-vim',         { 'for' : 'vim' }
-
-"" python
-Plug 'numirias/semshi'
 
 call plug#end()
 
@@ -102,17 +71,13 @@ let g:PaperColor_Theme_Options = {
 
 colorscheme PaperColor
 
-"" coq colours
-hi default CheckedByCoq ctermbg=10 guibg=#282828
-hi default SentToCoq ctermbg=12 guibg=#383c36
-
 
 "======================="
 "       Spelling        "
 "======================="
 
-set spelllang=en_gb
-set spellfile=$HOME/.local/share/nvim/spell/en.add
+autocmd Filetype tex set spelllang=en_gb spell | set spellfile=$HOME/.local/share/nvim/spell/en.add
+autocmd Filetype txt set spelllang=en_gb spell | set spellfile=$HOME/.local/share/nvim/spell/en.add
 
 "======================="
 "      Navigation       "
@@ -256,26 +221,26 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 
 "" Language Server
-let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
-let g:LanguageClient_serverCommands = {
-    \ 'sh': ['bash-language-server', 'start'],
-    \ 'python': ['pyls'],
-    \ 'typescript' : ['typescript-language-server', '--stdio'],
-    \ }
+"let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
+"let g:LanguageClient_serverCommands = {
+    "\ 'sh': ['bash-language-server', 'start'],
+    "\ 'python': ['pyls'],
+    "\ 'typescript' : ['typescript-language-server', '--stdio'],
+    "\ }
 
-augroup Filetype typescript, sh, python
-    nnoremap <localleader>lcm :call LanguageClient_contextMenu()<CR>
-    map <localleader>lh :call LanguageClient#textDocument_hover()<CR>
-    map <localleader>ld :call LanguageClient#textDocument_definition()<CR>
-    map <localleader>lr :call LanguageClient#textDocument_rename()<CR>
-    map <localleader>lf :call LanguageClient#textDocument_formatting()<CR>
-    map <localleader>lR :call LanguageClient#textDocument_references()<CR>
-    map <localleader>la :call LanguageClient#textDocument_codeAction()<CR>
-    map <localleader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
-augroup END
+"augroup filetype typescript, sh, python
+    "nnoremap <localleader>lcm :call LanguageClient_contextMenu()<CR>
+    "map <localleader>lh :call LanguageClient#textDocument_hover()<CR>
+    "map <localleader>ld :call LanguageClient#textDocument_definition()<CR>
+    "map <localleader>lr :call LanguageClient#textDocument_rename()<CR>
+    "map <localleader>lf :call LanguageClient#textDocument_formatting()<CR>
+    "map <localleader>lR :call LanguageClient#textDocument_references()<CR>
+    "map <localleader>la :call LanguageClient#textDocument_codeAction()<CR>
+    "map <localleader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
+"augroup END
 
 "" ncm2
-autocmd BufEnter * call ncm2#enable_for_buffer()
+"autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 set shortmess+=c
 inoremap <c-c> <ESC>
@@ -286,7 +251,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "" latex
 let g:tex_flavor = 'latex'
 let g:tex_stylish = 1
-"let g:vimtex_compiler_progname='nvr'
+let g:vimtex_compiler_progname='nvr'
 let g:vimtex_view_method='skim'
 let g:vimtex_index_split_pos = 'below'
 let g:vimtex_fold_enabled=1
@@ -345,6 +310,9 @@ au Filetype tex call ncm2#register_source({
     \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
     \ })
 
+let g:coqtail_coq_path = "/Users/david/.opam/default/bin/"
+
+
 "" hexmode patterns
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 
@@ -355,10 +323,6 @@ nmap ga <Plug>(EasyAlign)
 "" gitgutter
 let g:gitgutter_async=0
 
-"" agda
-let g:agda_extraincpaths = [ '~/.agda' ]
-let g:NERDCustomDelimiters = { 'agda': { 'left': '{-', 'right': '-}', 'nested': 1, 'leftAlt': '--', 'nestedAlt': 1 } }
-
 "" limelight
 let g:limelight_conceal_guifg = '#777777'
 let g:limelight_priority = -1
@@ -367,30 +331,6 @@ let g:limelight_priority = -1
 let g:ale_linters = { 
             \ 'sh' : ['language_server'],
 \ }
-
-"" stuff for coq
-function! CoqFunction(prompt, command)
-    call inputsave()
-    let l:result = input(a:prompt)
-    call CoqQuery(a:command . " " . result . ".")
-    call inputrestore()
-endfunction
-
-function! CoqBindings()
-    nnoremap<buffer><localleader>t :call CoqFunction("Check: ",  "Check")<CR>
-    nnoremap<buffer><localleader>p :call CoqFunction("Print: ",  "Print")<CR>
-    nnoremap<buffer><localleader>s :call CoqFunction("Search: ", "Search")<CR>
-    nnoremap<buffer><localleader>L :call CoqLaunch()<CR>
-    nnoremap<buffer><localleader>n :call CoqFunction("Enter expression: ", "Compute")<CR>
-    nnoremap<buffer><localleader>r :call CoqNext()<CR>
-    nnoremap<buffer><localleader>K :call CoqStop()<CR>
-    nnoremap<buffer><localleader>l :call CoqToCursor()<CR>
-endfunction
-
-augroup CoqStuff 
-    au FileType coq call CoqBindings()
-    au FileType coq runtime coq-utf8.vim
-augroup END
 
 ""
 let g:airline_powerline_fonts=1

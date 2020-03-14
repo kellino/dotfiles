@@ -1,36 +1,3 @@
-source '/Users/davidkelly/.zplugin/bin/zplugin.zsh'
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
-
-export PATH="/Users/davidkelly/bin:/usr/local/opt/fzf/bin:/usr/local/opt/coreutils/bin:/usr/local/miniconda3/bin:/Users/davidkelly/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:"
-
-export TERM=alacritty
-
-fpath=($HOME/.zsh-completions $fpath)
-
-if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
-else
-   export EDITOR='nvim'
-fi
-
-zstyle ':completion:*' rehash true
-
-# history file
-HISTFILE=$HOME/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt INC_APPEND_HISTORY
-setopt SHARE_HISTORY
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_FIND_NO_DUPS
-setopt HIST_IGNORE_SPACE
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_REDUCE_BLANKS
-
-
 #---------#
 # ALIASES #
 #---------#
@@ -51,6 +18,7 @@ zplugin light trapd00r/LS_COLORS
 
 zplugin snippet OMZ::plugins/vi-mode/vi-mode.plugin.zsh
 zplugin snippet OMZ::plugins/git/git.plugin.zsh
+#zplugin snippet OMZ::plugins/fasd/fasd.plugin.zsh
 zplugin snippet OMZ::lib/directories.zsh
 zplugin snippet OMZ::plugins/git/git.plugin.zsh
 zplugin snippet OMZ::plugins/gnu-utils/gnu-utils.plugin.zsh
@@ -63,12 +31,7 @@ source $HOME/bin/osx.plugin.zsh
 # PROMPT # 
 #--------#
 
-zplugin light eendroroy/alien-minimal
-
-## alien-minimal prompt
-export AM_ENABLE_VI_PROMPT=1
-export AM_UPDATE_L_PROMPT=1
-export USE_NERD_FONT=1
+zplugin light bhilburn/powerlevel9k
 
 
 #-------------#
@@ -105,3 +68,6 @@ export FZF_DEFAULT_OPTS='
 bindkey '^p' fzf-cd-widget
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+
+# opam configuration
+test -r /Users/davidkelly/.opam/opam-init/init.zsh && . /Users/davidkelly/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

@@ -90,3 +90,4 @@ chunkc tiling::rule --owner \"System Preferences\" --subrole AXStandardWindow --
 chunkc tiling::rule --owner \"App Store\" --state float &
 chunkc tiling::rule --owner iTunes --state float --grid-layout 6:6:1:1:4:4 &
 chunkc tiling::rule --owner mpv --state float --alpha 0.65 --grid-layout 5:5:4:0:1:1 &
+chunkc tiling::rule --owner "Emacs" --except "^$" --state tile &

@@ -1,13 +1,14 @@
 # open terminal, blazingly fast compared to iTerm/Hyper
-cmd - return : open -n /Applications/Alacritty.app
+cmd - return : open /Applications/Alacritty.app
+
+cmd - e :  open /Applications/Emacs.app
 
 # close focused window
 alt - x : chunkc tiling::window --close && chunkc tiling::window --focus prev
 
-fn + alt - c : open "/Applications/Google Chrome.app"
-fn + alt - C : open -n "/Applications/Google Chrome.app"
+ctrl + cmd - c : open "/Applications/Google Chrome.app"
 ctrl + cmd - m : open /Applications/Mail.app
-fn + alt - s : open /Applications/Slack.app
+ctrl + cmd - s : open /Applications/Slack.app
 ctrl + cmd - w : open /Applications/WhatsApp.app
 ctrl + cmd - y : open /Applications/Spotify.app
 
